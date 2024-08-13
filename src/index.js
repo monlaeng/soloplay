@@ -4,13 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import RaidMap from './raid/RaidMap';
+import Calendar from './component/common/Calendar';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <div>
+    <Calendar></Calendar>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<RaidMap />}></Route>
+        
       </Routes>
     </BrowserRouter>
   </div>
