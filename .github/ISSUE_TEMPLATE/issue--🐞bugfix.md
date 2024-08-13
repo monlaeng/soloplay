@@ -2,7 +2,7 @@
 name: "Issue: \U0001F41EBUGFIX"
 about: Create a report to help us improve
 title: ''
-labels: "\U0001F41Ebugfix"
+labels: bugfix
 assignees: ''
 
 ---
