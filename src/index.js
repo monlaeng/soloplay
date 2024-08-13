@@ -1,14 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes } from 'react-router-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Calendar from './component/common/Calendar';
+import PointMain from 'component/point/PointMain';
+
+import 'asset/css/font-awesome.min.css';
+import 'asset/css/materialize.min.css';
+import 'asset/css/slick.css';
+import 'asset/css/slick-theme.css';
+import 'asset/css/owl.carousel.css';
+import 'asset/css/owl.theme.css';
+import 'asset/css/owl.transitions.css';
+import 'asset/css/lightbox.min.css';
+import 'asset/css/style.css';
+
+
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <div>
-    <Calendar></Calendar>
+    <h1>내 포인트 조회</h1>
+    <PointMain></PointMain>
     <BrowserRouter>
       <Routes>
         
