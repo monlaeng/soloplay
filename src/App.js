@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import Footer from 'component/common/Footer';
 import './App.css';
+import NavBar from 'component/common/NavBar';
+import PanelControl from 'component/common/PanelControl';
+import Home from 'component/common/Home';
+import PointMain from 'component/point/PointMain';
+import PointTransfer from 'component/point/PointTransfer';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar/>
+      <div className='main'>
+         <PanelControl/>
+         <div className='content'>
+            {/* 실제 콘텐츠 */}
+            <PointTransfer/>
+         </div>
+      </div>
+      <Footer/>
     </div>
   );
 }

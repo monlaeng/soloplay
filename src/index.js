@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import PointMain from 'component/point/PointMain';
+import App from 'App';
 
 import 'asset/css/font-awesome.min.css';
 import 'asset/css/materialize.min.css';
@@ -17,16 +17,16 @@ import 'asset/css/style.css';
 import RaidMap from 'component/raid/RaidMap';
 
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <div>
-
     <BrowserRouter>
       <Routes>
         <Route path='/point' element={<PointMain />}></Route>
         <Route path='/raidMap' element={<RaidMap />}></Route>
+        {/* path="*" 를 사용하여 모든 경로에 대해 App컴포넌트를 렌더링 */}
+        <Route path="/" element={<App />} />
+        {/* 라우터 추가 */}
       </Routes>
     </BrowserRouter>
   </div>
