@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import PointMain from 'component/point/PointMain';
@@ -14,6 +14,7 @@ import 'asset/css/owl.theme.css';
 import 'asset/css/owl.transitions.css';
 import 'asset/css/lightbox.min.css';
 import 'asset/css/style.css';
+import RaidMap from 'component/raid/RaidMap';
 
 
 
@@ -21,11 +22,11 @@ import 'asset/css/style.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <div>
-    <h1>내 포인트 조회</h1>
-    <PointMain></PointMain>
+
     <BrowserRouter>
       <Routes>
-        
+        <Route path='/point' element={<PointMain />}></Route>
+        <Route path='/raidMap' element={<RaidMap />}></Route>
       </Routes>
     </BrowserRouter>
   </div>
