@@ -15,13 +15,10 @@ import 'asset/css/owl.transitions.css';
 import 'asset/css/lightbox.min.css';
 import 'asset/css/style.css';
 
-
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <div>
-    <h1>내 포인트 조회</h1>
+    
     <PointMain></PointMain>
     <BrowserRouter>
       <Routes>
