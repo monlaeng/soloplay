@@ -5,6 +5,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import App from "App";
 
+
 import "asset/css/font-awesome.min.css";
 import "asset/css/materialize.min.css";
 import "asset/css/slick.css";
@@ -21,6 +22,8 @@ import Footer from "component/common/Footer";
 import PanelControl from "component/common/PanelControl";
 import NavBar from "component/common/NavBar";
 import Home from "component/common/Home";
+import RaidMap from 'component/raid/RaidMap';
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -34,7 +37,8 @@ root.render(
           <Route path="/point" element={<PointMain />} />
           <Route path="/transfer" element={<PointTransfer />} />
           {/* 라우터 추가 */}
-        </Route>
+          <Route path='/raidMap' element={<RaidMap />}></Route>
+        </Route>        
       </Routes>
     </BrowserRouter>
   </div>
