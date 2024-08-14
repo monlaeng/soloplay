@@ -14,6 +14,7 @@ import 'asset/css/owl.theme.css';
 import 'asset/css/owl.transitions.css';
 import 'asset/css/lightbox.min.css';
 import 'asset/css/style.css';
+import RaidMap from 'component/raid/RaidMap';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,7 +22,8 @@ root.render(
   <div>
     <BrowserRouter>
       <Routes>
-        <Route path="*" element={<App />} />
+        <Route path='/point' element={<PointMain />}></Route>
+        <Route path='/raidMap' element={<RaidMap />}></Route>
         {/* path="*" 를 사용하여 모든 경로에 대해 App컴포넌트를 렌더링 */}
         <Route path="/" element={<App />} />
         {/* 라우터 추가 */}
