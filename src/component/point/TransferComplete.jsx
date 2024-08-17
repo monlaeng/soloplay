@@ -1,6 +1,7 @@
 import React from 'react';
 import completeIcon from "asset/image/completeIcon.png"
 import "asset/css/point.css"
+import { Link } from 'react-router-dom';
 
 function TransferComplete(props) {
     return (
@@ -37,7 +38,9 @@ function TransferComplete(props) {
                 cursor: "pointer",
                 }}
             >
-                메인 화면으로 이동
+                <Link to="/" style={{
+                color: "#fff",
+                }}>메인 화면으로 이동</Link>
             </button>
 
         </div>
