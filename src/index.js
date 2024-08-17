@@ -23,6 +23,7 @@ import PanelControl from "component/common/PanelControl";
 import NavBar from "component/common/NavBar";
 import Home from "component/common/Home";
 import RaidMap from 'component/raid/RaidMap';
+import TransferComplete from "component/point/TransferComplete";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -35,7 +36,8 @@ root.render(
           <Route index element={<Home />} />
           {/* 포인트 */}
           <Route path="/point" element={<PointMain />} />
-          <Route path="/transfer" element={<PointTransfer />} />
+          <Route path="/point/transfer" element={<PointTransfer />} />
+          <Route path="/point/transfer/complete" element={<TransferComplete/>} />
           {/* 라우터 추가 */}
           <Route path='/raidMap' element={<RaidMap />}></Route>
         </Route>        
