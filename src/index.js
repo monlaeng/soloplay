@@ -17,13 +17,10 @@ import "asset/css/lightbox.min.css";
 import "asset/css/style.css";
 import PointTransfer from "component/point/PointTransfer";
 import PointMain from "component/point/PointMain";
-import Navbar from "component/common/NavBar";
-import Footer from "component/common/Footer";
-import PanelControl from "component/common/PanelControl";
-import NavBar from "component/common/NavBar";
 import Home from "component/common/Home";
 import RaidMap from 'component/raid/RaidMap';
 import TransferComplete from "component/point/TransferComplete";
+import CouponMain from "component/coupon/CouponMain";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -38,6 +35,8 @@ root.render(
           <Route path="/point" element={<PointMain />} />
           <Route path="/point/transfer" element={<PointTransfer />} />
           <Route path="/point/transfer/complete" element={<TransferComplete/>} />
+          {/* 쿠폰 */}
+          <Route path="/coupon" element={<CouponMain />} />
           {/* 라우터 추가 */}
           <Route path='/raidMap' element={<RaidMap />}></Route>
         </Route>        
