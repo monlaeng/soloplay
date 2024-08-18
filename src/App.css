@@ -7,7 +7,7 @@
 
 .content {
   flex: 1; /* 나머지 공간을 차지하도록 설정 */
-  padding: 1px; /* 여백 추가 */
+  padding: 1px; 
 }
 
 

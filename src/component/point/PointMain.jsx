@@ -24,7 +24,7 @@ function PointMain(props) {
             <br></br>
             <h4 style={{ textAlign: "left", fontSize: 15 }}>
               <Link
-                to="/transfer"
+                to="/point/transfer"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 포인트 전환 &gt;

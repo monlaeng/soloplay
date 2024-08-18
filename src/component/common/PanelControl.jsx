@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import photosImg from 'asset/img/photos.png';
+import M from  'materialize-css/dist/js/materialize.min.js';
+
 
 function PanelControl(props) {
+
+    useEffect(() => {
+        // 사이드바 초기화
+        const sidenavElems = document.querySelectorAll('#slide-out-left');
+        M.Sidenav.init(sidenavElems);
+    }, []);
+
     return (
         <div className="panel-control-left">
             <ul id="slide-out-left" className="side-nav collapsible" data-collapsible="accordion">
                 <li>
                     <div className="photos">
-                        <img src="img/photos.png" alt="" />
+                        <img src={photosImg} alt="" />
                         <h3>Mario Doe</h3>
                     </div>
                 </li>
