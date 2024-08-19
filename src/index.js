@@ -5,8 +5,8 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 // 외부 라이브라리 및 프레임워크
-import 'materialize-css/dist/css/materialize.min.css';
-import "asset/css/materialize.min.css"
+import "materialize-css/dist/css/materialize.min.css";
+
 import "asset/css/font-awesome.min.css";
 import "asset/css/slick.css";
 import "asset/css/slick-theme.css";
@@ -21,10 +21,9 @@ import App from "App";
 import PointTransfer from "component/point/PointTransfer";
 import PointMain from "component/point/PointMain";
 import Home from "component/common/Home";
-import RaidMap from 'component/raid/RaidMap';
+import RaidMap from "component/raid/RaidMap";
 import TransferComplete from "component/point/TransferComplete";
 import CouponMain from "component/coupon/CouponMain";
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -37,12 +36,15 @@ root.render(
           {/* 포인트 */}
           <Route path="/point" element={<PointMain />} />
           <Route path="/point/transfer" element={<PointTransfer />} />
-          <Route path="/point/transfer/complete" element={<TransferComplete/>} />
+          <Route
+            path="/point/transfer/complete"
+            element={<TransferComplete />}
+          />
           {/* 쿠폰 */}
           <Route path="/coupon" element={<CouponMain />} />
           {/* 라우터 추가 */}
-          <Route path='/raidMap' element={<RaidMap />}></Route>
-        </Route>        
+          <Route path="/raidMap" element={<RaidMap />}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   </div>

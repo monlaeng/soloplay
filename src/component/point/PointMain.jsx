@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function PointMain(props) {
   return (
-      <>      
+    <>
       <div className="faq app-pages app-section">
         <div className="container">
           <div className="pages-title">
