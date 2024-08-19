@@ -32,6 +32,8 @@ import MyThemeDetail from "component/theme/MyThemeDetail"; /** 나의 테마 상
 import ThemeRegister from "component/theme/ThemeRegister"; /** 테마 등록 페이지 추가 */
 import TransferComplete from "component/point/TransferComplete";
 import CouponMain from "component/coupon/CouponMain";
+import CardList from "component/card/CardList";
+import CardUsageHistory from "component/card/CardUsageHistory"; 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -50,6 +52,9 @@ root.render(
           />
           {/* 쿠폰 */}
           <Route path="/coupon" element={<CouponMain />} />
+          {/* 카드 */}
+          <Route path='card' element={<CardList />}></Route>
+          <Route path='cardusage' element={<CardUsageHistory />} />
           {/* 레이드 */}
           <Route path='/raidMap' element={<RaidMap />}></Route>
           {/* 테마 */}
