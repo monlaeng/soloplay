@@ -34,6 +34,7 @@ import TransferComplete from "component/point/TransferComplete";
 import CouponMain from "component/coupon/CouponMain";
 import CardList from "component/card/CardList";
 import CardUsageHistory from "component/card/CardUsageHistory"; 
+import RaidBattle from "component/raid/RaidBattle";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
