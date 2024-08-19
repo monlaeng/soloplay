@@ -17,14 +17,13 @@ import "asset/css/lightbox.min.css";
 import "asset/css/style.css";
 import "asset/css/theme.css"; /** 테마 메뉴 통합 css 추가 */
 
-
 // 컴포넌트
 import App from "App";
 
 import PointTransfer from "component/point/PointTransfer";
 import PointMain from "component/point/PointMain";
 import Home from "component/common/Home";
-import RaidMap from 'component/raid/RaidMap';
+import RaidMap from "component/raid/RaidMap";
 import ThemeSearchMain from "component/theme/ThemeSearchMain"; /** 테마 메인페이지 겸 전체 테마 조회 페이지 추가 */
 import MyThemeSearch from "component/theme/MyThemeSearch"; /** 나의 테마 조회 페이지 추가 */
 import ThemeDetail from "component/theme/ThemeDetail"; /** 테마 상세조회 페이지 추가 */
@@ -37,6 +36,7 @@ import CardUsageHistory from "component/card/CardUsageHistory";
 import Login from "component/auth/Login"; 
 import Registration from "component/auth/Registration";
 import RaidBattle from "component/raid/RaidBattle";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <div>
@@ -57,19 +57,23 @@ root.render(
           {/* 쿠폰 */}
           <Route path="/coupon" element={<CouponMain />} />
           {/* 카드 */}
-          <Route path='card' element={<CardList />}></Route>
-          <Route path='cardusage' element={<CardUsageHistory />} />
+          <Route path="/card" element={<CardList />}></Route>
+          <Route path="/cardusage" element={<CardUsageHistory />} />
           {/* 레이드 */}
           <Route path='/raidMap' element={<RaidMap />}></Route>
           <Route path='/raidBattle' element={<RaidBattle />}></Route>
           {/* 테마 */}
-          <Route path="/themeSearchAll" element={<ThemeSearchMain />} /> {/** 테마 메인(전체 테마 조회) 페이지 */}
-          <Route path="/myThemeSearch" element={<MyThemeSearch />} /> {/** 나의 테마 조회 페이지 */}
-          <Route path="/themeDetail" element={<ThemeDetail />} /> {/** 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
-          <Route path="/myThemeDetail" element={<MyThemeDetail />} /> {/** 나의 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
-          <Route path="/themeRegister" element={<ThemeRegister />} /> {/** 테마 등록 페이지 */}
-
-      </Route>
+          <Route path="/themeSearchAll" element={<ThemeSearchMain />} />{" "}
+          {/** 테마 메인(전체 테마 조회) 페이지 */}
+          <Route path="/myThemeSearch" element={<MyThemeSearch />} />{" "}
+          {/** 나의 테마 조회 페이지 */}
+          <Route path="/themeDetail" element={<ThemeDetail />} />{" "}
+          {/** 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
+          <Route path="/myThemeDetail" element={<MyThemeDetail />} />{" "}
+          {/** 나의 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
+          <Route path="/themeRegister" element={<ThemeRegister />} />{" "}
+          {/** 테마 등록 페이지 */}
+        </Route>
       </Routes>
     </BrowserRouter>
   </div>
