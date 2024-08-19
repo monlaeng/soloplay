@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import 'asset/css/style.css';
-import 'asset/css/materialize.min.css';
-
 import markerPic from 'asset/image/coffeeMonster.png';
 import ReactModal from 'react-modal';
 import dayjs from 'dayjs';
 import SearchRaid from './SearchRaid';
 const { kakao } = window;
-const style = { width: "80%", height: "400px", margin: "0 auto" };
+const style = { width: "80%", height: "600px", margin: "0 auto" };
 var geocoder;
 var map;
 var data;
@@ -16,7 +13,6 @@ var data;
 function RaidMap(props) {
     const [modalOpen, setModalOpen] = useState(false);      //모달창 상태 관리
     const [selectedData, setSelectedData] = useState(null); //선택한 마커 데이터
-
     useEffect(() => {       //페이지 로드 될 떄 호출
         if (kakao) {
             kakao.maps.load(() => {
@@ -81,7 +77,7 @@ function RaidMap(props) {
         marker.setMap(map);     //마커 지도에 등록
 
         //마커와 같이 보여줄 장소 커스텀 인포
-        var content = `<div style="width:100%;text-align:center;padding:5px 10px; background-color:rgba(175, 102, 75, 0.82); color:white; font-weight:bold; border-radius:20px; border: none; overflow: scroll">${message}</div>`;
+        var content = `<div style="width:100%;text-align:center;padding:5px 10px; background-color:rgba(175, 102, 75, 0.82); color:white; font-weight:bold; border-radius:20px; border: none;">${message}</div>`;
         var customOverlay = new kakao.maps.CustomOverlay({
             map: map,
             position: locPosition,
@@ -141,7 +137,7 @@ function RaidMap(props) {
 
     return (
         <div>
-            <div style={style} id="map"></div>      
+            <div style={style} id="map"></div>
 
             <ReactModal
                 isOpen={modalOpen}
@@ -150,7 +146,7 @@ function RaidMap(props) {
                 ariaHideApp={false}
                 contentLabel="Pop up Message"
             >
-                {selectedData && (
+                                {selectedData && (
                     <div>
                        <h3>{selectedData.merchantName}</h3>
                         <p>{selectedData.merchantAddress}</p>

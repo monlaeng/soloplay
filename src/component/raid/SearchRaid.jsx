@@ -1,12 +1,13 @@
 import React from 'react';
 
 function SearchRaid({data}) {
+    console.log(data)
     return (
         <div>
             <h5>-레이드목록-</h5>
-            {data.map((item, index) => (
+            {/* {data.map((item, index) => (
                 <div>{item.merchantName}</div>
-            ))}
+            ))} */}
         </div>
     );
 }
