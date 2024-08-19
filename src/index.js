@@ -34,8 +34,9 @@ import TransferComplete from "component/point/TransferComplete";
 import CouponMain from "component/coupon/CouponMain";
 import CardList from "component/card/CardList";
 import CardUsageHistory from "component/card/CardUsageHistory"; 
+import Login from "component/auth/Login"; 
+import Registration from "component/auth/Registration";
 import RaidBattle from "component/raid/RaidBattle";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <div>
@@ -44,6 +45,8 @@ root.render(
         <Route path="/" element={<App />}>
           {/* 메인 */}
           <Route index element={<Home />} />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/registration" element={<Registration />} />
           {/* 포인트 */}
           <Route path="/point" element={<PointMain />} />
           <Route path="/point/transfer" element={<PointTransfer />} />
