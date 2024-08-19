@@ -63,7 +63,7 @@ root.render(
           <Route path="/themeDetail" element={<ThemeDetail />} /> {/** 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
           <Route path="/myThemeDetail" element={<MyThemeDetail />} /> {/** 나의 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
           <Route path="/themeRegister" element={<ThemeRegister />} /> {/** 테마 등록 페이지 */}
-  
+
       </Route>
       </Routes>
     </BrowserRouter>
