@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+.jersey-10-regular {
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.raidBackground {
+    display: block;
+    width: 100%;
+}
+
+.monster {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 60%;
+}
+
+.blink {
+    animation: blink-animation 0.2s linear;
+}
+
+@keyframes blink-animation {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+
+
+.raidDisplay {
+    position: relative;
+    display: inline-block;
+}
+
+.number-overlay {
+    position: absolute;
+    top: 35%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    color: red;
+    background-color: transparent;
+    pointer-events: none;
+    animation: move-up-fade 0.5s ease-out;
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@keyframes move-up-fade {
+    0% {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, calc(-70% - 70px)); /* 위로 이동 */
+      opacity: 0;
+    }
+}
+  

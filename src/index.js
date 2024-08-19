@@ -36,6 +36,7 @@ import CardList from "component/card/CardList";
 import CardUsageHistory from "component/card/CardUsageHistory"; 
 import Login from "component/auth/Login"; 
 import Registration from "component/auth/Registration";
+import RaidBattle from "component/raid/RaidBattle";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <div>
@@ -60,6 +61,7 @@ root.render(
           <Route path='cardusage' element={<CardUsageHistory />} />
           {/* 레이드 */}
           <Route path='/raidMap' element={<RaidMap />}></Route>
+          <Route path='/raidBattle' element={<RaidBattle />}></Route>
           {/* 테마 */}
           <Route path="/themeSearchAll" element={<ThemeSearchMain />} /> {/** 테마 메인(전체 테마 조회) 페이지 */}
           <Route path="/myThemeSearch" element={<MyThemeSearch />} /> {/** 나의 테마 조회 페이지 */}
