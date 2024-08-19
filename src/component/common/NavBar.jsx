@@ -1,14 +1,14 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 
-function NavBar(props) {
+function NavBar({ togglePanel }) {
   return (
     <div className="navbar">
       <div className="container">
         <div className="panel-control-left">
-          <Link to="/controller">
-            <i class="fa fa-align-left"></i>
-          </Link>
+          <a href="#" onClick={togglePanel} className="sidenav-control">
+            <i className="fa fa-align-left"></i>
+          </a>
         </div>
         <div className="site-title">
           <Link to="/" className="logo">
