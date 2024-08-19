@@ -1,30 +1,28 @@
-import React from "react";
-import NavBar from "component/common/NavBar";
-import { Link } from "react-router-dom";
+
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function MyThemeDetail(props) {
-  return (
-    <>
-      <NavBar />
-      <div className="faq app-pages app-section">
-        <div className="container">
-          <div className="themeDetailTitleContainer">
-            <h2 style={{ textAlign: "left", lineHeight: 1.5 }}>
-              <span
-                style={{
-                  fontWeight: "bold",
-                  color: "#007FFF",
-                  fontSize: "0.8em",
-                }}
-              >
-                나의 테마 상세조회
-              </span>{" "}
-            </h2>
-          </div>
-          <div className="themeBackgroundImage">
-            테마 백그라운드 이미지 영역
-          </div>
-
+    return (
+        <>
+        <div className="faq app-pages app-section">
+            <div className="container">
+                <div className='themeDetailTitleContainer'>
+                <h2 style={{ textAlign: "left", lineHeight: 1.5 }}>
+                        <span
+                        style={{
+                            fontWeight: "bold",
+                            color: "#007FFF",
+                            fontSize: "0.8em",
+                        }}
+                        >
+                        나의 테마 상세조회
+                        </span>{" "}
+                    </h2>
+                </div>
+                <div className='themeBackgroundImg'>
+                    테마 백그라운드 이미지 영역
+                </div>
           <div className="themeInfoContainer">
             <div className="themeNameContainer">
               <span>테마명</span>

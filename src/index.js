@@ -32,7 +32,10 @@ import ThemeRegister from "component/theme/ThemeRegister"; /** 테마 등록 페
 import TransferComplete from "component/point/TransferComplete";
 import CouponMain from "component/coupon/CouponMain";
 import CardList from "component/card/CardList";
-import CardUsageHistory from "component/card/CardUsageHistory";
+import CardUsageHistory from "component/card/CardUsageHistory"; 
+import Login from "component/auth/Login"; 
+import Registration from "component/auth/Registration";
+import RaidBattle from "component/raid/RaidBattle";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -42,6 +45,8 @@ root.render(
         <Route path="/" element={<App />}>
           {/* 메인 */}
           <Route index element={<Home />} />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/registration" element={<Registration />} />
           {/* 포인트 */}
           <Route path="/point" element={<PointMain />} />
           <Route path="/point/transfer" element={<PointTransfer />} />
@@ -55,7 +60,8 @@ root.render(
           <Route path="/card" element={<CardList />}></Route>
           <Route path="/cardusage" element={<CardUsageHistory />} />
           {/* 레이드 */}
-          <Route path="/raidMap" element={<RaidMap />}></Route>
+          <Route path='/raidMap' element={<RaidMap />}></Route>
+          <Route path='/raidBattle' element={<RaidBattle />}></Route>
           {/* 테마 */}
           <Route path="/themeSearchAll" element={<ThemeSearchMain />} />{" "}
           {/** 테마 메인(전체 테마 조회) 페이지 */}
