@@ -23,6 +23,9 @@ import PanelControl from "component/common/PanelControl";
 import NavBar from "component/common/NavBar";
 import Home from "component/common/Home";
 import RaidMap from 'component/raid/RaidMap';
+import CardList from "component/card/CardList";
+import CardUsageHistory from "component/card/CardUsageHistory";
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -38,7 +41,10 @@ root.render(
           <Route path="/transfer" element={<PointTransfer />} />
           {/* 라우터 추가 */}
           <Route path='/raidMap' element={<RaidMap />}></Route>
-        </Route>        
+          {/* 카드 */}
+          <Route path='card' element={<CardList />}></Route>
+          <Route path='cardusage' element={<CardUsageHistory />} />
+          </Route>        
       </Routes>
     </BrowserRouter>
   </div>
