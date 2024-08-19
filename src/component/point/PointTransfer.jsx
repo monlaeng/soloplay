@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function PointTransfer(props) {
   return (
@@ -52,16 +53,24 @@ function PointTransfer(props) {
               </select>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="account-number">계좌 번호:</label>
+            <div
+              className="form-group"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <div style={{ width: "100px" }}>
+                <label htmlFor="account-number" style={{ marginRight: "10px" }}>
+                  계좌 번호
+                </label>
+              </div>
+
               <input
                 type="text"
                 id="account-number"
                 name="account-number"
                 placeholder="'-' 없이 입력"
                 style={{
-                  width: "100%",
-                  height: "60px",
+                  width: "90%",
+                  height: "43px",
                   padding: "8px",
                   margin: "8px 0",
                   borderRadius: "4px",
@@ -70,41 +79,57 @@ function PointTransfer(props) {
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="account-holder">예금주:</label>
-              <input
-                type="text"
-                id="account-holder"
-                name="account-holder"
-                style={{
-                  width: "100%",
-                  height: "60px",
-                  padding: "8px",
-                  margin: "8px 0",
-                  borderRadius: "4px",
-                  border: "1px solid #ccc",
-                }}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="account-holder">전환신청 포인트:</label>
-              <input
-                type="text"
-                id="account-holder"
-                name="account-holder"
-                style={{
-                  width: "100%",
-                  height: "60px",
-                  padding: "8px",
-                  margin: "8px 0",
-                  borderRadius: "4px",
-                  border: "1px solid #ccc",
-                }}
-              />
-            </div>
+            <div
+              className="form-group"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <div style={{ width: "100px" }}>
+                <label htmlFor="account-holder" style={{ marginRight: "10px" }}>
+                  예금주
+                </label>
+              </div>
 
+              <input
+                type="text"
+                id="account-holder"
+                name="account-holder"
+                style={{
+                  width: "90%",
+                  height: "43px",
+                  padding: "8px",
+                  margin: "8px 0",
+                  borderRadius: "4px",
+                  border: "1px solid #ccc",
+                }}
+              />
+            </div>
+            <div
+              className="form-group"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <div style={{ width: "100px" }}>
+                <label htmlFor="account-holder" style={{ marginRight: "10px" }}>
+                  전환신청 포인트
+                </label>
+              </div>
+
+              <input
+                type="text"
+                id="account-holder"
+                name="account-holder"
+                style={{
+                  width: "30%",
+                  height: "43px",
+                  padding: "8px",
+                  margin: "8px 0",
+                  borderRadius: "4px",
+                  border: "1px solid #ccc",
+                }}
+              />
+            </div>
+            <br />
             <button
-              type="submit"
+              type="button"
               style={{
                 width: "100%",
                 height: "60px",
@@ -116,7 +141,9 @@ function PointTransfer(props) {
                 cursor: "pointer",
               }}
             >
-              다음
+              <Link to={"/point/transfer/complete"} style={{ color: "#fff" }}>
+                전환하기
+              </Link>
             </button>
           </form>
         </div>
