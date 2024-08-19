@@ -34,6 +34,7 @@ import TransferComplete from "component/point/TransferComplete";
 import CouponMain from "component/coupon/CouponMain";
 import CardList from "component/card/CardList";
 import CardUsageHistory from "component/card/CardUsageHistory"; 
+import MainTest from "component/raid/MainTest";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -57,6 +58,7 @@ root.render(
           <Route path='cardusage' element={<CardUsageHistory />} />
           {/* 레이드 */}
           <Route path='/raidMap' element={<RaidMap />}></Route>
+          <Route path='/mainTest' element={<MainTest />}></Route>
           {/* 테마 */}
           <Route path="/themeSearchAll" element={<ThemeSearchMain />} /> {/** 테마 메인(전체 테마 조회) 페이지 */}
           <Route path="/myThemeSearch" element={<MyThemeSearch />} /> {/** 나의 테마 조회 페이지 */}
