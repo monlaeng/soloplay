@@ -37,6 +37,7 @@ root.render(
           <Route path="/point" element={<PointMain />} />
           <Route path="/transfer" element={<PointTransfer />} />
           {/* 라우터 추가 */}
+          {/* 레이드 지도 */}
           <Route path='/raidMap' element={<RaidMap />}></Route>
         </Route>        
       </Routes>

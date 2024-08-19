@@ -5361,6 +5361,15 @@ button.btn-floating {
   will-change: top, opacity;
 }
 
+.modal_open {
+
+  z-index: 1003;
+  display: block;
+  opacity: 1;
+  transform: scaleX(1);
+  top: 10%;
+}
+
 @media only screen and (max-width: 992px) {
   .modal {
     width: 80%;
