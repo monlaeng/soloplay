@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
 import markerPic from 'asset/image/coffeeMonster.png';
-import ReactModal from 'react-modal';
-import dayjs from 'dayjs';
-import SearchRaid from './SearchRaid';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import RaidModal from './RaidModal';
 const { kakao } = window;
-const style = { width: "80%", height: "600px", margin: "0 auto" };
+const style = { width: "80%", height: "500px", margin: "0 auto" };
 var geocoder;
 var map;
 var data;
@@ -85,12 +83,10 @@ function RaidMap(props) {
             yAnchor: 1
         });
 
-
-
         if (index !== null) {       //진행중인 레이드 마커에 클릭이벤트 등록
             kakao.maps.event.addListener(marker, 'click', function () {
                 setSelectedData(data[index]); // data[index]를 선택된 데이터로 설정
-                handlePopupMessage();       //모달창 열리는 이벤트 등록
+                setModalOpen(true);      //모달창 열리는 이벤트 등록
             });
         }
     }
@@ -104,63 +100,16 @@ function RaidMap(props) {
         });
     }
 
-    const customModalStyles = {     //모달창 스타일 
-        overlay: {
-            backgroundColor: " rgba(0, 0, 0, 0.4)",
-            width: "100%",
-            height: "100vh",
-            zIndex: "10",
-            position: "fixed",
-            top: "0",
-            left: "0",
-        },
-        content: {
-            width: "360px",
-            height: "180px",
-            zIndex: "150",
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            borderRadius: "10px",
-            boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
-            backgroundColor: "white",
-            justifyContent: "center",
-            overflow: "auto",
-        },
-
-    };
-
-    const handlePopupMessage = () => {      //모달 오픈 이벤트
-        setModalOpen(true);
-    };
-
+        
     return (
         <div>
             <div style={style} id="map"></div>
 
-            <ReactModal
+            <RaidModal
                 isOpen={modalOpen}
                 onRequestClose={() => setModalOpen(false)}
-                style={customModalStyles}
-                ariaHideApp={false}
-                contentLabel="Pop up Message"
-            >
-                                {selectedData && (
-                    <div>
-                       <h3>{selectedData.merchantName}</h3>
-                        <p>{selectedData.merchantAddress}</p>
-                        <p>Start Time: {dayjs(selectedData.startTime).format('YYYY-MM-DD HH:mm:ss')}</p>
-                        <p>End Time: {dayjs(selectedData.endTime).format('YYYY-MM-DD HH:mm:ss')}</p>
-                        <p>Hit Points: {selectedData.hitPoint}</p>
-                        <p>Reward: {selectedData.reward}</p>
-                    </div>
-                )}
-
-                <button>참가하기</button>
-                <button onClick={() => setModalOpen(false)}>x</button>
-            </ReactModal>
-            <SearchRaid data={data}></SearchRaid>
+                selectedData={selectedData}
+            />
         </div>
     );
 }
