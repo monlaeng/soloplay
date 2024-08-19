@@ -44,7 +44,7 @@ function PanelControl(props) {
           <div className="collapsible-body" style={{ borderBottom: "none" }}>
             <ul className="side-nav-panel">
               <li>
-                <a href="index.html">카드 조회</a>
+                <Link to="/card">카드 조회</Link>
               </li>
               <li>
                 <a href="index.html">사용 내역 조회</a>
@@ -66,10 +66,10 @@ function PanelControl(props) {
           <div className="collapsible-body" style={{ borderBottom: "none" }}>
             <ul className="side-nav-panel">
               <li>
-                <a href="home-store.html">테마 관리</a>
+                <Link to="/themeSearchAll">테마 관리</Link>
               </li>
               <li>
-                <a href="product-details.html">레이드</a>
+                <Link to="/raidMap">레이드</Link>
               </li>
             </ul>
           </div>
