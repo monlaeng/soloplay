@@ -56,7 +56,10 @@ function SearchRaid(props) {
             {filterMonster.map((item, index) => (
                 <li onClick={() => selectRaid(item.raidId)} className="raidList" key={item.raidId}>
                     <p>{item.merchantName}</p>
+                    <p>상세주소 : {item.merchantAddress}</p>
+                    <hr/>
                 </li>
+
             ))}
             </ul>
 
