@@ -1,0 +1,248 @@
+/* 검색 및 분류 영역 스타일링 */
+.themeTitleContainer {
+    margin-bottom: 20px;
+}
+
+.themeSearchContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+.search-container span {
+    margin-right: 10px;
+    width: 60px;
+    font-weight: bold;
+    color:#007FFF;
+}
+
+.search-container input {
+    flex-grow: 1;
+    margin: 0px 10px 0px 0px;
+    width: 500px;
+}
+
+.search-container button {
+    padding: 5px 10px;
+    width: 80px;
+    border: 0px;
+    font-weight: bold;
+    background-color: #007FFF;
+    color: white;
+}
+
+.category-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.category-container span {
+    width: 60px;
+    margin-right: 10px;
+    font-weight: bold;
+    color:#007FFF;
+}
+
+.category-container button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: 0px;
+    background-color: white;
+    color: black;
+}
+
+  /* 테마 조회화면 그리드 적용을 위한 css */
+
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3열 그리드 */
+    gap: 20px; /* 항목 사이의 간격 */
+    list-style: none; /* 리스트 스타일 제거 */
+    padding: 0; /* 패딩 제거 */
+  }
+    
+    /* 모바일에서는 1열로 표시 */
+    @media (max-width: 768px) {
+        .theme-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+  
+.theme-grid li .collapsible-header {
+    background-color: #007FFF;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px; /* 박스의 높이 */
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.themeTitle {
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 테마 상세조회 영역 */
+
+.themeDetailTitleContainer {
+    margin-bottom: 10px;
+}
+
+.themeBackgroundImage {
+    height: 300px;
+    background-color: #007FFF;
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.themeInfoContainer span {
+    margin: 0px 10px;
+    color:black;
+    font-size: 16px;
+    font-weight: bold;
+    width: 60px;
+}
+
+.themeInfoContainer p {
+    border: 1px solid lightgrey;
+    width: 100%;
+}
+
+.themeNameContainer {
+    display: flex;
+    align-items: center;
+}
+
+.themeNameContainer, .themeCategoryContainer, .themeSubCategoryContainer {
+    display: flex;
+    align-items: center;
+}
+
+.themeContentDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.themeContentDiv span {
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.themeEditBtn {
+    background-color: #007FFF;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: 0px;
+    padding: 5px 10px;
+}
+
+.themeContentContainer {
+    background-color: lightgray;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    height: 300px;
+}
+
+.moveThemeListBtnDiv {
+    display: flex;
+    justify-content:space-between;
+    margin-top: 10px;
+}
+
+.moveThemeListBtn {
+    background-color: #007FFF;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: 0px;
+    padding: 5px 10px;
+}
+
+.themeRemoveBtn {
+    background-color: red;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: 0px;
+    padding: 5px 10px;
+}
+
+/* 테마 상세조회 끝 */
+
+/* 테마 등록 영역 */
+
+.themeCategorySelectContainer {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.themeCategorySelectContainer select {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid lightgrey;
+    margin-left: 10px;
+    margin-right: 20px;
+    min-width: 200px;
+}
+
+.registerBtnDiv {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.registerBtn {
+    background-color: #007FFF;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: 0px;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.selectedThemes {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.tag {
+    background-color: white;
+    border-radius: 15px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid lightgrey;
+}
+
+.removeTag {
+    margin-left: 5px;
+    color: red;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 테마 등록 끝 */
