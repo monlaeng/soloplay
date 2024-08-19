@@ -57,6 +57,7 @@ root.render(
           <Route path='cardusage' element={<CardUsageHistory />} />
           {/* 레이드 */}
           <Route path='/raidMap' element={<RaidMap />}></Route>
+          <Route path='/raidBattle' element={<RaidBattle />}></Route>
           {/* 테마 */}
           <Route path="/themeSearchAll" element={<ThemeSearchMain />} /> {/** 테마 메인(전체 테마 조회) 페이지 */}
           <Route path="/myThemeSearch" element={<MyThemeSearch />} /> {/** 나의 테마 조회 페이지 */}
