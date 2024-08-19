@@ -1,11 +1,9 @@
 import React from 'react';
-import NavBar from 'component/common/NavBar';
 import { Link } from 'react-router-dom';
 
 function ThemeDetail(props) {
     return (
         <>
-        <NavBar />
         <div className="faq app-pages app-section">
             <div className="container">
                 <div className='themeDetailTitleContainer'>
@@ -21,7 +19,7 @@ function ThemeDetail(props) {
                         </span>{" "}
                     </h2>
                 </div>
-                <div className='themeBackgroundImage'>
+                <div className='themeBackgroundImg'>
                     테마 백그라운드 이미지 영역
                 </div>
                 <div className='themeInfoContainer'>

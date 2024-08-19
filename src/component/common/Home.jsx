@@ -6,13 +6,10 @@ function Home(props) {
       {/* slider */}
       <div className="slider-slick app-pages">
         <div className="slider-entry">
-          <img src="img/slider1.jpg" alt="" />
+          <img src="/asset/img/slider1.jpg" alt="" />
           <div className="overlay"></div>
           <div className="caption">
             <div className="container">
-              <h2>Clean Templates</h2>
-              <p>Lorem Ipsum Dolor Sit Meta</p>
-              <button className="button">Read More</button>
             </div>
           </div>
         </div>

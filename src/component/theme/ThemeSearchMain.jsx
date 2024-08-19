@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import NavBar from 'component/common/NavBar';
 
 function ThemeSearchMain(props) {
     const [searchKeyword, inputSearchKeyword] = useState('');
@@ -25,7 +24,6 @@ function ThemeSearchMain(props) {
 
     return (
       <>
-      <NavBar />
       <div className="faq app-pages app-section">
         <div className="container">
         <div className="themeTitleContainer">
