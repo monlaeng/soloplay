@@ -15,6 +15,7 @@ import "asset/css/owl.theme.css";
 import "asset/css/owl.transitions.css";
 import "asset/css/lightbox.min.css";
 import "asset/css/style.css";
+import "asset/css/theme.css"; /** 테마 메뉴 통합 css 추가 */
 import PointTransfer from "component/point/PointTransfer";
 import PointMain from "component/point/PointMain";
 import Navbar from "component/common/NavBar";
@@ -23,6 +24,11 @@ import PanelControl from "component/common/PanelControl";
 import NavBar from "component/common/NavBar";
 import Home from "component/common/Home";
 import RaidMap from 'component/raid/RaidMap';
+import ThemeSearchMain from "component/theme/ThemeSearchMain"; /** 테마 메인페이지 겸 전체 테마 조회 페이지 추가 */
+import MyThemeSearch from "component/theme/MyThemeSearch"; /** 나의 테마 조회 페이지 추가 */
+import ThemeDetail from "component/theme/ThemeDetail"; /** 테마 상세조회 페이지 추가 */
+import MyThemeDetail from "component/theme/MyThemeDetail"; /** 나의 테마 상세조회 페이지 추가 */
+import ThemeRegister from "component/theme/ThemeRegister"; /** 테마 등록 페이지 추가 */
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -38,7 +44,12 @@ root.render(
           <Route path="/transfer" element={<PointTransfer />} />
           {/* 라우터 추가 */}
           <Route path='/raidMap' element={<RaidMap />}></Route>
-        </Route>        
+          <Route path="/themeSearchAll" element={<ThemeSearchMain />} /> {/** 테마 메인(전체 테마 조회) 페이지 */}
+          <Route path="/myThemeSearch" element={<MyThemeSearch />} /> {/** 나의 테마 조회 페이지 */}
+          <Route path="/themeDetail" element={<ThemeDetail />} /> {/** 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
+          <Route path="/myThemeDetail" element={<MyThemeDetail />} /> {/** 나의 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
+          <Route path="/themeRegister" element={<ThemeRegister />} /> {/** 테마 등록 페이지 */}
+        </Route>
       </Routes>
     </BrowserRouter>
   </div>
