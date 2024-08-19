@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import App from "App";
 
+// 외부 라이브라리 및 프레임워크
+import "materialize-css/dist/css/materialize.min.css";
 
 import "asset/css/font-awesome.min.css";
-import "asset/css/materialize.min.css";
 import "asset/css/slick.css";
 import "asset/css/slick-theme.css";
 import "asset/css/owl.carousel.css";
@@ -15,15 +15,15 @@ import "asset/css/owl.theme.css";
 import "asset/css/owl.transitions.css";
 import "asset/css/lightbox.min.css";
 import "asset/css/style.css";
+
+// 컴포넌트
+import App from "App";
 import PointTransfer from "component/point/PointTransfer";
 import PointMain from "component/point/PointMain";
-import Navbar from "component/common/NavBar";
-import Footer from "component/common/Footer";
-import PanelControl from "component/common/PanelControl";
-import NavBar from "component/common/NavBar";
 import Home from "component/common/Home";
-import RaidMap from 'component/raid/RaidMap';
-
+import RaidMap from "component/raid/RaidMap";
+import TransferComplete from "component/point/TransferComplete";
+import CouponMain from "component/coupon/CouponMain";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -35,10 +35,16 @@ root.render(
           <Route index element={<Home />} />
           {/* 포인트 */}
           <Route path="/point" element={<PointMain />} />
-          <Route path="/transfer" element={<PointTransfer />} />
+          <Route path="/point/transfer" element={<PointTransfer />} />
+          <Route
+            path="/point/transfer/complete"
+            element={<TransferComplete />}
+          />
+          {/* 쿠폰 */}
+          <Route path="/coupon" element={<CouponMain />} />
           {/* 라우터 추가 */}
-          <Route path='/raidMap' element={<RaidMap />}></Route>
-        </Route>        
+          <Route path="/raidMap" element={<RaidMap />}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   </div>

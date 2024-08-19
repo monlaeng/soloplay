@@ -1,26 +1,31 @@
 import NavBar from "component/common/NavBar";
 import PanelControl from "component/common/PanelControl";
-import PointMain from "component/point/PointMain";
 import "./App.css";
-import { Outlet, Route, Routes } from "react-router-dom";
-import PointTransfer from "component/point/PointTransfer";
+import { Outlet } from "react-router-dom";
 import Footer from "component/common/Footer";
-import Home from "component/common/Home";
+import { useState } from "react";
 
 function App() {
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+
+  const togglePanel = (event) => {
+    event.preventDefault(); // 기본 링크 동작 방지
+    console.log("요청 가냐?????????");
+    setIsPanelOpen(!isPanelOpen);
+  };
+
   return (
     <>
-      <NavBar />
+      <NavBar togglePanel={togglePanel} />
       <div className="App">
         <div className="main">
-          <PanelControl />
+          {isPanelOpen && <PanelControl />} {/* 사이드바 표시 여부 */}
           <div className="content">
             {/* 현재 경로에 맞는 자식 컴포넌트를 렌더링 */}
             <Outlet />
           </div>
         </div>
       </div>
-
       <Footer />
     </>
   );
