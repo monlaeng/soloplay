@@ -4,12 +4,13 @@ import NavBar from "component/common/NavBar";
 function CardUsageHistory({ userId }) {
   const [usageHistory, setUsageHistory] = useState({});
 
-  // Fetch data from the API
   useEffect(() => {
-    fetch(`http://localhost:8800/card/userCardsAndUsageHistory?userId=${userId}`)
-      .then(response => response.json())
-      .then(data => setUsageHistory(data))
-      .catch(error => console.error("Error fetching usage history:", error));
+    fetch(
+      `http://localhost:8800/card/userCardsAndUsageHistory?userId=${userId}`
+    )
+      .then((response) => response.json())
+      .then((data) => setUsageHistory(data))
+      .catch((error) => console.error("Error fetching usage history:", error));
   }, [userId]);
 
   return (
@@ -24,23 +25,31 @@ function CardUsageHistory({ userId }) {
             <hr />
           </div>
           <div className="entry">
-            {Object.keys(usageHistory).map((cardNum) => (
-              <div key={cardNum} className="card-usage-section">
-                <h3>카드 번호: {cardNum}</h3>
-                <ul className="usage-list">
-                  {usageHistory[cardNum].map((usage) => (
-                    <li key={usage.usageId} className="usage-item">
-                      <div>
-                        <strong>거래 날짜:</strong> {new Date(usage.transactionDate).toLocaleDateString()}
+            {Object.keys(usageHistory).length === 0 ? (
+              <p>데이터를 불러오는 중입니다...</p>
+            ) : (
+              Object.keys(usageHistory).map((cardNum) => (
+                <div key={cardNum} className="card-usage-section">
+                  <h3>{usageHistory[cardNum].cardName}</h3>
+                  <h5>{cardNum}</h5>
+                  <div className="order">
+                    {usageHistory[cardNum].usageHistory.map((usage) => (
+                      <div key={usage.usageId} className="row">
+                        <div className="col s8">
+                          <p><strong>{new Date(usage.transactionDate).toLocaleDateString()}</strong></p>
+                        </div> 
+                        <div className="col s12">
+                          <p>
+                            <span>{usage.merchantName}</span>
+                            <span style={{ float: "right" }}>{usage.amount.toLocaleString()} 원</span>
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <strong>거래 금액:</strong> {usage.amount.toLocaleString()} 원
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+                    ))}
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
