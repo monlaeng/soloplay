@@ -1,5 +1,5 @@
 import React from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NavBar({ togglePanel }) {
   return (
@@ -17,7 +17,7 @@ function NavBar({ togglePanel }) {
         </div>
         <div className="panel-control-right">
           <Link to="#">
-            <i className="fa fa-envelope-o"></i>
+            <i className="fa fa-user-circle-o"></i>
           </Link>
         </div>
       </div>

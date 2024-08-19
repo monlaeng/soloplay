@@ -12,13 +12,14 @@ function TransferComplete(props) {
             style={{
               textAlign: "center",
               lineHeight: 1.5,
-              fontSize: 30,
+              fontSize: 27,
               fontWeight: "bold",
             }}
           >
             포인트 전환이 완료되었습니다.
             <br />
           </h2>
+          <br />
           <h2
             style={{
               textAlign: "center",
