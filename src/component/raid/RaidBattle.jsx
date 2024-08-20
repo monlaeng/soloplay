@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import raidBackground from "asset/image/raidBackground.jpg";
 import coffeeMonster from "asset/image/coffeeMonster.png";
-import attack from "asset/sound/attack.mp3";
 import "asset/css/raidBattle.css";
 
 
@@ -12,9 +11,6 @@ function RaidBattle(props) {
     const monsterAttack = () => {
         setIsBlinking(true);
         setShowNumber(true);
-
-        const sound = new Audio(attack);
-        sound.play();
 
         setTimeout(() => {
             setIsBlinking(false);
