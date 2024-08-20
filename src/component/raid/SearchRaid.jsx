@@ -12,10 +12,13 @@ function SearchRaid(props) {
     const [modalOpen, setModalOpen] = useState(false);      //모달창 상태 관리
     const [selectedData, setSelectedData] = useState(null); //선택한 마커 데이터
     const [selectLocation, setSelectLocation] = useState(null);
+
+    const key = process.env.REACT_APP_OPED_API_KEY;
+
     
     const option = useMemo(() => {
         const optionData = [];
-        axios.get('http://api.odcloud.kr/api/15063993/v1/uddi:e6b4e89e-5524-47ef-9db7-eedabf41ed29?page=1&perPage=26&serviceKey=a%2BypfTG%2FRyUR34XWh4gmkwq1d%2BAHRXRjYzpde9Z%2FqaA8CEo6X52auMzXjIEW%2BIPJOzcZSQz06%2BoJYxSnldj8UQ%3D%3D')
+        axios.get('http://api.odcloud.kr/api/15063993/v1/uddi:e6b4e89e-5524-47ef-9db7-eedabf41ed29?page=1&perPage=26&serviceKey='+key)
         .then((response) => {
             var data = response.data.data;
             data.forEach((item) => {
