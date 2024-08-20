@@ -23,7 +23,6 @@ import App from "App";
 import PointTransfer from "component/point/PointTransfer";
 import PointMain from "component/point/PointMain";
 import Home from "component/common/Home";
-import RaidMap from "component/raid/RaidMap";
 import ThemeSearchMain from "component/theme/ThemeSearchMain"; /** 테마 메인페이지 겸 전체 테마 조회 페이지 추가 */
 import MyThemeSearch from "component/theme/MyThemeSearch"; /** 나의 테마 조회 페이지 추가 */
 import ThemeDetail from "component/theme/ThemeDetail"; /** 테마 상세조회 페이지 추가 */
@@ -63,7 +62,6 @@ root.render(
           <Route path='cardUsage' element={<CardUsageHistory userId="user_1" />} />
           <Route path='cardRecommend' element={<cardRecommend userId="user_1" />} />
           {/* 레이드 */}
-          <Route path='/raidMap' element={<RaidMap />}></Route>
           <Route path='/mainTest' element={<MainTest />}></Route>
           <Route path='/raidBattle' element={<RaidBattle />}></Route>
 
