@@ -69,7 +69,7 @@ function PanelControl(props) {
                 <Link to="/themeSearchAll">테마 관리</Link>
               </li>
               <li>
-                <Link to="/Maintest">레이드</Link>
+                <Link to="/MainTest">레이드</Link>
               </li>
             </ul>
           </div>

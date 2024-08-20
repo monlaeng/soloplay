@@ -1,18 +1,36 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import RaidModal from './RaidModal';
+import Select from 'react-select';
+
 
 function SearchRaid(props) {
     const [raidList, setRaidList] = useState([]);
     const [searchRaid, setSearchRaid] = useState("");
+    const [selected, setSelected] = useState("");
 
     const [modalOpen, setModalOpen] = useState(false);      //모달창 상태 관리
     const [selectedData, setSelectedData] = useState(null); //선택한 마커 데이터
+    const [selectLocation, setSelectLocation] = useState(null);
 
+    const key = process.env.REACT_APP_OPED_API_KEY;
 
-    const onChange = (e) => {
-        setSearchRaid(e.target.value);
-    };
+    
+    const option = useMemo(() => {
+        const optionData = [];
+        axios.get('http://api.odcloud.kr/api/15063993/v1/uddi:e6b4e89e-5524-47ef-9db7-eedabf41ed29?page=1&perPage=26&serviceKey='+key)
+        .then((response) => {
+            var data = response.data.data;
+            data.forEach((item) => {
+                optionData.push({ value: item.기관명칭, label: item.기관명칭 });
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+        return optionData;
+    })
 
     // API 호출 후 raidList 설정
     useEffect(() => {
@@ -23,12 +41,16 @@ function SearchRaid(props) {
             .catch((error) => {
                 console.error(error);
             });
+            
     }, []);  
 
     // 입력된 검색어를 기준으로 필터링
-    const filterMonster = raidList.filter((monsterinfo) => (
-        monsterinfo.merchantAddress.includes(searchRaid) ||
-        monsterinfo.merchantName.includes(searchRaid)
+    const filterRaid = raidList.filter((raidinfo) => (
+        raidinfo.merchantAddress.includes(selectLocation===null?'서울특별시':selectLocation) && (
+        raidinfo.merchantName.includes(searchRaid) ||
+        raidinfo.merchantAddress.includes(searchRaid) 
+        )
+        
     ));
 
     function selectRaid(raidId) {
@@ -39,21 +61,33 @@ function SearchRaid(props) {
         setModalOpen(true);  // 모달 오픈 
     }
 
-    const handlePopupMessage = () => {      //모달 오픈 이벤트
-        setModalOpen(true);
+    const onChange = (e) => {
+        setSearchRaid(e.target.value);
     };
+
+    const onChangeSelect = (e:any) => {
+        if(e) setSelected(e.value);
+        else setSelected('');
+        // setSearchRaid(e.value);
+        setSelectLocation(e.value);
+    }
+
 
     return (
         <div>
-            <h5>-레이드목록-</h5>
+            <Select
+                onChange={onChangeSelect}
+                options={option}
+                placeholder='서울특별시'
+                defaultValue='서울특별시'
+            ></Select>
             <input 
                 className='search' 
                 placeholder='Search🔎' 
                 onChange={onChange} 
-                value={searchRaid} 
             />
             <ul>
-            {filterMonster.map((item, index) => (
+            {filterRaid.map((item, index) => (
                 <li onClick={() => selectRaid(item.raidId)} className="raidList" key={item.raidId}>
                     <p>{item.merchantName}</p>
                     <p>상세주소 : {item.merchantAddress}</p>
@@ -62,8 +96,6 @@ function SearchRaid(props) {
 
             ))}
             </ul>
-
-
             <RaidModal
                 isOpen={modalOpen}
                 onRequestClose={() => setModalOpen(false)}
