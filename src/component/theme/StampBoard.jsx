@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import 'asset/css/StampBoard.css';
-import shoppingImage from 'asset/img/shopping.jpg'; // 예시 이미지
-import travelImage from 'asset/img/travel.jpg';
-import dailyLifeImage from 'asset/img/life.jpg';
-import diningImage from 'asset/img/dining.jpg';
-import cultureImage from 'asset/img/culture.jpg'
+import shoppingImage from 'asset/image/shopping.jpg'; // 예시 이미지
+import travelImage from 'asset/image/travel.jpg';
+import dailyLifeImage from 'asset/image/life.jpg';
+import diningImage from 'asset/image/dining.jpg';
+import cultureImage from 'asset/image/culture.jpg'
 
 
 function StampBoard() {
