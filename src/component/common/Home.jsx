@@ -9,6 +9,21 @@ function Home(props) {
           <img src="/asset/img/slider1.jpg" alt="" />
           <div className="overlay"></div>
           <div className="caption">
+          <div className="who-we-are app-section">
+        <div className="container">
+          <div className="app-title">
+            <h4>응애응애</h4>
+            <div className="line"></div>
+          </div>
+          <div className="entry">
+            <p>
+             우리 뭔 서비스인지 소개 
+            </p>
+            <button className="button">Read More</button>
+          </div>
+          
+        </div>
+      </div>
             <div className="container">
             </div>
           </div>
@@ -18,7 +33,7 @@ function Home(props) {
           <img src="img/slider2.jpg" alt="" />
           <div className="caption">
             <div className="container">
-              <h2>Awesome Features</h2>
+              <h2>레이드 목록</h2>
               <p>Lorem Ipsum Dolor Sit Meta</p>
               <button className="button">Read More</button>
             </div>
@@ -26,39 +41,17 @@ function Home(props) {
         </div>
         <div className="slider-entry">
           <div className="overlay"></div>
-          <img src="img/slider3.jpg" alt="" />
+          <img src="img/slider2.jpg" alt="" />
           <div className="caption">
             <div className="container">
-              <h2>Perfect Templates</h2>
+              <h2>스탬프 목록</h2>
               <p>Lorem Ipsum Dolor Sit Meta</p>
               <button className="button">Read More</button>
             </div>
           </div>
         </div>
-      </div>
-      {/* end slider */}
 
-      {/* who we are */}
-      <div className="who-we-are app-section">
-        <div className="container">
-          <div className="app-title">
-            <h4>WHO WE ARE</h4>
-            <div className="line"></div>
-          </div>
-          <div className="entry">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Reprehenderit accusamus unde ipsam est, deserunt mollitia
-              inventore soluta consectetur, ea maxime odit vel, quaerat
-              necessitatibus voluptatibus? Maiores modi voluptate, in soluta!
-            </p>
-            <button className="button">Read More</button>
-          </div>
-        </div>
-      </div>
-      {/* end who we are */}
-
-      {/* our services */}
+            {/* our services */}
       <div className="service app-section app-bg-dark">
         <div className="container">
           <div className="app-title">
@@ -69,15 +62,15 @@ function Home(props) {
             <div className="col s6">
               <div className="entry">
                 <i className="fa fa-android"></i>
-                <h5>Android</h5>
-                <p>Lorem ipsum dolor sit amet consectetur</p>
+                <h5>레이드</h5>
+                <p>진행중인 레이드</p>
               </div>
             </div>
             <div className="col s6">
               <div className="entry">
                 <i className="fa fa-drupal"></i>
-                <h5>Drupal</h5>
-                <p>Lorem ipsum dolor sit amet consectetur</p>
+                <h5>테마 추천</h5>
+                <p>테마</p>
               </div>
             </div>
           </div>
@@ -85,14 +78,14 @@ function Home(props) {
             <div className="col s6">
               <div className="entry">
                 <i className="fa fa-wordpress"></i>
-                <h5>Wordpress</h5>
+                <h5>카드 추천</h5>
                 <p>Lorem ipsum dolor sit amet consectetur</p>
               </div>
             </div>
             <div className="col s6">
               <div className="entry">
                 <i className="fa fa-joomla"></i>
-                <h5>Joomla</h5>
+                <h5>리워드</h5>
                 <p>Lorem ipsum dolor sit amet consectetur</p>
               </div>
             </div>
@@ -101,7 +94,25 @@ function Home(props) {
       </div>
       {/* end our services */}
 
-      {/* portfolio */}
+
+   
+        {/* <div className="slider-entry">
+          <div className="overlay"></div>
+          <img src="img/slider3.jpg" alt="" />
+          <div className="caption">
+            <div className="container">
+              <h2>Perfect Templates</h2>
+              <p>Lorem Ipsum Dolor Sit Meta</p>
+              <button className="button">Read More</button>
+            </div>
+          </div> 
+        </div>*/}
+      </div>
+      {/* end slider */}
+
+      {/* who we are */}
+      {/* end who we are */}
+
       <div className="portfolio app-section">
         <div className="container">
           <div className="app-title">
@@ -112,9 +123,11 @@ function Home(props) {
             <li data-filter="all" className="active">
               All
             </li>
-            <li data-filter="1">Nature</li>
-            <li data-filter="2">Abstract</li>
-            <li data-filter="3">Objects</li>
+            <li data-filter="1">카드 대분류1 </li>
+            <li data-filter="2">카드 대분류2</li>
+            <li data-filter="3">카드 대분류3</li>
+            <li data-filter="4">카드 대분류4</li>
+            <li data-filter="5">카드 대분류5</li>
           </ul>
           <div className="portfolio-item">
             <div className="row">
@@ -156,10 +169,15 @@ function Home(props) {
           </div>
         </div>
       </div>
+
+
+
+
+      {/* portfolio */}
       {/* end portfolio */}
 
       {/* offers */}
-      <div className="offers app-section app-bg-dark">
+      {/* <div className="offers app-section app-bg-dark">
         <div className="container">
           <div className="app-title">
             <h4>FEATURES</h4>
@@ -218,11 +236,11 @@ function Home(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* end offers */}
 
       {/* testimonial */}
-      <div className="testimonial">
+      {/* <div className="testimonial">
         <div className="container">
           <div className="app-title">
             <h4>PEOPLE SAYS</h4>
@@ -261,7 +279,7 @@ function Home(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* end testimonial */}
     </div>
   );

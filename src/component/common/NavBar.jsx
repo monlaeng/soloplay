@@ -16,7 +16,7 @@ function NavBar({ togglePanel }) {
           </Link>
         </div>
         <div className="panel-control-right">
-          <Link to="#">
+          <Link to="/auth/login">
             <i className="fa fa-user-circle-o"></i>
           </Link>
         </div>
