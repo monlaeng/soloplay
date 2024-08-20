@@ -20,7 +20,7 @@ function CardUsageHistory({ userId }) {
         <div className="container">
           <div className="pages-title">
             <h2 style={{ textAlign: "left", lineHeight: 1.5 }}>
-              카드 결제 내역
+              결제 내역
             </h2>
             <hr />
           </div>

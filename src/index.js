@@ -36,6 +36,9 @@ import MainTest from "component/raid/MainTest";
 import Login from "component/auth/Login"; 
 import Registration from "component/auth/Registration";
 import RaidBattle from "component/raid/RaidBattle";
+import ThemeBucketList from "component/theme/ThemeBucketList";
+import ThemeAnalyzeResult from "component/theme/ThemeAnalyzeResult";
+import StampBoard from "component/theme/StampBoard";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -76,6 +79,10 @@ root.render(
           {/** 나의 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
           <Route path="/themeRegister" element={<ThemeRegister />} />{" "}
           {/** 테마 등록 페이지 */}
+          {/** 테마 추천 페이지 */}
+          <Route path="/bucketlist" element={<ThemeBucketList/>}/>
+		      <Route path="/analyzetheme" element={<ThemeAnalyzeResult/>}/>
+          <Route path="/stamp" element={<StampBoard/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

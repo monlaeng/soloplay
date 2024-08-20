@@ -1,54 +1,80 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "component/common/NavBar";
-import M from "materialize-css";
+import "asset/css/cardlist.css";
+import cardImage from "asset/image/carddummy.gif";
 
 function CardList() {
   const [cards, setCards] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 
 
   useEffect(() => {
     fetch("http://localhost:8800/card/list")
-      .then(response => response.json())
-      .then(data => setCards(data))
-      .catch(error => console.error("Error fetching cards:", error));
+      .then((response) => response.json())
+      .then((data) => setCards(data))
+      .catch((error) => console.error("Error fetching cards:", error));
   }, []);
 
-  useEffect(() => {
-    const elems = document.querySelectorAll(".collapsible");
-    M.Collapsible.init(elems);
-  }, [cards]); // This useEffect runs again whenever the 'cards' state updates
+  // 검색어에 따라 카드 필터링 (카드 이름과 혜택 모두를 기준으로)
+  const filteredCards = cards.filter((card) =>
+    card.cardName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    card.cardBenefit.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
       <NavBar />
-      <div className="accordion app-pages app-section">
+      <div className="app-pages app-section">
         <div className="container">
           <div className="pages-title">
             <h2 style={{ textAlign: "left", lineHeight: 1.5 }}>
-              신한카드 목록
+              신한카드
             </h2>
-            <hr />
+            <hr style={{ marginTop: "20px", marginBottom: "20px" }} />
           </div>
-          <div className="entry">
-            <ul className="collapsible" data-collapsible="accordion">
-              {cards.map((card) => (
-                <li key={card.cardId}>
-                  <div className="collapsible-header acc-collapsible">
-                    {card.cardName}
-                  </div>
-                  <div className="collapsible-body">
-                    <p>{card.cardBenefit}</p>
+
+          {/* 검색어 입력 필드 */}
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="카드 이름 또는 혜택으로 검색"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="search-input"
+            />
+          </div>
+
+          <div className="card-grid">
+            {filteredCards.map((card) => (
+              <div key={card.cardId} className="card-item">
+                <img
+                  src={cardImage}  
+                  alt={card.cardName}
+                  className="card-image"
+                />
+                <div className="card-content">
+                  <h5>
                     <a
                       href={card.cardLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn btn-primary"
+                      className="card-link"
                     >
-                        신한카드 홈페이지에서 확인
+                      {card.cardName}
                     </a>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  </h5>
+                  <p>
+                    <a
+                      href={card.cardLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="card-link"
+                    >
+                      {card.cardBenefit}
+                    </a>
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

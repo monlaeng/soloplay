@@ -1,62 +1,88 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import test from "asset/image/test.jpg";
+import completeIcon from "asset/image/completeIcon.png";
+import controller from "asset/image/controller.png";
+import card from "asset/image/card.png";
+import point from "asset/image/point.png";
+import recommand from "asset/image/recommand.png";
+
 
 function Home(props) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    { src: test, alt: "Slide 1", title: "응애응애", description: "우리 뭔 서비스인지 소개" },
+    { src: completeIcon, alt: "Slide 2", title: "테스트2", description: "테스트2 테스트2" },
+    { src: controller, alt: "Slide 3", title: "테스트3", description: "테스트3 테스트3" }
+  ];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+    }, 5000); // 5초
+
+    return () => clearTimeout(timer);
+  }, [currentSlide]);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
   return (
     <div>
       {/* slider */}
       <div className="slider-slick app-pages">
-        <div className="slider-entry">
-          <img src="/asset/img/slider1.jpg" alt="" />
-          <div className="overlay"></div>
-          <div className="caption">
-            <div className="container">
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`slider-entry ${currentSlide === index ? "active" : ""}`}
+            style={{
+              opacity: currentSlide === index ? 1 : 0,
+              zIndex: currentSlide === index ? 2 : 1,
+              position: 'absolute', // 모든 슬라이드가 겹쳐지도록 설정
+              width: '100%',
+              top: 0,
+              left: 0,
+              transition: 'opacity 0.5s ease-in-out', // 부드러운 전환 효과
+            }}
+          >
+            <img src={slide.src} alt={slide.alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <div className="overlay"></div>
+            <div className="caption">
+              <div className="who-we-are app-section">
+                <div className="container">
+                  <div className="app-title">
+                    <h4>{slide.title}</h4>
+                    <div className="line"></div>
+                  </div>
+                  <div className="entry">
+                    <p>{slide.description}</p>
+                    <button className="button">Read More</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="slider-entry">
-          <div className="overlay"></div>
-          <img src="img/slider2.jpg" alt="" />
-          <div className="caption">
-            <div className="container">
-              <h2>Awesome Features</h2>
-              <p>Lorem Ipsum Dolor Sit Meta</p>
-              <button className="button">Read More</button>
-            </div>
-          </div>
-        </div>
-        <div className="slider-entry">
-          <div className="overlay"></div>
-          <img src="img/slider3.jpg" alt="" />
-          <div className="caption">
-            <div className="container">
-              <h2>Perfect Templates</h2>
-              <p>Lorem Ipsum Dolor Sit Meta</p>
-              <button className="button">Read More</button>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
       {/* end slider */}
 
-      {/* who we are */}
-      <div className="who-we-are app-section">
-        <div className="container">
-          <div className="app-title">
-            <h4>WHO WE ARE</h4>
-            <div className="line"></div>
-          </div>
-          <div className="entry">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Reprehenderit accusamus unde ipsam est, deserunt mollitia
-              inventore soluta consectetur, ea maxime odit vel, quaerat
-              necessitatibus voluptatibus? Maiores modi voluptate, in soluta!
-            </p>
-            <button className="button">Read More</button>
-          </div>
-        </div>
+      {/* 슬라이드 컨트롤 버튼 */}
+      <div className="slider-controls">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={currentSlide === index ? "active" : ""}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
-      {/* end who we are */}
+
+      {/* 슬라이드 개수 표시 */}
+      <div className="slide-indicator">
+        {currentSlide + 1}/{slides.length}
+      </div>
 
       {/* our services */}
       <div className="service app-section app-bg-dark">
@@ -68,31 +94,31 @@ function Home(props) {
           <div className="row">
             <div className="col s6">
               <div className="entry">
-                <i className="fa fa-android"></i>
-                <h5>Android</h5>
-                <p>Lorem ipsum dolor sit amet consectetur</p>
+                <img src={point} alt="Point Icon" style={{ width: '50px', height: '50px' }} />
+                <h5>레이드</h5>
+                <p>진행중인 레이드</p>
               </div>
             </div>
             <div className="col s6">
               <div className="entry">
-                <i className="fa fa-drupal"></i>
-                <h5>Drupal</h5>
-                <p>Lorem ipsum dolor sit amet consectetur</p>
+                <img src={recommand} alt="Recommand Icon" style={{ width: '50px', height: '50px' }} />
+                <h5>테마 추천</h5>
+                <p>테마</p>
               </div>
             </div>
           </div>
           <div className="row">
             <div className="col s6">
               <div className="entry">
-                <i className="fa fa-wordpress"></i>
-                <h5>Wordpress</h5>
+                <img src={card} alt="Card Icon" style={{ width: '50px', height: '50px' }} />
+                <h5>카드 추천</h5>
                 <p>Lorem ipsum dolor sit amet consectetur</p>
               </div>
             </div>
             <div className="col s6">
               <div className="entry">
-                <i className="fa fa-joomla"></i>
-                <h5>Joomla</h5>
+                <img src={test} alt="Test Icon" style={{ width: '50px', height: '50px' }} />
+                <h5>리워드</h5>
                 <p>Lorem ipsum dolor sit amet consectetur</p>
               </div>
             </div>
@@ -109,12 +135,12 @@ function Home(props) {
             <div className="line"></div>
           </div>
           <ul className="portfolio-filter">
-            <li data-filter="all" className="active">
-              All
-            </li>
-            <li data-filter="1">Nature</li>
-            <li data-filter="2">Abstract</li>
-            <li data-filter="3">Objects</li>
+            <li data-filter="all" className="active">All</li>
+            <li data-filter="1">카드 대분류1</li>
+            <li data-filter="2">카드 대분류2</li>
+            <li data-filter="3">카드 대분류3</li>
+            <li data-filter="4">카드 대분류4</li>
+            <li data-filter="5">카드 대분류5</li>
           </ul>
           <div className="portfolio-item">
             <div className="row">
@@ -158,8 +184,70 @@ function Home(props) {
       </div>
       {/* end portfolio */}
 
+      {/* 슬라이드 전환을 위한 스타일 */}
+      <style jsx>{`
+        .slider-slick {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          height: 500px; /* 원하는 높이로 설정 */
+        }
+
+        .slider-entry {
+          position: absolute;
+          width: 100%;
+          height: 100%; /* 슬라이드의 전체 높이를 차지하도록 수정 */
+          top: 0; /* 모든 슬라이드의 top을 0으로 설정 */
+          left: 0;
+          opacity: 0;
+          transition: opacity 0.5s ease-in-out;
+          z-index: 1;
+        }
+
+        .slider-entry.active {
+          opacity: 1;
+          z-index: 2;
+        }
+
+        .slider-controls {
+          display: flex;
+          justify-content: center;
+          margin-top: 10px;
+        }
+
+        .slider-controls button {
+          margin: 0 5px;
+          padding: 5px 10px;
+          cursor: pointer;
+          border: none;
+          background-color: #ccc;
+          color: white;
+          font-size: 16px;
+        }
+
+        .slider-controls .active {
+          background-color: #333;
+        }
+
+        .slide-indicator {
+          text-align: center;
+          margin-top: 10px;
+          font-size: 18px;
+          color: #666;
+        }
+      `}</style>
+    </div>
+  );
+}
+
+export default Home;
+
+
+      {/* portfolio */}
+      {/* end portfolio */}
+
       {/* offers */}
-      <div className="offers app-section app-bg-dark">
+      {/* <div className="offers app-section app-bg-dark">
         <div className="container">
           <div className="app-title">
             <h4>FEATURES</h4>
@@ -218,11 +306,11 @@ function Home(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* end offers */}
 
       {/* testimonial */}
-      <div className="testimonial">
+      {/* <div className="testimonial">
         <div className="container">
           <div className="app-title">
             <h4>PEOPLE SAYS</h4>
@@ -261,10 +349,5 @@ function Home(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* end testimonial */}
-    </div>
-  );
-}
-
-export default Home;
