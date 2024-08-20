@@ -1,0 +1,66 @@
+.theme-result-container {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    color: #003366;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-section {
+    background-color: #e6f2ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 90%; /* 텍스트 블록의 최대 너비 설정 */
+    margin: 0 auto;
+}
+
+.result-theme {
+    font-size: 24px; /* 폰트 크기 약간 감소 */
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 15px;
+}
+
+.result-reason {
+    font-size: 16px; /* 폰트 크기 약간 감소 */
+    color: #005580;
+    line-height: 1.6; /* 줄 간격 추가 */
+    text-align: left; /* 왼쪽 정렬로 가독성 향상 */
+}
+
+.register-button {
+    background-color: #006699;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px; /* 간격 추가 */
+    width: 100%; /* 버튼을 전체 너비로 */
+    max-width: 300px; /* 최대 너비 설정 */
+}
+
+.register-button:hover {
+    background-color: #005580;
+}
+
+@media screen and (max-width: 480px) {
+    .result-theme {
+        font-size: 22px;
+    }
+
+    .result-reason {
+        font-size: 14px;
+    }
+
+    .register-button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}

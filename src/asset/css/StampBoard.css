@@ -1,0 +1,108 @@
+.stamp-board {
+    width: 100%;
+    padding: 20px;
+    background-color: #f0f4f8;
+}
+
+.theme-section {
+    margin-bottom: 60px;
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    background-size: cover; /* 배경 이미지가 섹션 전체를 덮도록 */
+    background-position: center; /* 배경 이미지가 중앙에 오도록 */
+    background-repeat: no-repeat; /* 배경 이미지가 반복되지 않도록 */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.theme-header {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.theme-path {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 20px;
+}
+
+.mission-node {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.mission-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    border: 5px solid #FFCC00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.mission-node.stamped .mission-icon {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+    transform: scale(1.2);
+}
+
+.mission-name {
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .theme-header {
+        font-size: 24px;
+    }
+
+    .theme-path {
+        height: 120px;
+    }
+
+    .mission-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .mission-name {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-header {
+        font-size: 20px;
+    }
+
+    .theme-path {
+        height: 100px;
+    }
+
+    .mission-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .mission-name {
+        font-size: 10px;
+    }
+}
