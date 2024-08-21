@@ -5,7 +5,13 @@
 /* 신한은행 로고의 파란색을 메인 테마로 사용 */
 :root {
     --main-color: #0045FF;
+    --secondary-color: #FFD700;
+    --text-color: #333;
+    --background-color: #f0f8ff;
+    --input-background-color: #f9f9f9;
+    --border-color: #ddd;
 }
+
 
 .bucketlist-container {
     display: flex;
@@ -34,8 +40,9 @@
 .bucketlist-title {
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    font-size: 24px;
-    color: #333;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--text-color);
     margin-bottom: 20px;
 }
 
@@ -51,25 +58,29 @@
 }
 
 .bucketlist-label {
-    display: block;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    color: var(--text-color);
+    font-weight: 500;
     margin-bottom: 8px;
-    color: #666;
 }
 
 .bucketlist-input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
+    padding: 12px;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     font-size: 14px;
     box-sizing: border-box;
-    transition: border-color 0.3s;
+    background-color: var(--input-background-color);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .bucketlist-input:focus {
     border-color: var(--main-color);
     outline: none;
+    box-shadow: 0 0 5px rgba(0, 69, 255, 0.3);
 }
 
 .bucketlist-submit-button {
@@ -80,13 +91,16 @@
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 69, 255, 0.1);
 }
 
 .bucketlist-submit-button:hover {
     background-color: #0036cc;
     transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 69, 255, 0.2);
 }
+
 
 @keyframes fadeIn {
     from {

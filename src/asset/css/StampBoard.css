@@ -9,10 +9,19 @@
     position: relative;
     padding: 20px;
     border-radius: 10px;
-    background-size: cover; /* 배경 이미지가 섹션 전체를 덮도록 */
-    background-position: center; /* 배경 이미지가 중앙에 오도록 */
-    background-repeat: no-repeat; /* 배경 이미지가 반복되지 않도록 */
+    overflow: hidden;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    z-index: 0;
 }
 
 .theme-header {
@@ -20,23 +29,30 @@
     margin-bottom: 20px;
     text-align: center;
     font-weight: bold;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    position: relative;
 }
 
 .theme-path {
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: flex-end;
     padding: 0 20px;
+    z-index: 1;
 }
 
 .mission-node {
-    position: relative;
-    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
     z-index: 2;
+    max-width: 100px;
 }
 
 .mission-icon {
@@ -51,6 +67,7 @@
     font-size: 24px;
     margin-bottom: 10px;
     transition: transform 0.3s ease, background-color 0.3s ease;
+    margin-top: auto;
 }
 
 .mission-node.stamped .mission-icon {
@@ -62,9 +79,19 @@
 
 .mission-name {
     font-size: 14px;
-    color: #333;
+    color: #ffffff;
     font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.6); /* 반투명 배경 추가 */
+    padding: 5px; /* 텍스트와 배경 간의 여백 추가 */
+    border-radius: 5px; /* 둥근 모서리 추가 */
 }
 
 @media (max-width: 768px) {
@@ -84,6 +111,7 @@
 
     .mission-name {
         font-size: 12px;
+        height: 35px;
     }
 }
 
@@ -104,5 +132,6 @@
 
     .mission-name {
         font-size: 10px;
+        height: 30px;
     }
 }

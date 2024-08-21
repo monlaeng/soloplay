@@ -241,11 +241,9 @@
 
 .selectedThemes {
     display: flex;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;  /* 항목들이 줄을 넘어갈 경우 자동으로 다음 줄로 이동 */
     gap: 10px;
     margin-top: 10px;
-
-    height: 25px;
     width: 100%;
     background-color: lightgray;
     color: black;
@@ -261,6 +259,7 @@
     font-weight: bold;
     font-size: 14px;
     border: 1px solid lightgrey;
+    white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
 }
 
 .removeTag {
