@@ -39,6 +39,7 @@ import RaidBattle from "component/raid/RaidBattle";
 import ThemeBucketList from "component/theme/ThemeBucketList";
 import ThemeAnalyzeResult from "component/theme/ThemeAnalyzeResult";
 import StampBoard from "component/theme/StampBoard";
+import RaidHistory from "component/raid/RaidHistory";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -67,6 +68,7 @@ root.render(
           {/* 레이드 */}
           <Route path='/mainTest' element={<MainTest />}></Route>
           <Route path='/raidBattle' element={<RaidBattle />}></Route>
+          <Route path='/raidHistory' element={<RaidHistory />}></Route>
 
           {/* 테마 */}
           <Route path="/themeSearchAll" element={<ThemeSearchMain />} />{" "}
