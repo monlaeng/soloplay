@@ -1,3 +1,4 @@
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -27,7 +28,7 @@
   overflow: hidden; 
   margin-top: 20px;  
   margin-bottom: 10px;  
-  padding: 0 0;  
+  padding: 20px;  
   border-radius: 8px;  
 }
 
@@ -97,9 +98,19 @@
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 50px; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 최소 300px, 최대 1fr */
+  gap: 20px;
+  justify-content: center; /* 그리드를 중앙에 정렬 */
+  padding: 10px; /* 그리드에 여백 추가 */
 }
+
+.card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 
 
 
