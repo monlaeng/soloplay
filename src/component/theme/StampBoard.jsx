@@ -24,7 +24,7 @@ function StampBoard() {
         },
         {
             name: '여행/교통',
-            color: '#FF6F61',
+            color: '#000000',
             backgroundImage: travelImage,
             icon: '✈️',
             missions: [
@@ -91,17 +91,14 @@ function StampBoard() {
     return (
         <div className="stamp-board">
             {themes.map((theme, index) => (
-                <div
-                    key={index}
-                    className="theme-section"
-                    style={{ backgroundImage: `url(${theme.backgroundImage})` }}
-                >
+                <div key={index} className="theme-section">
+                    <img src={theme.backgroundImage} alt={`${theme.name} background`} className="background-image" />
                     <h2 className="theme-header" style={{ color: theme.color }}>{theme.name}</h2>
                     <div className="theme-path">
                         {theme.missions.map((mission, idx) => (
-                            <div
-                                key={idx}
-                                className={`mission-node ${stamps[theme.name]?.[mission.name] ? 'stamped' : ''}`}
+                            <div 
+                                key={idx} 
+                                className={`mission-node ${stamps[theme.name]?.[mission.name] ? 'stamped' : ''}`} 
                                 onClick={() => handleStamp(theme.name, mission.name)}
                             >
                                 <div className="mission-icon">{theme.icon}</div>
