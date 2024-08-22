@@ -5,14 +5,14 @@ import controller from "asset/image/controller.png";
 import card from "asset/image/card.png";
 import point from "asset/image/point.png";
 import recommand from "asset/image/recommand.png";
-
+import { Link } from "react-router-dom";
 
 function Home(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
-    { src: test, alt: "Slide 1", title: "응애응애", description: "우리 뭔 서비스인지 소개" },
-    { src: completeIcon, alt: "Slide 2", title: "테스트2", description: "테스트2 테스트2" },
-    { src: controller, alt: "Slide 3", title: "테스트3", description: "테스트3 테스트3" }
+    { src: test, alt: "Slide 1", title: "우리는 멤버십이다", description: "우리 뭔 서비스인지 소개" },
+    { src: completeIcon, alt: "Slide 2", title: "테마 관련 ~", description: "테마테마 및 스탬프" },
+    { src: controller, alt: "Slide 3", title: "레이드 관련~", description: "레이드레이드" }
   ];
 
   useEffect(() => {
@@ -84,8 +84,8 @@ function Home(props) {
         {currentSlide + 1}/{slides.length}
       </div>
 
-      {/* our services */}
-      <div className="service app-section app-bg-dark">
+     {/* our services */}
+     <div className="service app-section app-bg-dark">
         <div className="container">
           <div className="app-title">
             <h4>OUR SERVICES</h4>
@@ -94,38 +94,47 @@ function Home(props) {
           <div className="row">
             <div className="col s6">
               <div className="entry">
-                <img src={point} alt="Point Icon" style={{ width: '50px', height: '50px' }} />
-                <h5>레이드</h5>
-                <p>진행중인 레이드</p>
+                <Link to="/raidHistory">
+                  <img src={point} alt="Point Icon" style={{ width: '50px', height: '50px' }} />
+                  <h5>레이드</h5>
+                  <p>진행중인 레이드</p>
+                </Link>
               </div>
             </div>
             <div className="col s6">
               <div className="entry">
-                <img src={recommand} alt="Recommand Icon" style={{ width: '50px', height: '50px' }} />
-                <h5>테마 추천</h5>
-                <p>테마</p>
+                <Link to="/startBucket">
+                  <img src={recommand} alt="Recommand Icon" style={{ width: '50px', height: '50px' }} />
+                  <h5>테마 추천</h5>
+                  <p>테마</p>
+                </Link>
               </div>
             </div>
           </div>
           <div className="row">
             <div className="col s6">
               <div className="entry">
-                <img src={card} alt="Card Icon" style={{ width: '50px', height: '50px' }} />
-                <h5>카드 추천</h5>
-                <p>Lorem ipsum dolor sit amet consectetur</p>
+                <Link to="/cardRecommend">
+                  <img src={card} alt="Card Icon" style={{ width: '50px', height: '50px' }} />
+                  <h5>카드 추천</h5>
+                  <p>Lorem ipsum dolor sit amet consectetur</p>
+                </Link>
               </div>
             </div>
             <div className="col s6">
               <div className="entry">
-                <img src={test} alt="Test Icon" style={{ width: '50px', height: '50px' }} />
-                <h5>리워드</h5>
-                <p>Lorem ipsum dolor sit amet consectetur</p>
+                <Link to="/point">
+                  <img src={test} alt="Test Icon" style={{ width: '50px', height: '50px' }} />
+                  <h5>리워드</h5>
+                  <p>Lorem ipsum dolor sit amet consectetur</p>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
       {/* end our services */}
+
 
       {/* portfolio */}
       <div className="portfolio app-section">
