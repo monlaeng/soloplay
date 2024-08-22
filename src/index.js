@@ -39,8 +39,8 @@ import RaidBattle from "component/raid/RaidBattle";
 import ThemeBucketList from "component/theme/ThemeBucketList";
 import ThemeAnalyzeResult from "component/theme/ThemeAnalyzeResult";
 import StampBoard from "component/theme/StampBoard";
+import RaidHistory from "component/raid/RaidHistory";
 import BucketListStart from "component/theme/BucketListStart";
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -62,19 +62,20 @@ root.render(
           {/* 쿠폰 */}
           <Route path="/coupon" element={<CouponMain />} />
           {/* 카드 */}
-          <Route path='card' element={<CardList />}></Route>
-          <Route path='cardUsage' element={<CardUsageHistory userId="user_1" />} />
-          <Route path='cardRecommend' element={<cardRecommend userId="user_1" />} />
+          <Route path='/cardList' element={<CardList />}></Route>
+          <Route path='/cardUsage' element={<CardUsageHistory userId="user_1" />} />
+          <Route path='/cardRecommend' element={<cardRecommend userId="user_1" />} />
           {/* 레이드 */}
           <Route path='/mainTest' element={<MainTest />}></Route>
-          <Route path='/raidBattle' element={<RaidBattle />}></Route>
+          <Route path='/raidHistory' element={<RaidHistory />}></Route>
+          <Route path='/raidBattle/:raidId' element={<RaidBattle />}/>
 
           {/* 테마 */}
           <Route path="/themeSearchAll" element={<ThemeSearchMain />} />{" "}
           {/** 테마 메인(전체 테마 조회) 페이지 */}
           <Route path="/myThemeSearch" element={<MyThemeSearch />} />{" "}
           {/** 나의 테마 조회 페이지 */}
-          <Route path="/themeDetail" element={<ThemeDetail />} />{" "}
+          <Route path="/themeDetail/:themeId" element={<ThemeDetail />} />{" "}
           {/** 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
           <Route path="/myThemeDetail" element={<MyThemeDetail />} />{" "}
           {/** 나의 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}

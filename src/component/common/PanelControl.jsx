@@ -44,10 +44,10 @@ function PanelControl(props) {
           <div className="collapsible-body" style={{ borderBottom: "none" }}>
             <ul className="side-nav-panel">
               <li>
-                <Link to="/card">카드 조회</Link>
+                <Link to="/cardList">카드 조회</Link>
               </li>
               <li>
-                <a href="index.html">사용 내역 조회</a>
+              <Link to="/cardUsage">카드 사용 내역</Link>
               </li>
               <li>
                 <a href="index.html">카드 추천</a>

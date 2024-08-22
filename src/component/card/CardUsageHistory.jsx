@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"; 
-import "asset/css/cardusagehistory.css";  
+import React, { useEffect, useState } from "react";
+import "asset/css/cardusagehistory.css";
 
 function CardUsageHistory({ userId }) {
   const [usageHistory, setUsageHistory] = useState({});
@@ -7,11 +7,9 @@ function CardUsageHistory({ userId }) {
   const [showCardNumber, setShowCardNumber] = useState(false); // 카드번호 표시 여부
   const [loading, setLoading] = useState(true); // 로딩 상태
 
-  const API_BASE_URL = "http://localhost:8800";
-  const endpoint = `/card/userCardsAndUsageHistory?userId=${userId}`;
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}${endpoint}`)
+    fetch(`/card/history?userId=${userId}`)
       .then((response) => response.json())
       .then((data) => {
         setUsageHistory(data);
@@ -49,7 +47,7 @@ function CardUsageHistory({ userId }) {
   const selectedCardHasUsage = selectedCard && usageHistory[selectedCard] && usageHistory[selectedCard].usageHistory.length > 0;
 
   return (
-    <> 
+    <>
       <div className="usage-history app-pages app-section">
         <div className="container">
           <div className="pages-title">
@@ -95,10 +93,18 @@ function CardUsageHistory({ userId }) {
                 </h3>
                 <div className="card-number-section">
                   {showCardNumber ? (
-                    <h5 className="card-number">{selectedCard}</h5>
+                    <>
+                      <h5 className="card-number">{selectedCard}</h5>
+                      <button
+                        onClick={toggleCardNumber}
+                        className="toggle-card-number-button"
+                      >
+                        카드번호 숨기기
+                      </button>
+                    </>
                   ) : (
-                    <button 
-                      onClick={toggleCardNumber} 
+                    <button
+                      onClick={toggleCardNumber}
                       className="toggle-card-number-button"
                     >
                       카드번호 보기

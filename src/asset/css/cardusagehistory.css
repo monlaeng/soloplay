@@ -24,12 +24,7 @@
   
   .card-select-button:hover {
     background-color: #e9e9e9;
-  }
-  
-  .card-select-button.active {
-    background-color: #d0e6ff;
-    border-color: #a0c4ff;
-  }
+  } 
   
   .card-usage-section {
     text-align: left;
@@ -78,7 +73,8 @@
     color: #888; 
     margin-left: 3px;
     transition: background-color 0.3s ease, color 0.3s ease;
-  }
+    width: 80px;
+}
   
   .toggle-card-number-button:hover {
     background-color: #ececec;  
@@ -95,14 +91,15 @@
     margin-left: 5px;  
   }
  
-.card-select-dropdown {
+  .card-select-dropdown {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
+    justify-content: flex-end; /* 오른쪽 정렬 */
   }
   
   .card-select-dropdown label {
-    margin-right: 10px;
+    margin-right: 20px; /* 오른쪽 여백 조정 (원하는 만큼 조정하세요) */
     font-weight: bold;
   }
   
@@ -113,13 +110,8 @@
     background-color: #fff;
     font-size: 1em;
     cursor: pointer;
-    width: 200px;  
-  }
-  
-  .card-select-dropdown select:focus {
-    border-color: #a0c4ff;
-    outline: none;
-  } 
+    width: 150px; /* 너비 조정 (원하는 만큼 조정하세요) */
+  }  
   
   .pages-title h2 {
       text-align: left;
