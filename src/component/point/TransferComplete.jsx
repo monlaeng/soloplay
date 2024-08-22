@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import completeIcon from "asset/image/completeIcon.png";
 import "asset/css/point.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function TransferComplete(props) {
+  const userId = "roropo";
+  const [totalPoints, setTotalPoints] = useState(0);
+  useEffect(() => {
+    fetchTotalPoints();
+  }, []);
+
+  const fetchTotalPoints = async () => {
+    try {
+      const response = await axios.get(`/point/total/${userId}`);
+      setTotalPoints(response.data); // 응답 데이터에서 총 포인트 설정
+    } catch (error) {
+      console.error("총 포인트 데이터를 가져오는 중 오류 발생:", error);
+    }
+  };
   return (
     <div className="faq app-pages app-section">
       <div className="container">
@@ -28,7 +43,7 @@ function TransferComplete(props) {
               fontWeight: "normal",
             }}
           >
-            잔여 포인트 : 456P
+            잔여 포인트 : {totalPoints}P
             <br />
           </h2>
 
