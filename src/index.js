@@ -67,7 +67,7 @@ root.render(
           <Route path='cardRecommend' element={<cardRecommend userId="user_1" />} />
           {/* 레이드 */}
           <Route path='/mainTest' element={<MainTest />}></Route>
-          <Route path='/raidBattle' element={<RaidBattle />}></Route>
+          <Route path='/raidBattle/:raidId' element={<RaidBattle />}/>
 
           {/* 테마 */}
           <Route path="/themeSearchAll" element={<ThemeSearchMain />} />{" "}
