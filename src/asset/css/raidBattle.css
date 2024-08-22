@@ -1,11 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&display=swap');
-
-.jersey-10-regular {
-    font-family: "Jersey 10", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-
 .raidBackground {
     display: block;
     width: 100%;
@@ -19,46 +11,36 @@
     height: 60%;
 }
 
-.blink {
-    animation: blink-animation 0.2s linear;
-}
-
-@keyframes blink-animation {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
-}
-
-
-
-.raidDisplay {
+.monsterDisplay {
     position: relative;
     display: inline-block;
 }
-
-.number-overlay {
-    position: absolute;
-    top: 35%;
-    left: 60%;
-    transform: translate(-50%, -50%);
-    font-size: 4rem;
-    color: red;
-    background-color: transparent;
-    pointer-events: none;
-    animation: move-up-fade 0.5s ease-out;
-    font-family: "Jersey 10", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-@keyframes move-up-fade {
-    0% {
-      transform: translate(-50%, -50%);
-      opacity: 1;
-    }
-    100% {
-      transform: translate(-50%, calc(-70% - 70px)); /* 위로 이동 */
-      opacity: 0;
-    }
-}
   
+.attackLog {
+    height: 30vh;
+    background-color: black;
+    color:green;
+    overflow: auto;
+}
+
+.attackLog p {
+    margin-left: 8px;
+}
+
+.healthInformation {
+    text-align: center;
+}
+
+.healthBarContainer {
+    width: 90%; /* 체력 바의 전체 너비 */
+    height: 20px; /* 체력 바의 높이 */
+    background-color: darkred; /* 체력 바의 배경색 (비어있는 부분) */
+    overflow: hidden; /* 체력 바가 컨테이너를 벗어나지 않도록 */
+    margin: 0 auto;
+}
+
+.healthBar {
+    height: 100%; /* 체력 바의 높이 (컨테이너에 맞춤) */
+    background-color: green; /* 체력 바의 색상 (빨간색) */
+    transition: width 0.5s ease; /* 체력 바가 변화할 때 애니메이션 */
+}

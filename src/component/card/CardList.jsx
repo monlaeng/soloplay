@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import NavBar from "component/common/NavBar";
+import React, { useEffect, useState } from "react"; 
 import "asset/css/cardlist.css";
 import cardImage from "asset/image/carddummy.gif";
 
@@ -7,8 +6,10 @@ function CardList() {
   const [cards, setCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 
 
+  const API_BASE_URL = "http://localhost:8800";  
+
   useEffect(() => {
-    fetch("http://localhost:8800/card/list")
+    fetch(`${API_BASE_URL}/card/list`) 
       .then((response) => response.json())
       .then((data) => setCards(data))
       .catch((error) => console.error("Error fetching cards:", error));
@@ -21,8 +22,7 @@ function CardList() {
   );
 
   return (
-    <>
-      <NavBar />
+    <> 
       <div className="app-pages app-section">
         <div className="container">
           <div className="pages-title">
