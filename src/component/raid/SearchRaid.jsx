@@ -34,7 +34,7 @@ function SearchRaid(props) {
 
     // API 호출 후 raidList 설정
     useEffect(() => {
-        axios.get('/raid/raidList')
+        axios.get('/api/raid/raidList')
             .then((response) => {
                 setRaidList(response.data);
             })
