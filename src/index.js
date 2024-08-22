@@ -75,7 +75,7 @@ root.render(
           {/** 테마 메인(전체 테마 조회) 페이지 */}
           <Route path="/myThemeSearch" element={<MyThemeSearch />} />{" "}
           {/** 나의 테마 조회 페이지 */}
-          <Route path="/themeDetail" element={<ThemeDetail />} />{" "}
+          <Route path="/themeDetail/:themeId" element={<ThemeDetail />} />{" "}
           {/** 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
           <Route path="/myThemeDetail" element={<MyThemeDetail />} />{" "}
           {/** 나의 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
