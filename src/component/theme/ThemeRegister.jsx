@@ -1,10 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
+import Select from 'react-select';
 
 function ThemeRegister(props) {
     const location = useLocation();
     const receivedTheme = location.state?.theme || "";  // 소분류 테마를 받음
+
+    const [selected, setSelected] = useState("");
+    const onChangeSelect = (e) => {
+        if (e) setSelected(e.value);
+        else setSelected('');
+    };
+
+    const placeholder = "대분류를 선택하세요";
+
+    const options = [
+        {value:"생활", label:"생활"},
+        {value:"쇼핑", label:"쇼핑"},
+        {value:"생활2", label:"생활2"},
+        {value:"생활3", label:"생활3"},
+        {value:"생활4", label:"생활4"},
+    ];
 
     // 소분류 테마를 초기 상태로 설정
     const [selectedThemes, setSelectedThemes] = useState(receivedTheme.split(", ").map(item => item.trim())); 
@@ -110,13 +127,19 @@ function ThemeRegister(props) {
                             <div className='themeCategorySelectContainer'>
                                 <label>
                                     대분류
-                                    <select value={selectedCategory} onChange={handleCategoryChange}>
+                                    <Select
+                                        value = {selected}
+                                        onChange = {onChangeSelect}
+                                        options = {options}
+                                        placeholder = {placeholder}
+                                    />
+                                    {/* <select value={selectedCategory} onChange={handleCategoryChange}>
                                         {categories.map((category) => (
                                             <option key={category.themeMainCategoryId} value={category.themeMainCategoryId}>
                                                 {category.themeMainCategoryName}
                                             </option>
                                         ))}
-                                    </select>
+                                    </select> */}
                                 </label>
                             </div>
                             <div className='themeSubCategorySelectContainer'>

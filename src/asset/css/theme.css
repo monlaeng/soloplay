@@ -31,7 +31,7 @@
 }
 
 .search-container button {
-    padding: 5px 10px;
+    padding: 5px 0px 5px 0px;
     width: 80px;
     border: 0px;
     font-weight: bold;
@@ -46,13 +46,14 @@
 }
 
 .category-container span {
-    width: 60px;
+    width: 10%;
     margin-right: 10px;
     font-weight: bold;
     color:#007FFF;
 }
 
 .category-container button {
+    width: 18%;
     margin-right: 5px;
     padding: 5px 10px;
     border: 0px;
@@ -78,22 +79,38 @@
     }
   
 .theme-grid li .collapsible-header {
-    background-color: #007FFF;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 150px; /* 박스의 높이 */
     text-align: center;
-    border-radius: 10px;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
+    width: 100%;
+    height: 150px;
+    border: none;
+    padding: 0px;
+}
+
+.theme-grid li {
+    border: none !important;
 }
 
 .themeTitle {
     color: black;
     font-size: 16px;
     font-weight: bold;
+}
+.themeThumbnail {
+    width: 100%;
+    height: 100%;
+}
+
+.themeThumbnail img {
+    width: 100%;
+    height: 100%;
+display: block;
 }
 
 /* 테마 상세조회 영역 */
@@ -133,7 +150,7 @@
 
 .themeContentDiv span {
     color: black;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     margin-top: 10px;
 }
@@ -148,11 +165,11 @@
 }
 
 .themeContentContainer {
-    background-color: lightgray;
     color: black;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 14px;
     height: 300px;
+    word-wrap: break-word;
 }
 
 .moveThemeListBtnDiv {
