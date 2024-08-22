@@ -62,9 +62,9 @@ root.render(
           {/* 쿠폰 */}
           <Route path="/coupon" element={<CouponMain />} />
           {/* 카드 */}
-          <Route path='card' element={<CardList />}></Route>
-          <Route path='cardUsage' element={<CardUsageHistory userId="user_1" />} />
-          <Route path='cardRecommend' element={<cardRecommend userId="user_1" />} />
+          <Route path='/cardList' element={<CardList />}></Route>
+          <Route path='/cardUsage' element={<CardUsageHistory userId="user_1" />} />
+          <Route path='/cardRecommend' element={<cardRecommend userId="user_1" />} />
           {/* 레이드 */}
           <Route path='/mainTest' element={<MainTest />}></Route>
           <Route path='/raidHistory' element={<RaidHistory />}></Route>

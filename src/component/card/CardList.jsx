@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react"; 
+import React, { useEffect, useState } from "react";
 import "asset/css/cardlist.css";
-import cardImage from "asset/image/carddummy.gif";
 
 function CardList() {
   const [cards, setCards] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 
-
-  const API_BASE_URL = "http://localhost:8800";  
+  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/card/list`) 
+    fetch("/card/list")
       .then((response) => response.json())
       .then((data) => setCards(data))
       .catch((error) => console.error("Error fetching cards:", error));
@@ -21,8 +18,13 @@ function CardList() {
     card.cardBenefit.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // 카드 이미지 URL 생성 함수
+  const getCardImageUrl = (cardId) => {
+    return `https://soloplaybucket.s3.ap-northeast-2.amazonaws.com/${cardId}.gif`;
+  };
+
   return (
-    <> 
+    <>
       <div className="app-pages app-section">
         <div className="container">
           <div className="pages-title">
@@ -47,7 +49,7 @@ function CardList() {
             {filteredCards.map((card) => (
               <div key={card.cardId} className="card-item">
                 <img
-                  src={cardImage}  
+                  src={getCardImageUrl(card.cardId)} // 카드 ID에 따라 이미지 URL 설정
                   alt={card.cardName}
                   className="card-image"
                 />
