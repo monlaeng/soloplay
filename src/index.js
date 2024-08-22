@@ -39,8 +39,8 @@ import RaidBattle from "component/raid/RaidBattle";
 import ThemeBucketList from "component/theme/ThemeBucketList";
 import ThemeAnalyzeResult from "component/theme/ThemeAnalyzeResult";
 import StampBoard from "component/theme/StampBoard";
+import RaidHistory from "component/raid/RaidHistory";
 import BucketListStart from "component/theme/BucketListStart";
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -67,6 +67,7 @@ root.render(
           <Route path='cardRecommend' element={<cardRecommend userId="user_1" />} />
           {/* 레이드 */}
           <Route path='/mainTest' element={<MainTest />}></Route>
+          <Route path='/raidHistory' element={<RaidHistory />}></Route>
           <Route path='/raidBattle/:raidId' element={<RaidBattle />}/>
 
           {/* 테마 */}
