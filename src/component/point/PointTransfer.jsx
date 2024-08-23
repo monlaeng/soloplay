@@ -27,7 +27,12 @@ function PointTransfer(props) {
 
     try {
       await axios.post(`/point/${userId}`, pointDTO); // 서버로 포인트 전환 요청 보내기
-      navigate("/point/transfer/complete"); // 전환 완료 페이지로 이동
+      if (Response.data === 1) {
+        // 서버 응답이 1일 경우
+        navigate("/point/transfer/complete"); // 전환 완료 페이지로 이동
+      } else {
+        alert("포인트 전환이 실패했습니다. 포인트 잔액을 확인하세요.");
+      }
     } catch (error) {
       console.error("포인트 전환 중 오류 발생:", error);
       alert("포인트 전환 중 오류가 발생했습니다.");

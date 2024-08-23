@@ -31,9 +31,9 @@ import ThemeRegister from "component/theme/ThemeRegister"; /** 테마 등록 페
 import TransferComplete from "component/point/TransferComplete";
 import CouponMain from "component/coupon/CouponMain";
 import CardList from "component/card/CardList";
-import CardUsageHistory from "component/card/CardUsageHistory"; 
+import CardUsageHistory from "component/card/CardUsageHistory";
 import MainTest from "component/raid/MainTest";
-import Login from "component/auth/Login"; 
+import Login from "component/auth/Login";
 import Registration from "component/auth/Registration";
 import RaidBattle from "component/raid/RaidBattle";
 import ThemeBucketList from "component/theme/ThemeBucketList";
@@ -62,14 +62,19 @@ root.render(
           {/* 쿠폰 */}
           <Route path="/coupon" element={<CouponMain />} />
           {/* 카드 */}
-          <Route path='/cardList' element={<CardList />}></Route>
-          <Route path='/cardUsage' element={<CardUsageHistory userId="user_1" />} />
-          <Route path='/cardRecommend' element={<cardRecommend userId="user_1" />} />
+          <Route path="/cardList" element={<CardList />}></Route>
+          <Route
+            path="/cardUsage"
+            element={<CardUsageHistory userId="user_1" />}
+          />
+          <Route
+            path="/cardRecommend"
+            element={<cardRecommend userId="user_1" />}
+          />
           {/* 레이드 */}
-          <Route path='/mainTest' element={<MainTest />}></Route>
-          <Route path='/raidHistory' element={<RaidHistory />}></Route>
-          <Route path='/raidBattle/:raidId' element={<RaidBattle />}/>
-
+          <Route path="/mainTest" element={<MainTest />}></Route>
+          <Route path="/raidHistory" element={<RaidHistory />}></Route>
+          <Route path="/raidBattle/:raidId" element={<RaidBattle />} />
           {/* 테마 */}
           <Route path="/themeSearchAll" element={<ThemeSearchMain />} />{" "}
           {/** 테마 메인(전체 테마 조회) 페이지 */}
@@ -82,10 +87,10 @@ root.render(
           <Route path="/themeRegister" element={<ThemeRegister />} />{" "}
           {/** 테마 등록 페이지 */}
           {/** 테마 추천 페이지 */}
-          <Route path="/startBucket" element={<BucketListStart/>}/>
-          <Route path="/bucketlist" element={<ThemeBucketList/>}/>
-		      <Route path="/analyzetheme" element={<ThemeAnalyzeResult/>}/>
-          <Route path="/stamp" element={<StampBoard/>}/>
+          <Route path="/startBucket" element={<BucketListStart />} />
+          <Route path="/bucketlist" element={<ThemeBucketList />} />
+          <Route path="/analyzetheme" element={<ThemeAnalyzeResult />} />
+          <Route path="/stamp" element={<StampBoard />} />
         </Route>
       </Routes>
     </BrowserRouter>
