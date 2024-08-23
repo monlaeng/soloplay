@@ -119,17 +119,23 @@ display: block;
     margin-bottom: 10px;
 }
 
-.themeNameContainer span, .themeCategoryContainer span, .themeSubCategoryContainer span {
+.themeInfoContainer span {
     margin: 0px 10px;
     color:black;
     font-size: 16px;
     font-weight: bold;
     width: 60px;
 }
+/* 
+.themeNameContainer input {
+    height: 24px !important;
+} */
 
 .themeInfoContainer p {
-    border: 1px solid lightgrey;
     width: 100%;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .themeNameContainer {
@@ -137,9 +143,30 @@ display: block;
     align-items: center;
 }
 
-.themeNameContainer, .themeCategoryContainer, .themeSubCategoryContainer {
+.themeNameContainer input {
+    height: 35px !important;
+    margin-bottom: 0px !important;
+}
+
+.themeCategoryContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.mainCategoryEditContainer {
+    width: 25%;
+}
+
+.mainCategorySelectedContainer {
+    width: 65%;
+}
+
+.themeNameContainer, .themeCategoryContainer, .themeSubCategoryContainer, 
+.myThemeIsPublicContainer, .myThemeIsActivtedContainer {
     display: flex;
     align-items: center;
+    height: 37px;
 }
 
 .themeContentDiv {
@@ -155,13 +182,14 @@ display: block;
     margin-top: 10px;
 }
 
-.themeEditBtn {
+.themeEditBtn, .themeSaveBtn {
     background-color: #007FFF;
     color: white;
     font-size: 16px;
     font-weight: bold;
     border: 0px;
     padding: 5px 10px;
+    width: 80px;
 }
 
 .themeContentContainer {
@@ -185,15 +213,17 @@ display: block;
     font-weight: bold;
     border: 0px;
     padding: 5px 10px;
+    width: 80px;
 }
 
-.themeRemoveBtn {
+.themeRemoveBtn, .themeEditCancleBtn {
     background-color: red;
     color: white;
     font-size: 16px;
     font-weight: bold;
     border: 0px;
     padding: 5px 10px;
+    width: 80px;
 }
 
 /* 테마 상세조회 끝 */

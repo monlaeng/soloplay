@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import raidBackground from "asset/image/raidBackground.jpg";
 import monster from "asset/image/coffeeMonster.png";
 import "asset/css/raidBattle.css";
@@ -10,6 +10,7 @@ function RaidBattle() {
     const [battleData, setBattleData] = useState(null);
     const [participantId, setParticipantId] = useState(0);
     const [isLoading, setIsLoading] = useState(true); // 로딩 상태 추가
+    const attackLogRef = useRef(null);
 
     // 최초 로드 시 배틀 데이터 요청
     useEffect(() => {
@@ -32,6 +33,13 @@ function RaidBattle() {
         fetchBattleData();
     }, [raidId]);
 
+    useEffect(() => {
+        // battleData가 변경될 때마다 스크롤을 가장 아래로 이동
+        if (attackLogRef.current) {
+          attackLogRef.current.scrollTop = attackLogRef.current.scrollHeight;
+        }
+      }, [battleData]);
+
     // 주기적으로 알림 데이터 요청
     useEffect(() => {
         const fetchNotifications = async () => {
@@ -47,6 +55,10 @@ function RaidBattle() {
                         ...data.participants
                     ]
                 }));
+
+                if (data.participants && data.participants.length > 0) {
+                    setParticipantId(data.participants[data.participants.length-1].participantId);
+                }
             } catch (error) {
                 console.error('Error fetching notifications:', error);
             }
@@ -68,23 +80,25 @@ function RaidBattle() {
                 <div className="healthBarContainer">
                     <div
                         className="healthBar"
-                        // style={{ width: `${healthPercentage}%` }}
-                        style={{ width: "70%" }}
+                        style={{ width: `${battleData.raid.hitPoint/100000*100}%` }}
                     ></div>
                 </div>
-                HP: 70000/100000
+                HP : {battleData.raid.hitPoint} / 100000
             </div>
             <div className="monsterDisplay">
                 <img src={raidBackground} alt='Raid Background' className='raidBackground'/>
                 <img src={monster} alt="Monster" className='monster'/>
             </div>
-            <div className="userContribution">
-                <p>내가 준 대미지: {battleData.contribution}</p>
+            <div className="raidUserContribution">
+                <p>『내 정보』</p>
+                <p>⚔️ 내가 준 피해량: {battleData.contribution}</p>
+                <p>✨ 테마 달성 보너스: x1</p>
+                <p>💰 성공 시 보상: {Math.floor(battleData.raid.reward * battleData.contribution / 100000)}P</p>
             </div>
-            <div className="attackLog">
+            <div className="attackLog" ref={attackLogRef}>
                 {battleData.participants.map((participant, index) => (
                     <p key={index}>
-                        {participant.userId} 님이 {participant.contribution} 대미지를 입혔습니다.
+                        🗡️ {participant.userId} 님이 {participant.contribution} 피해를 입혔습니다. 
                     </p>
                 ))}
             </div>

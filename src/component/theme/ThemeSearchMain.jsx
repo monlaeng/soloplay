@@ -9,7 +9,7 @@ import diningImage from 'asset/image/diningImage.jpg';
 import cultureImage from 'asset/image/cultureImage.jpg';
 
 function ThemeSearchMain(props) {
-    const [searchKeyword, inputSearchKeyword] = useState('');
+    const [searchKeyword, setSearchKeyword] = useState('');
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [themes, setThemes] = useState([]);
 
@@ -36,16 +36,24 @@ function ThemeSearchMain(props) {
           }
         };
 
-    const handleSearch = () => {
-        // 검색어를 바탕으로 데이터를 필터링하는 로직 추가
-        console.log("Searching for:", searchKeyword);
-        // 여기서 axios 또는 fetch로 백엔드에 검색어를 보내고 결과를 받아올 수 있습니다.
-    };
+    const handleFilterSearch = themes.filter(theme => {
+      const nameSearch = searchKeyword.toLowerCase();
+      const keywordSearch = nameSearch === '' || 
+            theme.themeName.toLowerCase().includes(nameSearch) || 
+            theme.themeMainCategoryName.toLowerCase().includes(searchKeyword.toLowerCase());
+      
+      const categorySearch = selectedCategory === null || theme.themeMainCategoryName.toLowerCase().includes(selectedCategory.toLowerCase());
+
+      return keywordSearch && categorySearch;
+    });
+      
 
     const handleCategoryClick = (category) => {
-        setSelectedCategory(category);
-        console.log("Selected Category:", category);
-        // 여기서 선택된 카테고리 정보를 바탕으로 데이터를 필터링하는 로직을 추가합니다.
+        if(selectedCategory === category) {
+          setSelectedCategory(null)
+        } else {
+          setSelectedCategory(category);
+        }
     };
 
     //백엔드 데이터 가져오기
@@ -62,7 +70,7 @@ function ThemeSearchMain(props) {
            });
     }, []);
 
-    themes.forEach(theme => console.log('Theme ID: ', theme.id));
+    themes.forEach(theme => console.log('Theme ID: ', theme));
 
     return (
       <>
@@ -94,8 +102,8 @@ function ThemeSearchMain(props) {
             {/* 검색 영역 */}
             <div className='search-container'>
                 <span>검색</span>
-                <input type = 'text' placeholder = '검색어를 입력해주세요.' value={searchKeyword} onChange={(e) => inputSearchKeyword(e.target.value)} />
-            <button onClick={handleSearch}>검색</button>
+                <input type = 'text' placeholder = '검색어를 입력해주세요.' value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} />
+            {/* <button onClick={handleFilterSearch}>검색</button> */}
             </div>
             {/* 분류 영역 */}
             <div className='category-container'>
@@ -109,7 +117,7 @@ function ThemeSearchMain(props) {
           </div>
           <div className="entry">
             <ul className="collapsible theme-grid" data-collapsible="accordion">
-                {themes.map(theme => (
+                {handleFilterSearch.map(theme => (
                   <li key={theme.id} onClick={() => moveToDetail(theme.id)}>
                     <div className="collapsible-header">
                       <div className='themeThumbnail'>

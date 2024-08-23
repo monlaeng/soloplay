@@ -15,8 +15,7 @@ function ThemeDetail(props) {
     useEffect(() => {
         axios.get(`/theme/findThemeDetail/${themeId}`)
                 .then(response => {
-                    const detailArray = response.data;
-                    setDetailTheme(detailArray);
+                    setDetailTheme(response.data);
                 })
                 .catch(error => {
                     console.error("데이터를 가져오는 중 오류가 발생했습니다.", error);
