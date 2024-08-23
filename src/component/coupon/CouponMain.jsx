@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import axios from "axios";
+import "asset/css/coupon.css";
 
 function CouponMain(props) {
   const [couponList, setCouponList] = useState([]);
@@ -25,26 +26,8 @@ function CouponMain(props) {
     <>
       <div className="faq app-pages app-section">
         <div className="container">
-          <div className="pages-title">
-            <h2 style={{ textAlign: "center", lineHeight: 1.5 }}>
-              쿠폰조회
-              <br />
-            </h2>
+          <div className="coupon-pages-title">
             <br></br>
-            <h4 style={{ textAlign: "left", fontSize: 15 }}>
-              받은 쿠폰{" "}
-              <span
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "15px",
-                }}
-              >
-                {couponList.length}장
-              </span>
-            </h4>
-            <hr></hr>
-          </div>
-          <div className="entry">
             <div style={{ textAlign: "center", marginBottom: 15 }}>
               <span
                 style={{
@@ -71,7 +54,21 @@ function CouponMain(props) {
                 }}
               />
             </div>
-
+            <br></br>
+            <h4 style={{ textAlign: "left", fontSize: 15 }}>
+              받은 쿠폰{" "}
+              <span
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "15px",
+                }}
+              >
+                {couponList.length}장
+              </span>
+            </h4>
+            <hr></hr>
+          </div>
+          <div className="entry">
             <ul className="collapsible" data-collapsible="accordion">
               {couponList.map((coupon, index) => (
                 <li key={index}>
