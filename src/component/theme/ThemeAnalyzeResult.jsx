@@ -4,7 +4,7 @@ import 'asset/css/ThemeResultPage.css';
 import axios from 'axios';
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root'); // 모달창 접근성 설정
+Modal.setAppElement('#root');
 
 function ThemeAnalyzeResult(props) {
     const location = useLocation();
@@ -20,7 +20,7 @@ function ThemeAnalyzeResult(props) {
                 details: reason.split("\n")
             });
             setSubcategories(response.data.subCategories || []);
-            setIsModalOpen(true); // 모달 열기
+            setIsModalOpen(true);
         } catch (error) {
             console.error("Error recommending subcategories:", error);
             setSubcategories([]);
@@ -28,8 +28,14 @@ function ThemeAnalyzeResult(props) {
     };
 
     const handleRegisterTheme = () => {
-        // 모달창에 표기된 소분류 테마들을 ThemeRegister 페이지로 이동하면서 'theme'에 반영
-        navigate('/themeRegister', { state: { theme: subcategories.join(", ") } });
+        // 대분류 테마와 소분류 테마, 그리고 테마 이유를 ThemeRegister 페이지로 전달
+        navigate('/themeRegister', {
+            state: {
+                theme: subcategories.join(", "),
+                reason: reason,
+                mainCategory: theme // 대분류 테마 전달
+            }
+        });
     };
 
     const handleRetry = () => {
