@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "asset/css/point.css";
 
 function PointTransfer(props) {
   const [transferPoints, setTransferPoints] = useState("");
@@ -51,8 +52,8 @@ function PointTransfer(props) {
   return (
     <div className="faq app-pages app-section">
       <div className="container">
-        <div className="pages-title">
-          <h2 style={{ textAlign: "left", lineHeight: 1.5 }}>
+        <div className="point-pages-title">
+          <h2 className="point-h2">
             {userName}님의 포인트는
             <br />
             <span
@@ -69,7 +70,7 @@ function PointTransfer(props) {
           <br></br>
           <hr></hr>
           <br></br>
-          <h4 style={{ textAlign: "left" }}> 계좌 번호를 입력해주세요 </h4>
+          <h4 className="point-account-h4"> 계좌 번호를 입력해주세요 </h4>
           <br></br>
           <form>
             <div className="form-group">
