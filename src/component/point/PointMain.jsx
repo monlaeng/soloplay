@@ -2,26 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import M from "materialize-css/dist/js/materialize.min.js";
 import axios from "axios";
+import "asset/css/point.css";
 
 function PointMain(props) {
   const [totalPoints, setTotalPoints] = useState(0);
   const [pointList, setPointList] = useState([]);
-  const userId = "roropo";
-  const userName = "정성진";
-  //사용자 아이디, 이름 추가
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     // Component가 렌더링된 후 MaterializeCSS 초기화
     const elems = document.querySelectorAll(".collapsible");
     M.Collapsible.init(elems);
 
-    fetchTotalPoints();
+    fetchUserInfo();
     fetchPointList();
+    fetchTotalPoints();
   }, []);
 
   const fetchTotalPoints = async () => {
     try {
-      const response = await axios.get(`/point/total/${userId}`);
+      const response = await axios.get(`/point/total`);
       setTotalPoints(response.data); // 응답 데이터에서 총 포인트 설정
     } catch (error) {
       console.error("총 포인트 데이터를 가져오는 중 오류 발생:", error);
@@ -30,10 +30,18 @@ function PointMain(props) {
 
   const fetchPointList = async () => {
     try {
-      const response = await axios.get(`/point/${userId}/all`);
+      const response = await axios.get(`/point/all`);
       setPointList(response.data); // 응답 데이터에서 포인트 리스트 설정
     } catch (error) {
       console.error("포인트 리스트 데이터를 가져오는 중 오류 발생:", error);
+    }
+  };
+  const fetchUserInfo = async () => {
+    try {
+      const response = await axios.get(`/point/info`);
+      setUserName(response.data.userName);
+    } catch (error) {
+      console.error("사용자 정보를 가져오는 중 오류 발생:", error);
     }
   };
 
@@ -41,8 +49,8 @@ function PointMain(props) {
     <>
       <div className="faq app-pages app-section">
         <div className="container">
-          <div className="pages-title">
-            <h2 style={{ textAlign: "left", lineHeight: 1.5 }}>
+          <div className="point-pages-title">
+            <h2 className="point-h2">
               {userName}님의 포인트는
               <br />
               <span

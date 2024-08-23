@@ -10,3 +10,25 @@
   max-height: 70%; /* 컨테이너 높이를 넘지 않도록 설정 */
   height: auto; /* 비율 유지 */
 }
+
+.point-h2 {
+  text-align: left;
+  line-height: 1.5;
+  font-size: 26px;
+}
+
+.point-pages-title {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: -7px;
+  min-height: 100px;
+  padding-top: 10px;
+  margin-bottom: 12px;
+}
+
+.point-account-h4 {
+  text-align: left;
+  font-size: 15px;
+}
