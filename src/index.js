@@ -41,6 +41,7 @@ import ThemeAnalyzeResult from "component/theme/ThemeAnalyzeResult";
 import StampBoard from "component/theme/StampBoard";
 import RaidHistory from "component/raid/RaidHistory";
 import BucketListStart from "component/theme/BucketListStart";
+import CardRecommend from "component/card/CardRecommend";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -62,15 +63,11 @@ root.render(
           {/* 쿠폰 */}
           <Route path="/coupon" element={<CouponMain />} />
           {/* 카드 */}
+          <Route path='/cardList' element={<CardList />}></Route>
+          <Route path='/cardUsage' element={<CardUsageHistory userId="user_1" />} />
+          <Route path='/cardRecommend' element={<CardRecommend userId="user_1" />} />
           <Route path="/cardList" element={<CardList />}></Route>
-          <Route
-            path="/cardUsage"
-            element={<CardUsageHistory userId="user_1" />}
-          />
-          <Route
-            path="/cardRecommend"
-            element={<cardRecommend userId="user_1" />}
-          />
+         
           {/* 레이드 */}
           <Route path="/mainTest" element={<MainTest />}></Route>
           <Route path="/raidHistory" element={<RaidHistory />}></Route>
