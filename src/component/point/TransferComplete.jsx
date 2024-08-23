@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function TransferComplete(props) {
-  const userId = "roropo";
   const [totalPoints, setTotalPoints] = useState(0);
+
   useEffect(() => {
     fetchTotalPoints();
   }, []);
 
   const fetchTotalPoints = async () => {
     try {
-      const response = await axios.get(`/point/total/${userId}`);
+      const response = await axios.get(`/point/total`);
       setTotalPoints(response.data); // 응답 데이터에서 총 포인트 설정
     } catch (error) {
       console.error("총 포인트 데이터를 가져오는 중 오류 발생:", error);

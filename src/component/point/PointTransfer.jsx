@@ -6,11 +6,12 @@ import "asset/css/point.css";
 function PointTransfer(props) {
   const [transferPoints, setTransferPoints] = useState("");
   const [totalPoints, setTotalPoints] = useState(0);
-  const userId = "roropo";
-  const userName = "정성진";
+  const [userName, setUserName] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    fetchUserInfo();
     fetchTotalPoints();
   }, []);
 
@@ -27,8 +28,10 @@ function PointTransfer(props) {
     };
 
     try {
-      await axios.post(`/point/${userId}`, pointDTO); // 서버로 포인트 전환 요청 보내기
-      if (Response.data === 1) {
+      const response = await axios.post(`/point/create`, pointDTO); // 서버로 포인트 전환 요청 보내기
+      console.log(response);
+      if (response.data === 1) {
+        console.log("1이냐!????");
         // 서버 응답이 1일 경우
         navigate("/point/transfer/complete"); // 전환 완료 페이지로 이동
       } else {
@@ -40,9 +43,18 @@ function PointTransfer(props) {
     }
   };
 
+  const fetchUserInfo = async () => {
+    try {
+      const response = await axios.get(`/point/info`);
+      setUserName(response.data.userName);
+      setTotalPoints(response.data.totalPoints); // 응답 데이터에서 총 포인트 설정
+    } catch (error) {
+      console.error("사용자 정보를 가져오는 중 오류 발생:", error);
+    }
+  };
   const fetchTotalPoints = async () => {
     try {
-      const response = await axios.get(`/point/total/${userId}`);
+      const response = await axios.get(`/point/total`);
       setTotalPoints(response.data); // 응답 데이터에서 총 포인트 설정
     } catch (error) {
       console.error("총 포인트 데이터를 가져오는 중 오류 발생:", error);
