@@ -47,10 +47,10 @@ function PanelControl(props) {
                 <Link to="/cardList">카드 조회</Link>
               </li>
               <li>
-              <Link to="/cardUsage">카드 사용 내역</Link>
+                <Link to="/cardUsage">카드 사용 내역</Link>
               </li>
               <li>
-                <a href="index.html">카드 추천</a>
+                <Link to="/cardRecommend">카드 추천</Link>
               </li>
             </ul>
           </div>

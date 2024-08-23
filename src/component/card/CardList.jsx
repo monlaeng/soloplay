@@ -20,7 +20,13 @@ function CardList() {
 
   // 카드 이미지 URL 생성 함수
   const getCardImageUrl = (cardId) => {
-    return `https://soloplaybucket.s3.ap-northeast-2.amazonaws.com/${cardId}.gif`;
+    return `https://soloplaybucket.s3.ap-northeast-2.amazonaws.com/${cardId}.png`;
+  };
+
+  // 카드 ID에 따른 CSS 클래스 결정 함수
+  const getCardClass = (cardId) => {
+    const specialCardIds = [11, 12, 13, 14, 16, 22, 25];
+    return specialCardIds.includes(cardId) ? 'card-special' : 'card-default';
   };
 
   return (
@@ -47,11 +53,11 @@ function CardList() {
 
           <div className="card-grid">
             {filteredCards.map((card) => (
-              <div key={card.cardId} className="card-item">
+              <div key={card.cardId} className={`card-item ${getCardClass(card.cardId)}`}>
                 <img
                   src={getCardImageUrl(card.cardId)} // 카드 ID에 따라 이미지 URL 설정
                   alt={card.cardName}
-                  className="card-image"
+                  className="card-image-cardlist"
                 />
                 <div className="card-content">
                   <h5>
