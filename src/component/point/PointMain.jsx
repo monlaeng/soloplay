@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import M from "materialize-css/dist/js/materialize.min.js";
 import axios from "axios";
+import "asset/css/point.css";
 
 function PointMain(props) {
   const [totalPoints, setTotalPoints] = useState(0);
@@ -41,8 +42,8 @@ function PointMain(props) {
     <>
       <div className="faq app-pages app-section">
         <div className="container">
-          <div className="pages-title">
-            <h2 style={{ textAlign: "left", lineHeight: 1.5 }}>
+          <div className="point-pages-title">
+            <h2 className="point-h2">
               {userName}님의 포인트는
               <br />
               <span
