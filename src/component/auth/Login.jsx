@@ -15,6 +15,7 @@ function Login(props) {
             ...formData,
             [id]: value
         });
+        
     };
 
     const handleSubmit = async (e) => {
@@ -23,7 +24,8 @@ function Login(props) {
             const response = await axios.post('/auth/login', formData, {
                 headers: {
                     'Content-Type': 'application/json'  // JSON 형식으로 전송
-                }
+                },
+                withCredentials: true
             });
 
             alert(response.data);  // 성공 시 서버에서 받은 메시지를 알림으로 표시
@@ -39,7 +41,7 @@ function Login(props) {
                 alert('오류가 발생했습니다.');  // 기타 오류 발생 시 기본 메시지
             }
             // 실패 시에도 루트 경로로 이동
-            navigate('/');
+            navigate('/auth/login');
         }
     };
 

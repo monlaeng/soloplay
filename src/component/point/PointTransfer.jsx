@@ -1,13 +1,72 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "asset/css/point.css";
 
 function PointTransfer(props) {
+  const [transferPoints, setTransferPoints] = useState("");
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [userName, setUserName] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchUserInfo();
+    fetchTotalPoints();
+  }, []);
+
+  const handleTransfer = async () => {
+    if (!transferPoints || parseInt(transferPoints) <= 0) {
+      alert("유효한 전환 포인트를 입력하세요.");
+      return;
+    }
+
+    const pointDTO = {
+      pointName: "포인트 전환",
+      amount: parseInt(transferPoints), // 포인트 차감
+      isAdd: -1, // -1은 차감, 1은 추가
+    };
+
+    try {
+      const response = await axios.post(`/point/create`, pointDTO); // 서버로 포인트 전환 요청 보내기
+      console.log(response);
+      if (response.data === 1) {
+        console.log("1이냐!????");
+        // 서버 응답이 1일 경우
+        navigate("/point/transfer/complete"); // 전환 완료 페이지로 이동
+      } else {
+        alert("포인트 전환이 실패했습니다. 포인트 잔액을 확인하세요.");
+      }
+    } catch (error) {
+      console.error("포인트 전환 중 오류 발생:", error);
+      alert("포인트 전환 중 오류가 발생했습니다.");
+    }
+  };
+
+  const fetchUserInfo = async () => {
+    try {
+      const response = await axios.get(`/point/info`);
+      setUserName(response.data.userName);
+      setTotalPoints(response.data.totalPoints); // 응답 데이터에서 총 포인트 설정
+    } catch (error) {
+      console.error("사용자 정보를 가져오는 중 오류 발생:", error);
+    }
+  };
+  const fetchTotalPoints = async () => {
+    try {
+      const response = await axios.get(`/point/total`);
+      setTotalPoints(response.data); // 응답 데이터에서 총 포인트 설정
+    } catch (error) {
+      console.error("총 포인트 데이터를 가져오는 중 오류 발생:", error);
+    }
+  };
+
   return (
     <div className="faq app-pages app-section">
       <div className="container">
-        <div className="pages-title">
-          <h2 style={{ textAlign: "left", lineHeight: 1.5 }}>
-            양승건님의 포인트는
+        <div className="point-pages-title">
+          <h2 className="point-h2">
+            {userName}님의 포인트는
             <br />
             <span
               style={{
@@ -16,14 +75,14 @@ function PointTransfer(props) {
                 fontSize: "1.2em",
               }}
             >
-              1000P
+              {totalPoints}P
             </span>{" "}
             입니다.
           </h2>
           <br></br>
           <hr></hr>
           <br></br>
-          <h4 style={{ textAlign: "left" }}> 계좌 번호를 입력해주세요 </h4>
+          <h4 className="point-account-h4"> 계좌 번호를 입력해주세요 </h4>
           <br></br>
           <form>
             <div className="form-group">
@@ -114,9 +173,11 @@ function PointTransfer(props) {
               </div>
 
               <input
-                type="text"
-                id="account-holder"
-                name="account-holder"
+                type="number"
+                id="transfer-points"
+                name="transfer-points"
+                value={transferPoints}
+                onChange={(e) => setTransferPoints(e.target.value)}
                 style={{
                   width: "30%",
                   height: "43px",
@@ -130,6 +191,7 @@ function PointTransfer(props) {
             <br />
             <button
               type="button"
+              onClick={handleTransfer}
               style={{
                 width: "100%",
                 height: "60px",
@@ -141,9 +203,7 @@ function PointTransfer(props) {
                 cursor: "pointer",
               }}
             >
-              <Link to={"/point/transfer/complete"} style={{ color: "#fff" }}>
-                전환하기
-              </Link>
+              전환하기
             </button>
           </form>
         </div>

@@ -1,7 +1,51 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
+import shoppingImage from 'asset/image/shoppingImage.jpg'; // 예시 이미지
+import travelImage from 'asset/image/travelImage.jpg';
+import dailyLifeImage from 'asset/image/dailyLifeImage.jpg';
+import diningImage from 'asset/image/diningImage.jpg';
+import cultureImage from 'asset/image/cultureImage.jpg';
 
 function ThemeDetail(props) {
+    const [detailTheme, setDetailTheme] = useState('');
+
+    const { themeId } = useParams();
+
+    useEffect(() => {
+        axios.get(`/theme/findThemeDetail/${themeId}`)
+                .then(response => {
+                    setDetailTheme(response.data);
+                })
+                .catch(error => {
+                    console.error("데이터를 가져오는 중 오류가 발생했습니다.", error);
+                });
+    }, [themeId]);
+
+    console.log(detailTheme);
+
+    //배경이미지 가져오기
+    const getThemeBackgroundImage = (themeBackground) => {
+        switch (themeBackground) {
+            case 'shoppingImage':
+            return shoppingImage;
+            case 'travelImage':
+            return travelImage;
+            case 'dailyLifeImage':
+            return dailyLifeImage;
+            case 'diningImage':
+            return diningImage;
+            case 'cultureImage':
+            return cultureImage;
+            default:
+            return null;
+        }
+        };
+
+        if(!detailTheme) {
+            return <div>잠시만 기다려 주세요</div>;
+        }
+
     return (
         <>
         <div className="faq app-pages app-section">
@@ -20,27 +64,27 @@ function ThemeDetail(props) {
                     </h2>
                 </div>
                 <div className='themeBackgroundImg'>
-                    테마 백그라운드 이미지 영역
+                    <img src={getThemeBackgroundImage(detailTheme.themeBackground)} alt={detailTheme.themeName} />
                 </div>
                 <div className='themeInfoContainer'>
                     <div className='themeNameContainer'>
                         <span>테마명</span>
-                        <p>테마 내용</p>
+                        <p>{detailTheme.themeName}</p>
                     </div>
                     <div className='themeCategoryContainer'>
                         <span>대분류</span>
-                        <p>선택된 대분류 이름</p>
+                        <p>{detailTheme.themeMainCategoryName}</p>
                     </div>
                     <div className='themeSubCategoryContainer'>
                         <span>소분류</span>
-                        <p>선택된 소분류 이름</p>
+                        <p>{detailTheme.themeSunCategoryName.join(", ")}</p>
                     </div>
                 </div>
                 <div className='themeContentDiv'>
                 <span>테마 설명</span>
                 </div>
                 <div className='themeContentContainer'>
-                    <p>테마 설명에 대한 내용을 불러오는 영역</p>
+                    <p>{detailTheme.themeDescription}</p>
                 </div>
                 <div className='moveThemeListBtnDiv'>
                     <Link to={'/themeSearchAll'}>

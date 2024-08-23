@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Select from 'react-select';
 
 function ThemeRegister(props) {
     const location = useLocation();
@@ -173,7 +174,7 @@ function ThemeRegister(props) {
                                                 {category.themeMainCategoryName}
                                             </option>
                                         ))}
-                                    </select>
+                                    </select> */}
                                 </label>
                             </div>
                             <div className='themeSubCategorySelectContainer'>

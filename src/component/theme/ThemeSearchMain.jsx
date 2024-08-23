@@ -1,26 +1,76 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import shoppingImage from 'asset/image/shoppingImage.jpg'; // 예시 이미지
+import travelImage from 'asset/image/travelImage.jpg';
+import dailyLifeImage from 'asset/image/dailyLifeImage.jpg';
+import diningImage from 'asset/image/diningImage.jpg';
+import cultureImage from 'asset/image/cultureImage.jpg';
 
 function ThemeSearchMain(props) {
-    const [searchKeyword, inputSearchKeyword] = useState('');
+    const [searchKeyword, setSearchKeyword] = useState('');
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [themes, setThemes] = useState([]);
 
     const navigate = useNavigate();
-    const moveToDetail = () => {
-      navigate('/themeDetail');
+    const moveToDetail = (themeId) => {
+      navigate(`/themeDetail/${themeId}`);
     };
 
-    const handleSearch = () => {
-        // 검색어를 바탕으로 데이터를 필터링하는 로직 추가
-        console.log("Searching for:", searchKeyword);
-        // 여기서 axios 또는 fetch로 백엔드에 검색어를 보내고 결과를 받아올 수 있습니다.
-    };
+        //배경이미지 가져오기
+        const getThemeBackgroundImage = (themeBackground) => {
+          switch (themeBackground) {
+            case 'shoppingImage':
+              return shoppingImage;
+            case 'travelImage':
+              return travelImage;
+            case 'dailyLifeImage':
+              return dailyLifeImage;
+            case 'diningImage':
+              return diningImage;
+            case 'cultureImage':
+              return cultureImage;
+            default:
+              return null;
+          }
+        };
+
+    const handleFilterSearch = themes.filter(theme => {
+      const nameSearch = searchKeyword.toLowerCase();
+      const keywordSearch = nameSearch === '' || 
+            theme.themeName.toLowerCase().includes(nameSearch) || 
+            theme.themeMainCategoryName.toLowerCase().includes(searchKeyword.toLowerCase());
+      
+      const categorySearch = selectedCategory === null || theme.themeMainCategoryName.toLowerCase().includes(selectedCategory.toLowerCase());
+
+      return keywordSearch && categorySearch;
+    });
+      
 
     const handleCategoryClick = (category) => {
-        setSelectedCategory(category);
-        console.log("Selected Category:", category);
-        // 여기서 선택된 카테고리 정보를 바탕으로 데이터를 필터링하는 로직을 추가합니다.
+        if(selectedCategory === category) {
+          setSelectedCategory(null)
+        } else {
+          setSelectedCategory(category);
+        }
     };
+
+    //백엔드 데이터 가져오기
+    useEffect(() => {
+      axios.get('/theme/findAllTheme')
+           .then(response => {
+            const themeArray = Object.entries(response.data).map(([id, themeData]) => ({
+              id, ...themeData
+            }));
+            setThemes(themeArray);
+           })
+           .catch(error => {
+            console.error("데이터를 가져오는 중 오류가 발생했습니다.", error);
+           });
+    }, []);
+
+    themes.forEach(theme => console.log('Theme ID: ', theme));
 
     return (
       <>
@@ -52,8 +102,8 @@ function ThemeSearchMain(props) {
             {/* 검색 영역 */}
             <div className='search-container'>
                 <span>검색</span>
-                <input type = 'text' placeholder = '검색어를 입력해주세요.' value={searchKeyword} onChange={(e) => inputSearchKeyword(e.target.value)} />
-            <button onClick={handleSearch}>검색</button>
+                <input type = 'text' placeholder = '검색어를 입력해주세요.' value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} />
+            {/* <button onClick={handleFilterSearch}>검색</button> */}
             </div>
             {/* 분류 영역 */}
             <div className='category-container'>
@@ -67,60 +117,17 @@ function ThemeSearchMain(props) {
           </div>
           <div className="entry">
             <ul className="collapsible theme-grid" data-collapsible="accordion">
-              <li onClick={moveToDetail}>
-                <div className="collapsible-header">
-                  <div className='themeThumbnail'>썸네일 영역</div>
-                </div>
-                <span className='themeTitle'>테마 제목</span>
-              </li>
-              <li onClick={moveToDetail}>
-                <div className="collapsible-header">
-                  <div className='themeThumbnail'>썸네일 영역</div>
-                </div>
-                <span className='themeTitle'>테마 제목</span>
-              </li>
-              <li onClick={moveToDetail}>
-                <div className="collapsible-header">
-                  <div className='themeThumbnail'>썸네일 영역</div>
-                </div>
-                <span className='themeTitle'>테마 제목</span>
-              </li>
-              <li onClick={moveToDetail}>
-                <div className="collapsible-header">
-                  <div className='themeThumbnail'>썸네일 영역</div>
-                </div>
-                <span className='themeTitle'>테마 제목</span>
-              </li>
-              <li onClick={moveToDetail}>
-                <div className="collapsible-header">
-                  <div className='themeThumbnail'>썸네일 영역</div>
-                </div>
-                <span className='themeTitle'>테마 제목</span>
-              </li>
-              <li onClick={moveToDetail}>
-                <div className="collapsible-header">
-                  <div className='themeThumbnail'>썸네일 영역</div>
-                </div>
-                <span className='themeTitle'>테마 제목</span>
-              </li>
-              <li onClick={moveToDetail}>
-                <div className="collapsible-header">
-                  <div className='themeThumbnail'>썸네일 영역</div>
-                </div>
-                <span className='themeTitle'>테마 제목</span>
-              </li>
-              <li onClick={moveToDetail}>
-                <div className="collapsible-header">
-                  <div className='themeThumbnail'>썸네일 영역</div>
-                </div>
-                <span className='themeTitle'>테마 제목</span>
-              </li>
-              <li onClick={moveToDetail}>
-                <div className="collapsible-header">
-                  <div className='themeThumbnail'>썸네일 영역</div>
-                </div>
-                <span className='themeTitle'>테마 제목</span>
-              </li>
+                {handleFilterSearch.map(theme => (
+                  <li key={theme.id} onClick={() => moveToDetail(theme.id)}>
+                    <div className="collapsible-header">
+                      <div className='themeThumbnail'>
+                        <img src={getThemeBackgroundImage(theme.themeBackground)} alt={theme.themeName} />
+                      </div>
+                    </div>
+                    <span className='themeTitle'>{theme.themeName}</span>
+                  </li>
+
+                ))}
             </ul>
           </div>
         </div> {/* container */}
