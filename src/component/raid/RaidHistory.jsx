@@ -12,6 +12,7 @@ function RaidHistory(props) {
         const fetchHistory = async () => {
             try {
                 const historyData = [];
+                //백에서 세션에서 가져오는걸로 수정하기
                 var params = { userId: "user_1" };
                 
                 // 1차 데이터 가져오기
@@ -27,7 +28,7 @@ function RaidHistory(props) {
                     historyData.push({
                         merchantName: data.merchantName,
                         contribution: contribution,
-                        percentage: data.hitPoint*contribution,
+                        percentage: Math.floor((contribution/data.totalHitPoint)*100),
                         startTime: data.startTime,
                         endTime: data.endTime,
                         isRewarded: isRewarded,
