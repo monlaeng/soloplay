@@ -82,7 +82,7 @@ root.render(
           {/** 나의 테마 조회 페이지 */}
           <Route path="/themeDetail/:themeId" element={<ThemeDetail />} />{" "}
           {/** 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
-          <Route path="/myThemeDetail" element={<MyThemeDetail />} />{" "}
+          <Route path="/myThemeDetail/:themeId" element={<MyThemeDetail />} />{" "}
           {/** 나의 테마 상세 페이지 - 테마번호에 따른 동적 페이지로 구현 예정 */}
           <Route path="/themeRegister" element={<ThemeRegister />} />{" "}
           {/** 테마 등록 페이지 */}
