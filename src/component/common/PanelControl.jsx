@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import photosImg from "asset/img/photos.png";
 import M from "materialize-css/dist/js/materialize.min.js";
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
 
 function PanelControl(props) {
   useEffect(() => {

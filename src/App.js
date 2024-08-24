@@ -1,21 +1,21 @@
-import NavBar from "component/common/NavBar";
-import PanelControl from "component/common/PanelControl";
-import "./App.css";
-import { Outlet } from "react-router-dom";
-import Footer from "component/common/Footer";
-import { useState } from "react";
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import NavBar from 'component/common/NavBar';
+import PanelControl from 'component/common/PanelControl';
+import { AuthContext } from 'component/auth/AuthContext';
+import './App.css';
 
 function App() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [user, setUser] = useState(null); // 사용자 상태 관리
 
   const togglePanel = (event) => {
     event.preventDefault(); // 기본 링크 동작 방지
-    console.log("요청 가냐?????????");
     setIsPanelOpen(!isPanelOpen);
   };
 
   return (
-    <>
+    <AuthContext.Provider value={{ user, setUser }}>
       <NavBar togglePanel={togglePanel} />
       <div className="App">
         <div className="main">
@@ -26,7 +26,7 @@ function App() {
           </div>
         </div>
       </div>
-    </>
+    </AuthContext.Provider>
   );
 }
 

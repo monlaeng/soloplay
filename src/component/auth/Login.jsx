@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
+import { AuthContext } from './AuthContext';
 
 function Login(props) {
     const [formData, setFormData] = useState({
         userId: '',
         userPassword: ''
     });
+    const { setUser } = useContext(AuthContext); // Context에서 setUser 함수 가져오기
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -15,7 +17,6 @@ function Login(props) {
             ...formData,
             [id]: value
         });
-        
     };
 
     const handleSubmit = async (e) => {
@@ -23,28 +24,29 @@ function Login(props) {
         try {
             const response = await axios.post('/auth/login', formData, {
                 headers: {
-                    'Content-Type': 'application/json'  // JSON 형식으로 전송
+                    'Content-Type': 'application/json'
                 },
                 withCredentials: true
             });
-
-            alert(response.data);  // 성공 시 서버에서 받은 메시지를 알림으로 표시
-
-            // 로그인 성공 후 루트 경로로 이동
-            if (response.status === 200) {
+    
+            // 로그인 성공 시 사용자 정보를 세션 스토리지에 저장하고 상태 업데이트
+            if (response.status === 200 && response.data.user) {
+                sessionStorage.setItem('user', JSON.stringify(response.data.user)); // 사용자 정보 저장
+                setUser(response.data.user); // 사용자 상태 업데이트
                 navigate('/');  // navigate 함수를 사용해 "/" 경로로 이동
+            } else {
+                console.error("User data is undefined in the response");
             }
         } catch (error) {
             if (error.response && error.response.data) {
-                alert(error.response.data);  // 실패 시 서버에서 받은 메시지를 알림으로 표시
+                alert(error.response.data);
             } else {
-                alert('오류가 발생했습니다.');  // 기타 오류 발생 시 기본 메시지
+                alert('오류가 발생했습니다.');
             }
-            // 실패 시에도 루트 경로로 이동
             navigate('/auth/login');
         }
     };
-
+    
     return (
         <div className="login app-pages app-section">
             <div className="container">
