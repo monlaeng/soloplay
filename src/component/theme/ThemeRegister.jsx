@@ -142,6 +142,8 @@ function ThemeRegister(props) {
         }
     }, [selectedThemes, receivedMainCategory]);
 
+    console.log(selectedCategory);
+
     return (
         <>
             <div className="faq app-pages app-section">
@@ -174,7 +176,7 @@ function ThemeRegister(props) {
                                                 {category.themeMainCategoryName}
                                             </option>
                                         ))}
-                                    </select> */}
+                                    </select>
                                 </label>
                             </div>
                             <div className='themeSubCategorySelectContainer'>

@@ -77,7 +77,7 @@ function ThemeDetail(props) {
                     </div>
                     <div className='themeSubCategoryContainer'>
                         <span>소분류</span>
-                        <p>{detailTheme.themeSunCategoryName.join(", ")}</p>
+                        <p>{detailTheme.themeSubCategoryName.join(", ")}</p>
                     </div>
                 </div>
                 <div className='themeContentDiv'>
