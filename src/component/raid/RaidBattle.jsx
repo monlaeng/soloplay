@@ -116,7 +116,7 @@ function RaidBattle() {
                         style={{ width: `${battleData.raid.hitPoint/battleData.raid.totalHitPoint*100}%` }}
                     ></div>
                 </div>
-                HP : {battleData.raid.hitPoint} / {battleData.raid.totalHitPoint}
+                HP : {battleData.raid.hitPoint.toLocaleString()} / {battleData.raid.totalHitPoint.toLocaleString()}
             </div>
             <div className="raidInformation">
                 <div className="monsterDisplay">
@@ -125,14 +125,14 @@ function RaidBattle() {
                 </div>
                 <div className="raidUserContribution">
                     <p>『내 정보』</p>
-                    <p>⚔️ 내가 준 피해량: {battleData.contribution}</p>
-                    <p>✨ 테마 달성 보너스: x1</p>
-                    <p>💰 성공 시 보상: {Math.floor(battleData.raid.reward * battleData.contribution / battleData.raid.totalHitPoint)}P</p>
+                    <p>⚔️ 내가 준 피해량: {battleData.contribution.toLocaleString()}</p>
+                    <p>✨ 테마 달성 보너스: x{battleData.buff}</p>
+                    <p>💰 성공 시 보상: {Math.floor(battleData.raid.reward * battleData.contribution / battleData.raid.totalHitPoint).toLocaleString()}P</p>
                 </div>
                 <div className="attackLog" ref={attackLogRef}>
                     {battleData.participants.map((participant, index) => (
                         <p key={index}>
-                            🗡️ {participant.userId} 님이 {participant.contribution} 피해를 입혔습니다. 
+                            🗡️ {participant.userId} 님이 {participant.contribution.toLocaleString()} 피해를 입혔습니다. 
                         </p>
                     ))}
                 </div>
