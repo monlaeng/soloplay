@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Select from 'react-select';
 
 function ThemeRegister(props) {
     const location = useLocation();
@@ -18,9 +17,7 @@ function ThemeRegister(props) {
         "여행/교통": require('../../asset/image/travelImage.jpg')
     };
 
-    const [selectedThemes, setSelectedThemes] = useState(
-        receivedTheme ? receivedTheme.split(", ").map(item => ({ themeSubCategoryName: item })) : []
-    );
+    const [selectedThemes, setSelectedThemes] = useState([]);
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -39,6 +36,13 @@ function ThemeRegister(props) {
                     if (category) {
                         setSelectedCategory(category.themeMainCategoryId);
                         fetchSubCategories(category.themeMainCategoryId);
+
+                        // 초기 로딩 시 receivedTheme 반영
+                        const themeSubCategories = category.subCategories.filter(sub => 
+                            receivedTheme.split(", ").includes(sub.themeSubCategoryName)
+                        );
+                        setSelectedThemes(themeSubCategories);
+
                         setBackgroundImg(themeImages[receivedMainCategory]);  // 초기 로딩 시 이미지 설정
                     }
                 }
@@ -54,6 +58,12 @@ function ThemeRegister(props) {
         try {
             const subCategoriesResponse = await axios.get(`/api/categories/${mainCategoryId}/subcategories`);
             setSubCategories(subCategoriesResponse.data);
+
+            // 만약 receivedTheme이 있을 경우 subCategories와 매칭
+            const themeSubCategories = subCategoriesResponse.data.filter(sub => 
+                receivedTheme.split(", ").includes(sub.themeSubCategoryName)
+            );
+            setSelectedThemes(themeSubCategories);
         } catch (error) {
             console.error('소분류 데이터를 불러오는데 실패했습니다 : ', error);
         }
@@ -64,11 +74,11 @@ function ThemeRegister(props) {
         const newMainCategory = categories.find(cat => cat.themeMainCategoryId === parseInt(newCategoryId))?.themeMainCategoryName;
 
         if (newMainCategory) {
-            setBackgroundImg(themeImages[newMainCategory]);  // 대분류 변경 시 이미지 설정
+            setBackgroundImg(themeImages[newMainCategory]);
         }
         setSelectedCategory(newCategoryId);
         setSubCategories([]);
-        setSelectedThemes([]); // 새로운 대분류 선택 시 소분류 초기화
+        setSelectedThemes([]);
         fetchSubCategories(newCategoryId);
     };
 
@@ -102,13 +112,13 @@ function ThemeRegister(props) {
         const themeData = {
             themeName: themeName,
             themeDescription: themeContent,
-            themeIsActivated: false,  // 활성화 여부, 둘 다 기본적으로 false로 설정함
-            themeIsPublic: false,  // 공개 여부
+            themeIsActivated: false,
+            themeIsPublic: false,
             subCategory: selectedThemes.map(theme => ({
                 themeSubCategoryId: theme.themeSubCategoryId
-            })),  // 선택된 소분류 정보
-            user: { userId: "user_1" },  // 사용자 정보
-            mainCategory: {"themeMainCategoryId":selectedCategory}  // 선택된 대분류 ID 추가
+            })),
+            user: { userId: "user_1" },
+            mainCategory: { "themeMainCategoryId": selectedCategory }
         };
         console.log(themeData);
         try {
@@ -116,14 +126,13 @@ function ThemeRegister(props) {
             if (response.status === 201) {
                 alert("테마가 성공적으로 등록되었습니다.");
                 navigate('/themeSearchAll');
-
             }
         } catch (error) {
             console.error('테마 등록 중 오류가 발생했습니다: ', error);
             alert('테마 등록 중 오류가 발생했습니다.');
         }
     };
-    
+
     useEffect(() => {
         if (selectedThemes.length > 0) {
             const mainCategoryCounts = selectedThemes.reduce((acc, curr) => {
@@ -138,7 +147,7 @@ function ThemeRegister(props) {
         } else if (receivedMainCategory && selectedCategory === "") {
             setBackgroundImg(themeImages[receivedMainCategory]);
         } else if (selectedThemes.length === 0) {
-            setBackgroundImg(null); // 테마가 삭제되었을 때 배경 이미지를 초기화
+            setBackgroundImg(null);
         }
     }, [selectedThemes, receivedMainCategory]);
 
@@ -174,7 +183,7 @@ function ThemeRegister(props) {
                                                 {category.themeMainCategoryName}
                                             </option>
                                         ))}
-                                    </select> */}
+                                    </select>
                                 </label>
                             </div>
                             <div className='themeSubCategorySelectContainer'>

@@ -119,3 +119,93 @@ button:hover {
     align-items: center;
     justify-content: center;
 }
+
+.balloons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.balloon {
+    position: relative;
+    display: inline-block;
+    padding: 15px 20px;
+    border-radius: 30px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 18px;
+    margin: 10px 0;
+    max-width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.balloon:hover {
+    transform: translateY(-5px);
+}
+
+.balloon:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-right-color: #f0f0f0;
+    border-left: 0;
+    margin-top: -15px;
+    margin-left: -15px;
+}
+
+.balloon.left {
+    background-color: #ffe4e1;
+    color: #d9534f;
+}
+
+.balloon.left:before {
+    border-right-color: transparent;
+    border-left-color: #ffe4e1;
+    left: auto;
+    right: -15px;
+}
+
+.balloon.right {
+    background-color: #d1e7dd;
+    color: #155724;
+}
+
+.balloon.right:before {
+    border-right-color: #d1e7dd;
+    border-left-color: transparent;
+    margin-left: -15px;
+}
+
+.balloon.yellow {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.balloon.yellow:before {
+    border-right-color: #fff3cd;
+}
+
+.balloon.pink {
+    background-color: #f8d7da;
+    color: #f8d7da;
+}
+
+.balloon.pink:before {
+    border-right-color: #f8d7da;
+}
+
+.balloon.blue {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.balloon.blue:before {
+    border-right-color: #cce5ff;
+}
