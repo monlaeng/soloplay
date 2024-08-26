@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import 'asset/css/ThemeResultPage.css';
 import axios from 'axios';
 import Modal from 'react-modal';
+import ThemedBalloons from './ThemedBalloons';
 
 Modal.setAppElement('#root');
 
@@ -12,6 +13,7 @@ function ThemeAnalyzeResult(props) {
     const { theme, reason } = location.state || { theme: '테마 없음', reason: '이유 없음' };
     const [subcategories, setSubcategories] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const reasonsArray = reason.split("\n");
 
     const handleRecommendTheme = async () => {
         try {
@@ -50,15 +52,7 @@ function ThemeAnalyzeResult(props) {
         <div className="theme-result-container">
             <section className="result-section">
                 <h2 className="result-theme">분석 결과 : {theme} 테마</h2>
-                <p className="result-reason">
-                    {reason.split("\n").map((line, index) => (
-                        <React.Fragment key={index}>
-                            {line}
-                            <br />
-                            <br />
-                        </React.Fragment>
-                    ))}
-                </p>
+                <ThemedBalloons reasons={reasonsArray} />
                 <div className="button-group">
                     <button className="register-button" onClick={handleRecommendTheme}>
                         소분류 테마 확인하기
