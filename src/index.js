@@ -42,6 +42,7 @@ import StampBoard from "component/theme/StampBoard";
 import RaidHistory from "component/raid/RaidHistory";
 import BucketListStart from "component/theme/BucketListStart";
 import CardRecommend from "component/card/CardRecommend";
+import SearchRaid from "component/raid/SearchRaid";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -72,6 +73,8 @@ root.render(
           <Route path="/mainTest" element={<MainTest />}></Route>
           <Route path="/raidHistory" element={<RaidHistory />}></Route>
           <Route path="/raidBattle/:raidId" element={<RaidBattle />} />
+          <Route path="/SearchRaid" element={<SearchRaid />} />
+
           {/* 테마 */}
           <Route path="/themeSearchAll" element={<ThemeSearchMain />} />{" "}
           {/** 테마 메인(전체 테마 조회) 페이지 */}

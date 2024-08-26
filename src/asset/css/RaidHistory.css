@@ -1,3 +1,8 @@
+.raid-card-wrapper {
+    margin-bottom: 20px;
+}
+
+
 .raid-card-list {
     display: flex;
     flex-direction: column;
@@ -6,6 +11,7 @@
     width: 100%;
     height: 100%;
     margin:0 auto;
+    padding-bottom: 20px;
 }
 
 .raid-card {
