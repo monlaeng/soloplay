@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import raidBackground from "asset/image/raidBackground.jpg";
-import monster from "asset/image/coffeeMonster.png";
+import slimeWeak from "asset/image/slime25.png";
+import slimeHalf from "asset/image/slime50.png";
+import slimeWounded from "asset/image/slime75.png";
+import slime from "asset/image/slime100.png";
+import kingWeak from "asset/image/king25.png";
+import kingHalf from "asset/image/king50.png";
+import kingWounded from "asset/image/king75.png";
+import king from "asset/image/king100.png";
 import "asset/css/raidBattle.css";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -70,6 +77,32 @@ function RaidBattle() {
         return () => clearInterval(intervalId);
     }, [raidId, participantId]);
 
+    const getImageSrc = () => {
+        let ratio = battleData.raid.hitPoint / battleData.raid.totalHitPoint;
+        if (battleData.raid.totalHitPoint <= 100000) {
+            if (ratio > 0.75) {
+                return slime;
+            } else if (ratio > 0.5) {
+                return slimeWounded;
+            } else if (ratio > 0.25) {
+                return slimeHalf;
+            } else {
+                return slimeWeak;
+            }
+        } else {
+            if (ratio > 0.75) {
+                return king;
+            } else if (ratio > 0.5) {
+                return kingWounded;
+            } else if (ratio > 0.25) {
+                return kingHalf;
+            } else {
+                return kingWeak;
+            }
+        }
+            
+      };
+
     if (isLoading) {
         return <p>Loading battle data...</p>; // 데이터 로드 중일 때 로딩 메시지 표시
     }
@@ -80,20 +113,20 @@ function RaidBattle() {
                 <div className="healthBarContainer">
                     <div
                         className="healthBar"
-                        style={{ width: `${battleData.raid.hitPoint/100000*100}%` }}
+                        style={{ width: `${battleData.raid.hitPoint/battleData.raid.totalHitPoint*100}%` }}
                     ></div>
                 </div>
-                HP : {battleData.raid.hitPoint} / 100000
+                HP : {battleData.raid.hitPoint} / {battleData.raid.totalHitPoint}
             </div>
             <div className="monsterDisplay">
                 <img src={raidBackground} alt='Raid Background' className='raidBackground'/>
-                <img src={monster} alt="Monster" className='monster'/>
+                <img src={getImageSrc()} alt="Monster" className='monster'/>
             </div>
             <div className="raidUserContribution">
                 <p>『내 정보』</p>
                 <p>⚔️ 내가 준 피해량: {battleData.contribution}</p>
                 <p>✨ 테마 달성 보너스: x1</p>
-                <p>💰 성공 시 보상: {Math.floor(battleData.raid.reward * battleData.contribution / 100000)}P</p>
+                <p>💰 성공 시 보상: {Math.floor(battleData.raid.reward * battleData.contribution / battleData.raid.totalHitPoint)}P</p>
             </div>
             <div className="attackLog" ref={attackLogRef}>
                 {battleData.participants.map((participant, index) => (
