@@ -64,8 +64,8 @@ root.render(
           <Route path="/coupon" element={<CouponMain />} />
           {/* 카드 */}
           <Route path='/cardList' element={<CardList />}></Route>
-          <Route path='/cardUsage' element={<CardUsageHistory userId="user_1" />} />
-          <Route path='/cardRecommend' element={<CardRecommend userId="user_1" />} />
+          <Route path='/cardUsage' element={<CardUsageHistory />} />
+          <Route path='/cardRecommend' element={<CardRecommend />} />
           <Route path="/cardList" element={<CardList />}></Route>
          
           {/* 레이드 */}

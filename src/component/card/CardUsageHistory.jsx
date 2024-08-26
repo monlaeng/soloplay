@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "asset/css/cardusagehistory.css";
 
-function CardUsageHistory({ userId }) {
+function CardUsageHistory() {
   const [usageHistory, setUsageHistory] = useState({});
   const [selectedCard, setSelectedCard] = useState(null); // 사용자가 선택한 카드
   const [showCardNumber, setShowCardNumber] = useState(false); // 카드번호 표시 여부
@@ -9,7 +9,7 @@ function CardUsageHistory({ userId }) {
 
 
   useEffect(() => {
-    fetch(`/card/history?userId=${userId}`)
+    fetch(`/card/history`)
       .then((response) => response.json())
       .then((data) => {
         setUsageHistory(data);
@@ -24,7 +24,7 @@ function CardUsageHistory({ userId }) {
         console.error("Error fetching usage history:", error);
         setLoading(false); // 로딩 종료
       });
-  }, [userId]);
+  }, []);
 
   // 카드 선택 시 
   const handleCardSelect = (cardNum) => {
