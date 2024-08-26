@@ -3,6 +3,10 @@
     margin: 0 auto;
 }
 
+.raidInformation {
+    background-color: black;
+}
+
 .raidBackground {
     display: block;
     width: 100%;
