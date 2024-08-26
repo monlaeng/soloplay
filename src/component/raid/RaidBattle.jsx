@@ -118,22 +118,24 @@ function RaidBattle() {
                 </div>
                 HP : {battleData.raid.hitPoint} / {battleData.raid.totalHitPoint}
             </div>
-            <div className="monsterDisplay">
-                <img src={raidBackground} alt='Raid Background' className='raidBackground'/>
-                <img src={getImageSrc()} alt="Monster" className='monster'/>
-            </div>
-            <div className="raidUserContribution">
-                <p>『내 정보』</p>
-                <p>⚔️ 내가 준 피해량: {battleData.contribution}</p>
-                <p>✨ 테마 달성 보너스: x1</p>
-                <p>💰 성공 시 보상: {Math.floor(battleData.raid.reward * battleData.contribution / battleData.raid.totalHitPoint)}P</p>
-            </div>
-            <div className="attackLog" ref={attackLogRef}>
-                {battleData.participants.map((participant, index) => (
-                    <p key={index}>
-                        🗡️ {participant.userId} 님이 {participant.contribution} 피해를 입혔습니다. 
-                    </p>
-                ))}
+            <div className="raidInformation">
+                <div className="monsterDisplay">
+                    <img src={raidBackground} alt='Raid Background' className='raidBackground'/>
+                    <img src={getImageSrc()} alt="Monster" className='monster'/>
+                </div>
+                <div className="raidUserContribution">
+                    <p>『내 정보』</p>
+                    <p>⚔️ 내가 준 피해량: {battleData.contribution}</p>
+                    <p>✨ 테마 달성 보너스: x1</p>
+                    <p>💰 성공 시 보상: {Math.floor(battleData.raid.reward * battleData.contribution / battleData.raid.totalHitPoint)}P</p>
+                </div>
+                <div className="attackLog" ref={attackLogRef}>
+                    {battleData.participants.map((participant, index) => (
+                        <p key={index}>
+                            🗡️ {participant.userId} 님이 {participant.contribution} 피해를 입혔습니다. 
+                        </p>
+                    ))}
+                </div>
             </div>
         </div>   
     );
