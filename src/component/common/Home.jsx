@@ -1,12 +1,13 @@
 import React from "react";
 import Slider from "../home/Slider";
-import SliderControls from "../home/SliderButton";
 import Services from "../home/Services";
 import completeIcon from "asset/image/completeIcon.png";
 import controller from "asset/image/controller.png";
-import "asset/css/home.css"
+import "asset/css/home.css";
 import testImage from "asset/img/blog1.jpg"; // 실제 파일 경로로 수정
-
+import Raid from "../raid/RaidHistory"
+import CardList from "component/card/CardList";
+import ThemeSearchMain from "component/theme/ThemeSearchMain";
 function Home() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const slides = [
@@ -15,16 +16,17 @@ function Home() {
     { src: controller, alt: "Slide 3", title: "레이드 관련~", description: "레이드레이드" }
   ];
 
-
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
 
   return (
     <div>
-      <Slider slides={slides} currentSlide={currentSlide} />
-      <SliderControls currentSlide={currentSlide} slides={slides} goToSlide={goToSlide} />
+      {/* <Slider slides={slides} currentSlide={currentSlide} goToSlide={goToSlide} /> */}
       <Services />
+      <Raid></Raid>
+      <ThemeSearchMain></ThemeSearchMain>
+      <CardList></CardList>
     </div>
   );
 }

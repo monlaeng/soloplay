@@ -20,7 +20,7 @@ function PanelControl(props) {
   return (
     <div
       className="panel-control-left"
-      style={{ position: "fixed", zIndex: 20 }}
+      style={{ position: "fixed", zIndex: 5 ,marginTop: "-5px"}}
     >
       <ul
         id="slide-out-left"
@@ -105,76 +105,6 @@ function PanelControl(props) {
               </li>
             </ul>
           </div>
-        </li>
-        <li>
-          <div
-            className="collapsible-header"
-            style={{ borderBottom: "none", padding: "1.5rem" }}
-          >
-            <i className="fa fa-phone"></i>고객센터
-          </div>
-          <div className="collapsible-body" style={{ borderBottom: "none" }}>
-            <ul className="side-nav-panel">
-              <li>
-                <a href="gallery1.html">Gallery 1</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <div
-            className="collapsible-header"
-            style={{ borderBottom: "none", padding: "1.5rem" }}
-          >
-            <i className="fa fa-address-book"></i>마이페이지
-          </div>
-          <div className="collapsible-body" style={{ borderBottom: "none" }}>
-            <ul className="side-nav-panel">
-              <li>
-                <a href="portfolio1.html">Portfolio 1</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <div
-            className="collapsible-header"
-            style={{ borderBottom: "none", padding: "1.5rem" }}
-          >
-            <i className="fa fa-file-powerpoint-o"></i>Pages
-          </div>
-          <div className="collapsible-body" style={{ borderBottom: "none" }}>
-            <ul className="side-nav-panel">
-              <li>
-                <a href="about.html">About Us</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <div
-            className="collapsible-header"
-            style={{ borderBottom: "none", padding: "1.5rem" }}
-          >
-            <i className="fa fa-mobile"></i>App
-          </div>
-          <div className="collapsible-bodyi" style={{ borderBottom: "none" }}>
-            <ul className="side-nav-panel">
-              <li>
-                <a href="calendar.html">Calendar</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <a href="login.html">
-            <i className="fa fa-sign-in"></i>Login
-          </a>
-        </li>
-        <li>
-          <a href="register.html">
-            <i className="fa fa-user-plus"></i>Register
-          </a>
         </li>
       </ul>
     </div>

@@ -1,13 +1,11 @@
-/* Slider.css */
-
 .slider-slick {
     position: relative;
     overflow: hidden;
     width: 100%;
     height: 500px; /* 원하는 높이로 설정 */
-  }
-  
-  .slider-entry {
+}
+
+.slider-entry {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -16,32 +14,32 @@
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     z-index: 1;
-  }
-  
-  .slider-entry.active {
+}
+
+.slider-entry.active {
     opacity: 1;
     z-index: 2;
-  }
-  
-  .overlay {
+}
+
+.overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5); /* 배경 오버레이 */
-  }
-  
-  .caption {
+}
+
+.caption {
     position: absolute;
-    bottom: 20px;
+    bottom: 60px; /* Read More 버튼과 SliderControls 사이에 공간 확보 */
     left: 50%;
     transform: translateX(-50%);
     color: white;
     text-align: center;
-  }
-  
-  .slider-controls {
+}
+
+.slider-controls {
     position: absolute;
     bottom: 20px;
     left: 50%;
@@ -49,18 +47,24 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-  }
-  
-  .slider-controls button {
+    z-index: 20;
+}
+
+.slider-controls button {
     padding: 5px 10px;
     cursor: pointer;
     border: none;
     background-color: #ccc;
     color: white;
     font-size: 16px;
-  }
-  
-  .slider-controls button.active {
+}
+
+.slider-controls button.active {
     background-color: #333;
-  }
-  
+}
+
+.slider-entry .entry {
+    position: relative;
+    z-index: 10;
+    padding-bottom: 50px; /* SliderControls와 겹치지 않도록 여백 추가 */
+}

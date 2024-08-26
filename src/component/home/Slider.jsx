@@ -1,6 +1,8 @@
 import React from "react";
-import 'asset/css/slider.css'
-function Slider({ slides, currentSlide }) {
+import 'asset/css/slider.css';
+import SliderControls from 'component/home/SliderButton'; // SliderControls 임포트
+
+function Slider({ slides, currentSlide, goToSlide }) {
   return (
     <div className="slider-slick app-pages">
       {slides.map((slide, index) => (
@@ -29,6 +31,8 @@ function Slider({ slides, currentSlide }) {
                 <div className="entry">
                   <p>{slide.description}</p>
                   <button className="button">Read More</button>
+                  {/* SliderControls를 Read More 버튼 바로 아래에 추가 */}
+                  <SliderControls currentSlide={currentSlide} slides={slides} goToSlide={goToSlide} />
                 </div>
               </div>
             </div>

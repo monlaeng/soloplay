@@ -25,6 +25,7 @@ function NavBar({ togglePanel }) {
           console.error('로그아웃 요청 중 오류 발생:', error);
       }
   };
+  
     return (
         <div className="navbar">
             <div className="container">
