@@ -7,6 +7,7 @@
 .content {
   flex: 1; /* 나머지 공간을 차지하도록 설정 */
   padding: 1px;
+  
 }
 
 @media (prefers-reduced-motion: no-preference) {

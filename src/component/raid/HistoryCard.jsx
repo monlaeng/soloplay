@@ -1,7 +1,9 @@
 import React from 'react';
 import 'asset/css/RaidHistory.css'
+import axios from 'axios';
+import Swal from "sweetalert2";
 
-function HistoryCard({ image, merchantName, contribution, percentage, isSuccess, startTime, endTime, isRewarded }) {
+function HistoryCard({ raidId, image, merchantName, contribution, percentage, isSuccess, startTime, endTime, isRewarded }) {
     const today =new Date();
 
     function formatTimestamp(timestamp) {
@@ -19,9 +21,26 @@ function HistoryCard({ image, merchantName, contribution, percentage, isSuccess,
     }
 
     const raidStatus = 
-    isSuccess === 1 
-        ? "성공" : new Date(endTime) > today
-            ? "진행중": "실패";
+        isSuccess === 1 
+            ? "성공" : new Date(endTime) > today
+                ? "진행중": "실패";
+
+    function getReward() {
+        const data = { raidId: raidId };  // raidId를 JSON 객체로 만듭니다.
+        axios.post('/api/raid/reward', data)  // data 객체를 post 요청의 본문으로 전달합니다.
+            .then((response) => {
+                Swal.fire({
+                    title: `${merchantName} 레이드 보상`,
+                    text: response.data,
+                    icon: "success",
+                    confirmButtonColor: "green",
+                    confirmButtonText: "확인",
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
     
     return (
         <div className="raid-card">
@@ -29,7 +48,7 @@ function HistoryCard({ image, merchantName, contribution, percentage, isSuccess,
                 <div className="raid-card-header">
                     <img src={image} alt={merchantName} className="raid-card-image" />
                     <h3>{merchantName}</h3>
-                    <button onClick={(e) => console.log("click!")} className={`raid-card-button ${isRewarded===0 ? 'fail' : isRewarded===1?'':'received'}`} disabled={isRewarded===1?'':'disabled'}>
+                    <button onClick={() => getReward()} className={`raid-card-button ${isRewarded===0 ? 'fail' : isRewarded===1?'':'received'}`} disabled={isRewarded===1?'':'disabled'}>
                         {isRewarded===0 ? '대상 아님' : isRewarded===1?"보상 받기":"수령 완료"}
                     </button>
                 </div>
