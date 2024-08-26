@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import HistoryCard from './HistoryCard';
-import monster from "asset/image/coffeeMonster.png";
 import slime100 from "asset/image/slime100.png";
 import king100 from "asset/image/king100.png";
 function RaidHistory(props) {
