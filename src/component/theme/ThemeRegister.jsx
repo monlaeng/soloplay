@@ -151,6 +151,8 @@ function ThemeRegister(props) {
         }
     }, [selectedThemes, receivedMainCategory]);
 
+    console.log(selectedCategory);
+
     return (
         <>
             <div className="faq app-pages app-section">

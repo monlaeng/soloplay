@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import shoppingImage from 'asset/image/shoppingImage.jpg'; // 예시 이미지
@@ -8,37 +8,198 @@ import dailyLifeImage from 'asset/image/dailyLifeImage.jpg';
 import diningImage from 'asset/image/diningImage.jpg';
 import cultureImage from 'asset/image/cultureImage.jpg';
 
-function MyThemeDetail(props) {
+function MyThemeDetail(props) { 
   const [myDetailTheme, setMyDetailTheme] = useState('');
+  const [initialThemeData, setInitialThemeData] = useState('');
   const [isEditMode, setIsEditMode] = useState(false);
   const { themeId } = useParams();
+  
+  // 종경
+  const location = useLocation();
   const navigate = useNavigate();
+  const receivedTheme = location.state?.theme || "";  // 소분류 테마를 받음
+  const receivedMainCategory = location.state?.mainCategory || "";  // 추천받은 대분류 테마를 받음
+  
+  const themeImages = {
+    "생활": require('../../asset/image/dailyLifeImage.jpg'),
+    "쇼핑": require('../../asset/image/shoppingImage.jpg'),
+    "외식/카페": require('../../asset/image/diningImage.jpg'),
+    "문화/교육": require('../../asset/image/cultureImage.jpg'),
+    "여행/교통": require('../../asset/image/travelImage.jpg')
+  };
+
+  const [selectedThemes, setSelectedThemes] = useState(
+    receivedTheme ? receivedTheme.split(", ").map(item => ({ themeSubCategoryName: item })) : []
+  );
+  const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [themeName, setThemeName] = useState("");
+  const [themeContent, setThemeContent] = useState('');
+  const [backgroundImg, setBackgroundImg] = useState(receivedMainCategory ? themeImages[receivedMainCategory] : null);
+  
+  useEffect(() => {
+    const fetchCategories = async () => {
+        try {
+            const categoriesResponse = await axios.get('/api/categories');
+            setCategories(categoriesResponse.data);
+
+            if (receivedMainCategory) {
+                const category = categoriesResponse.data.find(cat => cat.themeMainCategoryName === receivedMainCategory);
+                if (category) {
+                    setSelectedCategory(category.themeMainCategoryId);
+                    fetchSubCategories(category.themeMainCategoryId);
+                    setBackgroundImg(themeImages[receivedMainCategory]);  // 초기 로딩 시 이미지 설정
+                }
+            }
+        } catch (error) {
+            console.error('대분류 데이터를 불러오는데 실패했습니다 : ', error);
+        }
+    };
+
+    fetchCategories();
+    }, []);
+
+  // subCategory 데이터 수신
+  const fetchSubCategories = async (mainCategoryId) => {
+    try {
+        const subCategoriesResponse = await axios.get(`/api/categories/${mainCategoryId}/subcategories`);
+        setSubCategories(subCategoriesResponse.data);
+    } catch (error) {
+        console.error('소분류 데이터를 불러오는데 실패했습니다 : ', error);
+    }
+  };
+
+  const handleCategoryChange = (event) => {
+    const newCategoryId = event.target.value;
+    const newMainCategory = categories.find(cat => cat.themeMainCategoryId === parseInt(newCategoryId))?.themeMainCategoryName;
+
+    if (newMainCategory) {
+        setBackgroundImg(themeImages[newMainCategory]);  // 대분류 변경 시 이미지 설정
+    }
+    setSelectedCategory(newCategoryId);
+    setSubCategories([]);
+    setSelectedThemes([]); // 새로운 대분류 선택 시 소분류 초기화
+    fetchSubCategories(newCategoryId);
+  };
+
+  const handleSubCategorySelect = (event) => {
+    const selectedSubCategory = subCategories.find(sub => sub.themeSubCategoryName === event.target.value);
+
+    if (selectedSubCategory && !selectedThemes.some(theme => theme.themeSubCategoryName === selectedSubCategory.themeSubCategoryName)) {
+        if (selectedThemes.length < 5) {
+            setSelectedThemes(prevThemes => [...prevThemes, selectedSubCategory]);
+        } else {
+            alert('선택할 수 있는 테마는 최대 5개까지 입니다.');
+        }
+    }
+  };
+  
+  const handleThemeNameChange = (event) => {
+    setThemeName(event.target.value);
+  };
+
+  const handleThemeContentChange = (event) => {
+    setThemeContent(event.target.value);
+  };
+  const handleRemoveThemes = (index) => {
+    const updateThemes = selectedThemes.filter((_, i) => i !== index);
+    setSelectedThemes(updateThemes);
+  };
+
+  useEffect(() => {
+      if (selectedThemes.length > 0) {
+          const mainCategoryCounts = selectedThemes.reduce((acc, curr) => {
+              acc[curr.themeMainCategoryName] = (acc[curr.themeMainCategoryName] || 0) + 1;
+              return acc;
+          }, {});
+
+          const mostSelectedMainCategory = Object.keys(mainCategoryCounts).reduce((a, b) =>
+              mainCategoryCounts[a] > mainCategoryCounts[b] ? a : b
+          );
+          setBackgroundImg(themeImages[mostSelectedMainCategory]);
+      } else if (receivedMainCategory && selectedCategory === "") {
+          setBackgroundImg(themeImages[receivedMainCategory]);
+      } else if (selectedThemes.length === 0) {
+          setBackgroundImg(null); // 테마가 삭제되었을 때 배경 이미지를 초기화
+      }
+    }, [selectedThemes, receivedMainCategory]);
+
+    console.log(selectedCategory);
+
+  // 종경
 
   //themeDetail 데이터 수신
   useEffect(() => {
-    axios.get(`/theme/findMyThemeDetail/${themeId}`)
-      .then(response => {
-          setMyDetailTheme(response.data);
-      })
-      .catch(error => {
+    const fetchData = async() => {
+      try {
+        const { data : myDetailThemeResponse }  = await axios.get(`/theme/findThemeDetail/${themeId}`);
+            setMyDetailTheme(myDetailThemeResponse);
+            setInitialThemeData(myDetailThemeResponse);
+
+        const { data : categoryResponse } = await axios.get('/api/categories');
+        setCategories(categoryResponse);
+
+        if(myDetailThemeResponse.themeMainCategoryId) {
+          fetchSubCategories(myDetailThemeResponse.themeMainCategoryId);
+        }
+          setSelectedThemes(myDetailThemeResponse.themeSubCategory || []);
+      } catch (error) {
         console.error("데이터를 가져오는 중 오류가 발생했습니다.", error);
-      });
-  }, [themeId]);
+      }
+    };
+      fetchData();
+    }, [themeId]);
 
-  console.log(myDetailTheme);
+        //배경이미지 가져오기 (조회용)
+        const getThemeBackgroundImage = (themeBackground) => {
+          switch (themeBackground) {
+              case 'shoppingImage':
+              return shoppingImage;
+              case 'travelImage':
+              return travelImage;
+              case 'dailyLifeImage':
+              return dailyLifeImage;
+              case 'diningImage':
+              return diningImage;
+              case 'cultureImage':
+              return cultureImage;
+              default:
+              return null;
+          }
+          };
 
-        const [selectedMainCategory, setSelectedMainCategory] = useState('');
-        const mainCategorySelect = (e) => {
-          setSelectedMainCategory(selectedMainCategory, e.target.value);
-        }
+        // 수정내용을 useState에 다시 담아주는 함수 - 원본
+        const handleChange = (e) => {
+            const { name, value, checked } = e.target;
 
-        console.log(selectedMainCategory);
-        
-        const [selectedSubCategory, setSelectedSubCategory] = useState([]);
-        const subCategorySelect = (e) => {
-          setSelectedSubCategory([...selectedSubCategory, e.target.value]);
-        }
+            const newValue = (name === 'themeIsPublic' || name === 'themeIsAvtivated')
+            ? value ==='true' || value ===true
+            : value;
 
+            setMyDetailTheme((prev) => ({
+                ...prev,
+                [name]: newValue,
+            }));
+
+            // MainCategory의 선택에 따른 SubCategory 분류
+            if (name === 'themeMainCategoryId') {
+
+              const selectedCategory = categories.find(category => category.themeMainCategoryName === value);
+
+              if(selectedCategory) {
+                fetchSubCategories(value);
+                setMyDetailTheme((prev) => ({
+                  ...prev,
+                  themeBackground: selectedCategory.themeMainCategoryName,
+                  themeMainCategoryId: selectedCategory.themeMainCategoryId,
+                }));
+              }
+              setSelectedThemes([]);
+            }
+        };
+
+        // 테마 데이터 삭제
         const handleRemoveClick = () => {
           axios.delete(`/theme/deleteTheme/${themeId}`)
               .then(response => {
@@ -50,79 +211,48 @@ function MyThemeDetail(props) {
               });
         }
 
-        // 수정내용을 useState에 다시 담아주는 함수
-        const handleChange = (e) => {
-            setMyDetailTheme({
-                ...myDetailTheme,
-                [e.target.name]: e.target.value,
-            });
-        };
-
         if(!myDetailTheme) {
             return <div>잠시만 기다려 주세요</div>;
         }
-
-      //배경이미지 가져오기
-      const getThemeBackgroundImage = (themeBackground) => {
-        switch (themeBackground) {
-            case 'shoppingImage':
-            return shoppingImage;
-            case 'travelImage':
-            return travelImage;
-            case 'dailyLifeImage':
-            return dailyLifeImage;
-            case 'diningImage':
-            return diningImage;
-            case 'cultureImage':
-            return cultureImage;
-            default:
-            return null;
-        }
-        };
 
         // 수정하기 버튼 클릭 시 화면구성 변경
         const handleEditClick = () => {
           setIsEditMode(true);
         };
         const handleCancleClick = () => {
+          setMyDetailTheme(initialThemeData);
           setIsEditMode(false);
         };
 
-        // 저장용
-        const handleRegister = () => {
+    // 테마 등록정보 저장
+    const handleEditSave = async () => {
+      const themeData = {
+          themeName: themeName,
+          themeDescription: themeContent,
+          themeIsActivated: false, // 테마가 수정되었으니 활성화 기본적으로는 x
+          themeIsPublic: false, // 공개여부 기본으로는 비공개 , 하지만 선택할 수 있도록 만들 것임
+          subCategory: selectedThemes.map(theme => ({
+              themeSubCategoryId: theme.themeSubCategoryId
+          })),
+          mainCategory: {"themeMainCategoryId":selectedCategory}  // 선택된 대분류 ID 추가
+      };
+      console.log("themeData")
+      console.log(themeData);
+      try {
+          const response = await axios.put(`/theme/updateTheme/${themeId}`, themeData);
+          if (response.status === 201) {
+              alert("테마가 성공적으로 수정되었습니다.");
+              navigate('/myThemeSearch');
 
-        }
+          }
+      } catch (error) {
+          console.error('테마 수정 중 오류가 발생했습니다: ', error);
+          alert('테마 수정 중 오류가 발생했습니다.');
+      }
+  };
 
-    // <=== 종경 코드 ====
-
-  //   const handleRegister = async () => {
-        
-  //     const themeData = {
-  //         themeName: themeName,
-  //         themeDescription: themeContent,
-  //         themeIsActivated: false,  // 활성화 여부, 둘 다 기본적으로 false로 설정함
-  //         themeIsPublic: false,  // 공개 여부
-  //         subCategory: selectedThemes.map(theme => ({
-  //             themeSubCategoryId: theme.themeSubCategoryId
-  //         })),  // 선택된 소분류 정보
-  //         user: { userId: "user_2" },  // 사용자 정보
-  //         mainCategory: selectedCategory  // 선택된 대분류 ID 추가
-  //     };
-  //     console.log(themeData);
-  //     try {
-  //         const response = await axios.post('/theme/insertTheme', themeData);
-  //         if (response.status === 201) {
-  //             alert("테마가 성공적으로 등록되었습니다.");
-  //             navigate('/themeSearchAll');
-
-  //         }
-  //     } catch (error) {
-  //         console.error('테마 등록 중 오류가 발생했습니다: ', error);
-  //         alert('테마 등록 중 오류가 발생했습니다.');
-  //     }
-  // };
-
-    // ==== 종경 코드 ===>
+    console.log("myDetailTheme - 229번줄")
+    console.log(myDetailTheme)
 
     return (
         <>
@@ -131,88 +261,125 @@ function MyThemeDetail(props) {
             <div className='themeDetailTitleContainer'>
             <h2 style={{ textAlign: "left", lineHeight: 1.5 }}>
                     <span
-                    style={{
-                        fontWeight: "bold",
-                        color: "#007FFF",
-                        fontSize: "0.8em",
-                    }}
-                    >
+                    style={{ fontWeight: "bold", color: "#007FFF", fontSize: "0.8em" }}>
                     나의 테마 상세조회
                     </span>{" "}
                 </h2>
             </div>
+              {isEditMode ? (
             <div className='themeBackgroundImg'>
-                <img src={getThemeBackgroundImage(myDetailTheme.themeBackground)} alt={myDetailTheme.themeName} />
+                {backgroundImg && <img src={backgroundImg} alt="Theme Background" />}
             </div>
+              ) : (
+              <div className='themeBackgroundImg'>
+                {/* <img src={backgroundImg} alt="Theme Background" /> */}
+                <img src={getThemeBackgroundImage(myDetailTheme.themeBackground)} alt={myDetailTheme.themeName} />
+              </div>
+
+              )}
             <div className="themeInfoContainer">
                 <div className="themeNameContainer">
                     <span>테마명</span>
                     {isEditMode ? (
-                      <input type="text" name="themeName" value={myDetailTheme.themeName} onChange={handleChange} />
+                      <input value={themeName} style={{display:'inline-block', height:'27px', fontSize:'14px'}}
+                      onChange={handleThemeNameChange} />
                     ) : (
                       <p>{myDetailTheme.themeName}</p>
                     )}
                 </div>
-                <div className="themeCategoryContainer">
-                    <span>대분류</span>
-                    {isEditMode ? (
-                      <>
-                      <div className='themeCategoryContainer'>
-                      <div className='mainCategoryEditContainer'>
-                        <select style={{display:'inline-block', height:'27px', fontSize:'12px'}} onChange={mainCategorySelect}>
-                          <option value='값1'>값1</option>
-                        </select>
 
-                        {/* <select name='themeMainCategoryName' value={myDetailTheme.themeMainCategoryName} onChange={subCategorySelect} >
-                          {mainCategories.map((category) => (
-                            <option key={category.id} value={category.name}>{category.name}</option>
-                          ))}
-                        </select> */}
-                      </div>
-                      <div className='mainCategorySelectedContainer'>
-                        <span>{selectedMainCategory}</span>
-                      </div> 
-                      </div>
-                      </>
-                    ) : (
-                      <p>{myDetailTheme.themeMainCategoryName}</p>
-                    )}
-                </div>
-                <div className="themeSubCategoryContainer">
-                    <span>소분류</span>
+                <div className="themeCategoryContainer">
                     {isEditMode ? (
                       <>
-                      <div className='themeCategoryContainer'>
-                      <div className='mainCategoryEditContainer'>
-                        <select style={{display:'inline-block', height:'27px', fontSize:'12px'}} onChange={subCategorySelect}>
-                          <option selected value='test1'>test1</option>
-                          <option value='test2'>test2</option>
-                          <option value='test3'>test3</option>
-                          <option value='test4'>test4</option>
-                        </select>
+                      <div className='mainCategoryAfterSpanContainer'>
+                        <span>대분류</span>
                       </div>
-                      <div className='mainCategorySelectedContainer'>
-                          {selectedSubCategory.map((item, index) => (
-                            <span key={index}>{item}</span>
-                          ))}
-                      </div>
+                      <div className='mainCategoryAfterSelectContainer'>
+                          <select value={selectedCategory}
+                                  style={{display:'inline-block', height:'27px', fontSize:'12px'}} 
+                                  onChange={handleCategoryChange} >
+                            <option value=''>대분류 선택</option>
+                            {categories.map((category) => (
+                              <option key={category.themeMainCategoryId} value={category.themeMainCategoryId}>
+                                {category.themeMainCategoryName}
+                              </option>
+                            ))}
+                          </select>
                       </div>
                       </>
-                      // <select name='themeSunCategoryName' multiple value={myDetailTheme.themeSunCategoryName} onChange={handleChange}>
-                      //   {subCategories.map((subCategory) => (
-                      //     <option key={subCategory.id} value={subCategory.name}>{subCategory.name}</option>
-                      //   ))}
-                      // </select>
                     ) : (
-                      <p>{myDetailTheme.themeSunCategoryName.join(", ")}</p>
+                      <>
+                      <div className='mainCategoryBeforeSpanContainer'>
+                        <span>대분류</span>
+                      </div>
+                      <div className='mainCategoryBeforeContentContainer'>
+                        <p>{myDetailTheme.themeMainCategoryName}</p>
+                      </div>
+                      </>
+                    )}
+                    
+                    {isEditMode ? (
+                      <>
+                        <div className='subCategoryAfterSpanContainer'>
+                          <span>소분류</span>
+                        </div>
+                        <div className='subCategoryAfterSelectContainer'>
+                            <select style={{display:'inline-block', height:'27px', fontSize:'12px'}} 
+                            onChange={handleSubCategorySelect}>
+                              <option value=''>소분류 선택</option>
+                              {subCategories.map((subCategory) => (
+                                <option key={subCategory.themeSubCategoryId} value={subCategory.themeSubCategoryName}>
+                                  {subCategory.themeSubCategoryName}
+                                </option>
+                              ))}
+                            </select>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+
+                      </>
                     )}
                 </div>
+
+                {isEditMode ? (
+                <div className='selectedEditThemes'>
+                            {selectedThemes.length === 0 ? (
+                                <p className='placeholder'>선택된 테마가 없습니다. 5개의 테마를 등록해주세요</p>
+                            ) : (
+                                selectedThemes.map((theme, index) => (
+                                    <div key={index} className='tagEdit'>
+                                        {theme.themeSubCategoryName}{" "}
+                                        <span className='removeTagEdit' onClick={() => handleRemoveThemes(index)}>
+                                            X
+                                        </span>
+                                    </div>
+                                ))
+                            )}
+                </div>
+                ) : (
+                  <>
+                  <div className='subCategoryBeforeTotalContainer'>
+                    <div className='subCategoryBeforeSpanContainer'>
+                        <span>소분류</span>
+                      </div>
+                      <div className='subCategoryBeforeContentContainer'>
+                        <p>{myDetailTheme.themeSubCategoryName.join(", ")}</p>
+                    </div>
+                  </div>
+                  </>
+                )}
+
                 <div className='myThemeIsPublicContainer'>
                     <span>공개</span>
                     {isEditMode ? (
-                      <select>
-                        <option value={'true'}>공개</option>
-                        <option value={'false'}>비공개</option>
+                      <select 
+                      name='themeIsPublic' 
+                      value={myDetailTheme.themeIsPublic ? 'true' : 'false'} 
+                      style={{display:'inline-block', height:'27px', fontSize:'12px'}} 
+                      onChange={handleChange}>
+                        <option value='true'>공개</option>
+                        <option value='false'>비공개</option>
                       </select>
                     ) : (
                       <p>{myDetailTheme.themeIsPublic ? '공개':'비공개'}</p>
@@ -221,9 +388,13 @@ function MyThemeDetail(props) {
                 <div className='myThemeIsActivtedContainer'>
                     <span>활성</span>
                     {isEditMode ? (
-                      <select>
-                        <option value={'true'}>활성화</option>
-                        <option value={'false'}>비활성화</option>
+                      <select 
+                      name='themeIsActivated' 
+                      value={myDetailTheme.themeIsActivated ? 'true' : 'false'} 
+                      style={{display:'inline-block', height:'27px', fontSize:'12px'}} 
+                      onChange={handleChange}>
+                        <option value='true'>활성화</option>
+                        <option value='false'>비활성화</option>
                       </select>
                     ) : (
                       <p>{myDetailTheme.themeIsActivated ? '활성' : '비활성'}</p>
@@ -234,14 +405,26 @@ function MyThemeDetail(props) {
         <div className="themeContentDiv">
             <span>테마 설명</span>
             {isEditMode ? (
-                <button className="themeSaveBtn" onClick={handleRegister}>저장하기</button>
+              <Link to={"/myThemeSearch"}>
+                <button className="themeSaveBtn" onClick={handleEditSave}>저장하기</button>
+              </Link>
             ) : (
               <button className="themeEditBtn" onClick={handleEditClick}>수정하기</button>
             )}
         </div>
 
         <div className="themeContentContainer">
-            <p>{myDetailTheme.themeDescription}</p>
+            {isEditMode ? (
+                        <textarea
+                        className='themeContentContainer'
+                        value={themeContent}
+                        onChange={handleThemeContentChange}
+                        placeholder="여기에 테마 설명을 입력하세요. (추천받은 경우, 이유가 자동으로 입력됩니다.)"
+                        rows={10}
+                    />
+            ) : (
+              <p>{myDetailTheme.themeDescription}</p>
+            )}
         </div>
             <div className="moveThemeListBtnDiv">
                 <Link to={"/myThemeSearch"}>
