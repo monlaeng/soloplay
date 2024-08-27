@@ -53,7 +53,7 @@ function ThemeBucketList(props) {
                             />
                         </div>
                     ))}
-                    <button type="submit" className="bucketlist-submit-button">Submit</button>
+                    <button type="submit" className="bucketlist-submit-button">제출하기</button>
                 </form>
             </div>
         </div>

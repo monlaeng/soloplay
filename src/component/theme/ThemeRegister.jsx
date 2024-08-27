@@ -113,11 +113,10 @@ function ThemeRegister(props) {
             themeName: themeName,
             themeDescription: themeContent,
             themeIsActivated: false,
-            themeIsPublic: false,
+            themeIsPublic: true,
             subCategory: selectedThemes.map(theme => ({
                 themeSubCategoryId: theme.themeSubCategoryId
             })),
-            user: { userId: "user_1" },
             mainCategory: { "themeMainCategoryId": selectedCategory }
         };
         console.log(themeData);
@@ -149,7 +148,7 @@ function ThemeRegister(props) {
         } else if (selectedThemes.length === 0) {
             setBackgroundImg(null);
         }
-    }, [selectedThemes, receivedMainCategory]);
+    }, [selectedThemes, receivedMainCategory, themeImages, selectedCategory]);
 
     console.log(selectedCategory);
 
