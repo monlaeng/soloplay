@@ -37,7 +37,6 @@ function NavBar({ togglePanel }) {
                 <div className="site-title">
                     <Link to="/" className="logo">
                         <div className="soloplay-logo-container">
-                            <img src={ControllerImg} alt="Controller" className="soloplay-controller-icon" />
                             <h1 className="soloplay-text">SOLoPLAY</h1>
                         </div>
                     </Link>

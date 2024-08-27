@@ -32,7 +32,6 @@ import TransferComplete from "component/point/TransferComplete";
 import CouponMain from "component/coupon/CouponMain";
 import CardList from "component/card/CardList";
 import CardUsageHistory from "component/card/CardUsageHistory";
-import MainTest from "component/raid/MainTest";
 import Login from "component/auth/Login";
 import Registration from "component/auth/Registration";
 import RaidBattle from "component/raid/RaidBattle";
@@ -70,7 +69,6 @@ root.render(
           <Route path="/cardList" element={<CardList />}></Route>
          
           {/* 레이드 */}
-          <Route path="/mainTest" element={<MainTest />}></Route>
           <Route path="/raidHistory" element={<RaidHistory />}></Route>
           <Route path="/raidBattle/:raidId" element={<RaidBattle />} />
           <Route path="/SearchRaid" element={<SearchRaid />} />

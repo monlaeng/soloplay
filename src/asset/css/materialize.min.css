@@ -5448,11 +5448,12 @@ button.btn-floating {
   display: none;
   border-bottom: 1px solid #ddd;
   box-sizing: border-box;
+  padding-left: 10px;
+
 }
 
 .collapsible-body p {
   margin: 0;
-  padding: 2rem;
 }
 
 .side-nav .collapsible,
