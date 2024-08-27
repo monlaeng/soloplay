@@ -108,19 +108,28 @@ function ThemeRegister(props) {
     };
 
     const handleRegister = async () => {
-        
-        const themeData = {
-            themeName: themeName,
-            themeDescription: themeContent,
-            themeIsActivated: false,
-            themeIsPublic: true,
-            subCategory: selectedThemes.map(theme => ({
-                themeSubCategoryId: theme.themeSubCategoryId
-            })),
-            mainCategory: { "themeMainCategoryId": selectedCategory }
-        };
-        console.log(themeData);
         try {
+            // 먼저 테마 개수 확인
+            const themeCountResponse = await axios.get('/api/categories/themeCount');
+            const themeCount = themeCountResponse.data;
+
+            if (themeCount >= 3) {
+                alert('테마는 최대 3개 까지 등록 가능합니다.');
+                return;  // 등록 중단
+            }
+
+            // 테마 등록 진행
+            const themeData = {
+                themeName: themeName,
+                themeDescription: themeContent,
+                themeIsActivated: false,
+                themeIsPublic: true,
+                subCategory: selectedThemes.map(theme => ({
+                    themeSubCategoryId: theme.themeSubCategoryId
+                })),
+                mainCategory: { "themeMainCategoryId": selectedCategory }
+            };
+            console.log(themeData);
             const response = await axios.post('/theme/insertTheme', themeData);
             if (response.status === 201) {
                 alert("테마가 성공적으로 등록되었습니다.");
@@ -150,7 +159,6 @@ function ThemeRegister(props) {
         }
     }, [selectedThemes, receivedMainCategory, themeImages, selectedCategory]);
 
-    console.log(selectedCategory);
 
     return (
         <>
