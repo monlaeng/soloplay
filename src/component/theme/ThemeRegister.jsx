@@ -2,12 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import shoppingIcon from "asset/image/shoppingIcon2.png";
+import travelIcon from "asset/image/travelcon.png";
+import lifestyleIcon from "asset/image/lifestyleIcon.png";
+import diningIcon from "asset/image/diningIcon.png";
+import cultureIcon from "asset/image/cultreIcon.png";
+
 function ThemeRegister(props) {
     const location = useLocation();
     const navigate = useNavigate();
     const receivedTheme = location.state?.theme || "";  // 소분류 테마를 받음
     const receivedReason = location.state?.reason || "";  // 테마 선정 이유를 받음
     const receivedMainCategory = location.state?.mainCategory || "";  // 추천받은 대분류 테마를 받음
+
+    const [stamps, setStamps]  = useState({}); /* 스탬프 변수 */
 
     const themeImages = {
         "생활": require('../../asset/image/dailyLifeImage.jpg'),
@@ -117,7 +125,6 @@ function ThemeRegister(props) {
             subCategory: selectedThemes.map(theme => ({
                 themeSubCategoryId: theme.themeSubCategoryId
             })),
-            user: { userId: "user_1" },
             mainCategory: { "themeMainCategoryId": selectedCategory }
         };
         console.log(themeData);
@@ -153,6 +160,152 @@ function ThemeRegister(props) {
 
     console.log(selectedCategory);
 
+    /* 스템프 영역 */
+
+    //배경이미지 가져오기 (조회용)
+    const getThemeBackgroundImage = (themeBackground) => {
+        switch (themeBackground) {
+            case 'shoppingImage':
+            return themeImages.쇼핑;
+            case 'travelImage':
+            return themeImages['여행/교통'];
+            case 'dailyLifeImage':
+            return themeImages.생활;
+            case 'diningImage':
+            return themeImages['외식/카페'];
+            case 'cultureImage':
+            return themeImages['문화/교육'];
+            default:
+            return null;
+        }
+        };
+
+    const getStampImage = (stampImage) => {
+        switch (stampImage) {
+        case '쇼핑':
+            return shoppingIcon;
+        case '여행/교통':
+            return travelIcon;
+        case '생활':
+            return lifestyleIcon;
+        case '외식/카페':
+            return diningIcon;
+        case '문화/교육':
+            return cultureIcon;
+        default:
+            return null;
+        }
+    };
+
+    /* 문구 가변으로 가져오기 */
+    const getMissionNameDetail = (missionNameDetail) => {
+        switch (missionNameDetail) {
+            case '편의점':
+                return '이용하기';
+            case '마트':
+                return '이용하기';
+            case '전통시장':
+                return '이용하기';
+            case '택시':
+                return '이용하기';
+            case '병원':
+              return '이용하기';
+            case '세탁소':
+              return '이용하기';
+            case '약국':
+              return '이용하기';
+            case '헤어샵':
+              return '이용하기';
+            case '서점':
+              return '이용하기';
+            case '가구점':
+              return '이용하기';
+            case '가전제품':
+              return '이용하기';
+            case '백화점':
+                return '이용하기';
+            case '의류/패션':
+                return '이용하기';
+            case '스포츠용품':
+                return '이용하기';
+            case '카페':
+                return '이용하기';
+            case '양식':
+              return '이용하기';
+            case '베이커리':
+              return '이용하기';
+            case '한식':
+              return '이용하기';
+            case '일식':
+              return '이용하기';
+            case '중식':
+              return '이용하기';
+            case '패스트푸드':
+              return '이용하기';
+            case '술집':
+              return '이용하기';
+            case '영화/공연':
+                return '이용하기';
+            case '스터디카페':
+                return '이용하기';
+            case '노래방':
+                return '이용하기';
+            case '독서실':
+                return '이용하기';
+            case '문구점':
+              return '이용하기';
+            case '스포츠시설':
+              return '이용하기';
+            case '취미/오락':
+              return '이용하기';
+            case '학원':
+              return '이용하기';
+            case '면세점':
+              return '이용하기';
+            case '숙소':
+              return '이용하기';
+            case '여행사':
+              return '이용하기';
+            case '주유소':
+              return '이용하기';
+            case '주차장':
+              return '이용하기';
+            default: return null;
+        }
+    };
+
+    const registThemes = [
+        {
+          name: themeName,
+          color: "black",
+          icon: getStampImage(selectedThemes.length > 0 ? selectedThemes[0].themeMainCategoryName : ""),
+
+          missions: selectedThemes.slice(0, 5).map((theme, index) => {
+            const subCategoryName = theme.themeSubCategoryName;
+            const missionDetail = getMissionNameDetail(subCategoryName);
+            return { name: `${subCategoryName} ${missionDetail}` };
+          })
+        }];
+
+
+    const handleStamp = (themeName, missionName) => {
+        setStamps((prev) => ({
+        ...prev,
+        [themeName]: {
+            ...prev[themeName],
+            [missionName]: true,
+        },
+        }));
+    };
+
+    console.log("selectedCategory", selectedCategory);
+
+    /* 스템프 영역 */
+
+    console.log("selectedThemes : ", selectedThemes);
+    console.log("selectedThemes.ddd : ", selectedThemes.length > 0 ? selectedThemes[0].themeMainCategoryName : "");
+    console.log("registThemes : ", registThemes);
+
     return (
         <>
             <div className="faq app-pages app-section">
@@ -165,7 +318,26 @@ function ThemeRegister(props) {
                         </h2>
                     </div>
                     <div className='themeBackgroundImg'>
-                        {backgroundImg && <img src={backgroundImg} alt="Theme Background" />}
+                    {registThemes.map((theme, index) => (
+                        <div key={index} className='theme-selection'>
+                              {backgroundImg ? ( <img src={backgroundImg} className="background-image" alt="Theme Background" />
+                            ) : (
+                               <img src={getThemeBackgroundImage(selectedThemes.themeBackground)}  className="background-image" alt={selectedThemes.themeName} />
+                            )}
+                            {/**/}
+                            <div className='theme-path'>
+                                {theme.missions.map((mission, index) => (
+                                    <div key={index} className={`mission-node ${
+                                        stamps[theme.name]?.[mission.name] ? "stapmed" : ""
+                                    }`}
+                                    onClick = {() => handleStamp(theme.name, mission.name)}>
+                                    <img src={theme.icon} alt={`${theme.name} icon`} className='mission-icon' />
+                                    <div className='mission-name'>{mission.name}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))} 
                     </div>
 
                     <div className='themeInfoContainer'>
@@ -174,11 +346,14 @@ function ThemeRegister(props) {
                             <input value={themeName} onChange={handleThemeNameChange} />
                         </div>
 
-                        <div className='themeCategoriesContainer'>
-                            <div className='themeCategorySelectContainer'>
-                                <label>
-                                    대분류
-                                    <select value={selectedCategory} onChange={handleCategoryChange}>
+                        <div className='themeCategoryContainer'>
+                            <div className='mainCategoryEditContainer'>
+                                <div className='mainCategoryAfterSpanContainer'>
+                                <span>대분류</span>
+                                </div>
+                                <div className='mainCategoryAfterSelectContainer'>
+                                    <select value={selectedCategory} style={{display:'inline-block', height:'27px', fontSize:'12px'}}
+                                    onChange={handleCategoryChange}>
                                         <option value="">대분류 선택</option>
                                         {categories.map((category) => (
                                             <option key={category.themeMainCategoryId} value={category.themeMainCategoryId}>
@@ -186,12 +361,15 @@ function ThemeRegister(props) {
                                             </option>
                                         ))}
                                     </select>
-                                </label>
+                                </div>
                             </div>
-                            <div className='themeSubCategorySelectContainer'>
-                                <label>
-                                    소분류
-                                    <select onChange={handleSubCategorySelect}>
+                            <div className='subCategoryEditContainer'>
+                                <div className='subCategoryAfterSpanContainer'>
+                                    <span>소분류</span>
+                                </div>
+                                <div className='subCategoryAfterSelectContainer'>
+                                    <select style={{display:'inline-block', height:'27px', fontSize:'12px'}}
+                                    onChange={handleSubCategorySelect}>
                                         <option value="">소분류 선택</option>
                                         {subCategories.map((subCategory) => (
                                             <option key={subCategory.themeSubCategoryId} value={subCategory.themeSubCategoryName}>
@@ -199,7 +377,7 @@ function ThemeRegister(props) {
                                             </option>
                                         ))}
                                     </select>
-                                </label>
+                                </div>
                             </div>
                         </div>
                         <div className='selectedThemes'>
@@ -219,8 +397,12 @@ function ThemeRegister(props) {
                     </div>
 
                     <div className='themeContentDiv'>
+                    <span>테마 설명</span>
+                    </div>
+
+                    <div className="themeContentContainer">
                         <textarea
-                            className='themeContentContainer'
+                            className='themeContentEditContainer'
                             value={themeContent} 
                             onChange={handleThemeContentChange}
                             placeholder="여기에 테마 설명을 입력하세요. (추천받은 경우, 이유가 자동으로 입력됩니다.)"
@@ -228,7 +410,7 @@ function ThemeRegister(props) {
                         />
                     </div>
 
-                    <div className='moveThemeListBtnDiv'>
+                    <div className="themeBottomBtnDiv">
                         <Link to={'/themeSearchAll'}>
                             <button className='moveThemeListBtn'>목록보기</button>
                         </Link>

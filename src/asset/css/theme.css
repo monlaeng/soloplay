@@ -120,7 +120,6 @@ display: block;
 }
 
 .themeInfoContainer span {
-    margin: 0px 10px;
     color:black;
     font-size: 16px;
     font-weight: bold;
@@ -132,12 +131,10 @@ display: block;
     width: 100%;
     color: black;
     font-size: 15px;
-    font-weight: bold;
 }
 
-.themeNameContainer {
-    display: flex;
-    align-items: center;
+.themeNameContainer span {
+    width: 60px;
 }
 
 .themeNameContainer input {
@@ -145,37 +142,44 @@ display: block;
     margin-bottom: 0px !important;
 }
 
-.themeCategoryContainer {
+.themeCategoryContainer, .themeSubCategoryContainer {
     display: flex;
-    /* justify-content: space-between; */
     width: 100%;
+    height: 37px;
+    align-items: center;
+}
+
+.mainCategoryEditContainer, .subCategoryEditContainer {
+    display: flex;
+    align-items: center;
+    width:50%;
 }
 
 /* 수정버튼 클릭 전 */
 .mainCategoryBeforeSpanContainer {
-    display: block !important;
+    display: inline-flex !important;
+    align-content: center !important;
 }
 
 .mainCategoryBeforeContentContainer {
-    display: block !important;
+    display: inline-flex !important;
 }
 
-.subCategoryBeforeTotalContainer {
-    display: inline-flex;
+.subCategoryBeforeSpanContainer {
+    color:black;
+    font-size: 16px;
+    font-weight: bold;
+    width: 60px;
+    align-content: center;
 }
 
-.subCategoryBeforeSpanContainer, .subCategoryBeforeContentContainer {
-    margin: auto;
+.subCategoryBeforeContentContainer {
+    width:auto;
 }
-
 
 /* 수정버튼 클릭 후 */
-.mainCategoryAfterSpanContainer, .subCategoryAfterSpanContainer {
-    width: 40% !important;
-}
-
 .mainCategoryAfterSelectContainer, .subCategoryAfterSelectContainer {
-    width: 60% !important;
+    margin-left: 10px;
 }
 
 .themeNameContainer, .myThemeIsPublicContainer, .myThemeIsActivtedContainer {
@@ -188,6 +192,7 @@ display: block;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 5px;
 }
 
 .themeContentDiv span {
@@ -213,9 +218,27 @@ display: block;
     font-size: 14px;
     height: 150px;
     word-wrap: break-word;
+    background-color: rgb(245, 245, 245);
+    border: 0px !important;
+    padding: 8px;
 }
 
-.moveThemeListBtnDiv {
+.themeContentContainer p {
+    margin: 0px !important;
+    font-weight: lighter !important;
+}
+
+.themeContentEditContainer {
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+    height: 135px;
+    word-wrap: break-word;
+    background-color: rgb(245, 245, 245);
+    border: 0px !important;
+}
+
+.themeBottomBtnDiv {
     display: flex;
     justify-content:space-between;
     margin-top: 10px;
@@ -245,14 +268,14 @@ display: block;
 
 /* 테마 등록 영역 */
 .themeBackgroundImg {
-    height: 300px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
 }
 
 .themeBackgroundImg img {
-    width: 100%;
     max-width: 100%;
     height: 100%;
-    display: block;
 }
 
 .themeRecieveBtn {
@@ -275,29 +298,6 @@ display: block;
     width: 48%;
 }
 
-.themeCategorySelectContainer label, .themeSubCategorySelectContainer label {
-    font-size: 16px;
-    font-weight: bold;
-    color: black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 10px;
-    white-space: nowrap;
-}
-
-.themeCategorySelectContainer select, .themeSubCategorySelectContainer select {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 100%;
-    z-index: 10; /* z-index 설정 */
-    position: relative; /* z-index가 적용되려면 relative나 absolute로 설정 */
-    visibility: visible; 
-    display: block; /* 안 보이는 문제를 해결 */
-}
-
 .themeContentDiv{
     white-space: nowrap;
 }
@@ -309,6 +309,7 @@ display: block;
     font-weight: bold;
     border: 0px;
     padding: 5px 10px;
+    width: 80px;
 }
 
 /* 선택 제한 안내 문구 스타일 */
@@ -322,34 +323,18 @@ display: block;
 
 .selectedThemes {
     display: flex;
-    flex-wrap: wrap;  /* 항목들이 줄을 넘어갈 경우 자동으로 다음 줄로 이동 */
+    /* flex-wrap: wrap; */  /* 항목들이 줄을 넘어갈 경우 자동으로 다음 줄로 이동 */
+    overflow-x: auto; /* 항목을 옆으로 넘김 */
     gap: 10px;
-    margin-top: 10px;
     width: 100%;
     min-height: 40px;  /* 최소 높이 설정 */
-    background-color: lightgray;
-    color: black;
-    font-weight: bold;
-    padding: 10px;
-    align-items: center; /* 텍스트가 중앙에 오도록 정렬 */
-    border-radius: 5px; /* 모서리 둥글게 */
-    margin-bottom: 20px;
-}
-
-.selectedEditThemes {
-    display: flex;
-    flex-wrap: wrap;  /* 항목들이 줄을 넘어갈 경우 자동으로 다음 줄로 이동 */
-    gap: 10px;
-    margin-top: 10px;
-    width: 100%;
-    min-height: 40px;  /* 최소 높이 설정 */
-    background-color: lightgray;
+    background-color: rgb(245, 245, 245);
     color: black;
     font-weight: bold;
     padding: 5px 10px;
     align-items: center; /* 텍스트가 중앙에 오도록 정렬 */
     border-radius: 5px; /* 모서리 둥글게 */
-    margin-bottom: 10px;
+    margin-top: 2px;
 }
 
 .placeholder {
@@ -357,39 +342,20 @@ display: block;
     font-size: 14px;
 }
 
-
 .tag {
     background-color: white;
     border-radius: 15px;
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 14px;
-    border: 1px solid lightgrey;
-    white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
-}
-
-.removeTag {
-    margin-left: 5px;
-    color: red;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.tagEdit {
-    background-color: white;
-    border-radius: 15px;
-    padding: 5px 10px;
+    padding: 2px 10px;
     display: flex;
     align-items: center;
     font-weight: bold;
     font-size: 13px;
     border: 1px solid lightgrey;
     white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
+    flex-shrink: 0;
 }
 
-.removeTagEdit {
+.removeTag {
     margin-left: 5px !important;
     margin-right: 0px !important;
     width: 10px !important;
