@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
+import 'asset/css/RaidSearch.css';
 
 function SearchRaid(props) {
     const [raidList, setRaidList] = useState([]);
@@ -77,6 +78,7 @@ function SearchRaid(props) {
           menu: (provided) => ({
             ...provided,
             width: '50%',
+            height: '200px',
           }),
           control: (provided) => ({
             ...provided,
@@ -100,7 +102,7 @@ function SearchRaid(props) {
       };
 
     return (
-        <div>
+        <div className='raid-search-wrapper'>
             <Select
                 // styles={customStyles}
                 onChange={onChangeSelect}
@@ -109,11 +111,12 @@ function SearchRaid(props) {
                 defaultValue='서울특별시'
             />
             <input 
-                className='search' 
-                placeholder='Search🔎' 
+                className='raid-search'
+                style={{ backgroundColor:'#cbdeff36', fontSize:'12px', margin:'0 auto', marginTop:'4px', marginBottom:'4px', fontStyle:'italic', textAlign:'center'}} 
+                placeholder='상호명 또는 주소를 입력하세요.🔎' 
                 onChange={onChange} 
             />
-            <ul>
+            <ul className='raid-ul'>
             {filterRaid.map((item, index) => (
                 <li onClick={() => selectRaid(item.raidId)} className="raidList" key={item.raidId}>
                     <p>{item.merchantName}</p>
