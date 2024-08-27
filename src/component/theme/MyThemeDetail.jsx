@@ -172,7 +172,7 @@ function MyThemeDetail(props) {
   };
 
   // 수정내용을 useState에 다시 담아주는 함수
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
 
     if (name === 'themeIsPublic') {
@@ -263,6 +263,7 @@ if (myDetailTheme.themeMainCategoryName) {
 
  // 테마 등록정보 저장
 const handleEditSave = async () => {
+
   console.log("카테고리" + selectedCategory);
   console.log(selectedThemes);
   console.log(myDetailTheme);
