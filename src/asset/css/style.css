@@ -210,6 +210,9 @@ p {
 .panel-control-left {
 	float: left;
 	font-size: 20px;
+	height: 100vh;
+	margin-top: -1;
+	
 }
 
 .panel-control-left a i,
@@ -240,6 +243,7 @@ p {
 .panel-control-left ul {
 	padding: 0;
 	border: none;
+	height: 100%;
 }
 
 .panel-control-left ul li {
