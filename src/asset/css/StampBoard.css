@@ -69,9 +69,8 @@
 }
 
 .mission-node.stamped .mission-icon {
-  background-color: #4caf50;
-  border-color: #4caf50;
-  color: white;
+  background-color: #494e52;
+  color: #494e52;
   transform: scale(1.2);
 }
 
@@ -90,6 +89,11 @@
   /* background-color: rgba(0, 0, 0, 0.6); 반투명 배경 추가 */
   padding: 5px; /* 텍스트와 배경 간의 여백 추가 */
   border-radius: 5px; /* 둥근 모서리 추가 */
+}
+
+.grayed-out {
+  filter: grayscale(100%); /* 회색빛 적용 */
+  opacity: 0.8; /* 약간 어둡게 */
 }
 
 @media (max-width: 768px) {

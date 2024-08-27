@@ -15,6 +15,8 @@
   text-align: left;
   line-height: 1.5;
   font-size: 26px;
+  color: black;
+  font-weight: 500;
 }
 
 .point-pages-title {
@@ -31,4 +33,20 @@
 .point-account-h4 {
   text-align: left;
   font-size: 15px;
+}
+
+.point-complete-h2 {
+  text-align: center;
+  line-height: 1.5;
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+}
+
+.point-complete-point {
+  text-align: center;
+  line-height: 1.5;
+  font-size: 20px;
+  font-weight: normal;
+  color: black;
 }

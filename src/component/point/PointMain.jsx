@@ -60,7 +60,7 @@ function PointMain(props) {
                   fontSize: "1.2em",
                 }}
               >
-                {totalPoints}P
+                {totalPoints.toLocaleString()}P
               </span>{" "}
               입니다.
             </h2>
@@ -92,7 +92,8 @@ function PointMain(props) {
                             fontSize: "1.2em",
                           }}
                         >
-                          {point.isAdd === 1 ? "+" : "-"} {point.amount}P
+                          {point.isAdd === 1 ? "+" : "-"}{" "}
+                          {point.amount.toLocaleString()}P
                         </span>
                         <i className="fa fa-plus"></i>
                       </div>
