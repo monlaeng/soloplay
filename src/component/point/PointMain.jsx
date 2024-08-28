@@ -2,12 +2,48 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import M from "materialize-css/dist/js/materialize.min.js";
 import axios from "axios";
+import ReactApexChart from "react-apexcharts";
 import "asset/css/point.css";
 
 function PointMain(props) {
   const [totalPoints, setTotalPoints] = useState(0);
   const [pointList, setPointList] = useState([]);
   const [userName, setUserName] = useState("");
+
+  const [chartOptions, setChartOptions] = useState({
+    chart: {
+      type: "bar",
+      stacked: true,
+      stackType: "100%",
+      height: 100,
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+      },
+    },
+    xaxis: {
+      categories: ["포인트 리포트"], // X축 카테고리
+    },
+    fill: {
+      opacity: 1,
+    },
+    legend: {
+      position: "top",
+      horizontalAlign: "left",
+    },
+  });
+
+  const [chartSeries, setChartSeries] = useState([
+    {
+      name: "테마 포인트",
+      data: [30], // 예시 데이터
+    },
+    {
+      name: "레이드 포인트",
+      data: [70], // 예시 데이터
+    },
+  ]);
 
   useEffect(() => {
     // Component가 렌더링된 후 MaterializeCSS 초기화
@@ -62,8 +98,15 @@ function PointMain(props) {
               >
                 {totalPoints}P
               </span>{" "}
-              입니다.
+              입니다
             </h2>
+            <div id="chart" style={{ height: "300px" }}>
+              <ReactApexChart
+                options={chartOptions}
+                series={chartSeries}
+                type="bar"
+              />
+            </div>
             <br></br>
             <h4 style={{ textAlign: "left", fontSize: 15 }}>
               <Link
