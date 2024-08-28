@@ -15,7 +15,6 @@ function PointMain(props) {
       type: "bar",
       stacked: true,
       stackType: "100%",
-      height: 100,
     },
     plotOptions: {
       bar: {
@@ -41,7 +40,11 @@ function PointMain(props) {
     },
     {
       name: "레이드 포인트",
-      data: [70], // 예시 데이터
+      data: [65], // 예시 데이터
+    },
+    {
+      name: "기타",
+      data: [5],
     },
   ]);
 
@@ -96,15 +99,17 @@ function PointMain(props) {
                   fontSize: "1.2em",
                 }}
               >
-                {totalPoints}P
+                {totalPoints.toLocaleString()}P
               </span>{" "}
               입니다
             </h2>
-            <div id="chart" style={{ height: "300px" }}>
+            <br></br>
+            <div id="chart" style={{ width: "100%", height: "200px" }}>
               <ReactApexChart
                 options={chartOptions}
                 series={chartSeries}
                 type="bar"
+                height={200}
               />
             </div>
             <br></br>
@@ -135,7 +140,8 @@ function PointMain(props) {
                             fontSize: "1.2em",
                           }}
                         >
-                          {point.isAdd === 1 ? "+" : "-"} {point.amount}P
+                          {point.isAdd === 1 ? "+" : "-"}{" "}
+                          {point.amount.toLocaleString()}P
                         </span>
                         <i className="fa fa-plus"></i>
                       </div>

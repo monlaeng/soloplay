@@ -31,7 +31,6 @@ function PointTransfer(props) {
       const response = await axios.post(`/point/create`, pointDTO); // 서버로 포인트 전환 요청 보내기
       console.log(response);
       if (response.data === 1) {
-        console.log("1이냐!????");
         // 서버 응답이 1일 경우
         navigate("/point/transfer/complete"); // 전환 완료 페이지로 이동
       } else {
@@ -47,7 +46,6 @@ function PointTransfer(props) {
     try {
       const response = await axios.get(`/point/info`);
       setUserName(response.data.userName);
-      setTotalPoints(response.data.totalPoints); // 응답 데이터에서 총 포인트 설정
     } catch (error) {
       console.error("사용자 정보를 가져오는 중 오류 발생:", error);
     }
@@ -75,7 +73,7 @@ function PointTransfer(props) {
                 fontSize: "1.2em",
               }}
             >
-              {totalPoints}P
+              {totalPoints.toLocaleString()}P
             </span>{" "}
             입니다.
           </h2>
