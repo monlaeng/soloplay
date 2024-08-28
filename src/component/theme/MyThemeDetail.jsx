@@ -296,6 +296,8 @@ function MyThemeDetail(props) {
     // 테마 등록정보 저장
     const handleEditSave = async () => {
 
+      
+
       console.log("카테고리" + selectedCategory);
       console.log(selectedThemes);
       console.log(myDetailTheme);
@@ -321,9 +323,10 @@ function MyThemeDetail(props) {
       try {
           const response = await axios.put(`/theme/updateTheme/${themeId}`, themeData);
           if (response.status === 201) {
+              console.log("테마가 성공적으로 수정되었습니다.")
               alert("테마가 성공적으로 수정되었습니다.");
               navigate('/myThemeSearch');
-
+              
           }
       } catch (error) {
           console.error('테마 수정 중 오류가 발생했습니다: ', error);
