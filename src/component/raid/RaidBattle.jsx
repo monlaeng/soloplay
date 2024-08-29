@@ -56,11 +56,13 @@ function RaidBattle() {
 
                 // 기존 battleData.participants에 알림 데이터를 추가하여 병합
                 setBattleData(prevData => ({
-                    ...prevData,
+                    ...data,
                     participants: [
                         ...prevData.participants,
                         ...data.participants
-                    ]
+                    ],
+                    contribution: prevData.contribution + data.contribution,
+                    buff: prevData.buff
                 }));
 
                 if (data.participants && data.participants.length > 0) {
