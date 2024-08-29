@@ -2,12 +2,51 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import M from "materialize-css/dist/js/materialize.min.js";
 import axios from "axios";
+import ReactApexChart from "react-apexcharts";
 import "asset/css/point.css";
 
 function PointMain(props) {
   const [totalPoints, setTotalPoints] = useState(0);
   const [pointList, setPointList] = useState([]);
   const [userName, setUserName] = useState("");
+
+  const [chartOptions, setChartOptions] = useState({
+    chart: {
+      type: "bar",
+      stacked: true,
+      stackType: "100%",
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+      },
+    },
+    xaxis: {
+      categories: ["포인트 리포트"], // X축 카테고리
+    },
+    fill: {
+      opacity: 1,
+    },
+    legend: {
+      position: "top",
+      horizontalAlign: "left",
+    },
+  });
+
+  const [chartSeries, setChartSeries] = useState([
+    {
+      name: "테마 포인트",
+      data: [30], // 예시 데이터
+    },
+    {
+      name: "레이드 포인트",
+      data: [65], // 예시 데이터
+    },
+    {
+      name: "기타",
+      data: [5],
+    },
+  ]);
 
   useEffect(() => {
     // Component가 렌더링된 후 MaterializeCSS 초기화
@@ -60,10 +99,19 @@ function PointMain(props) {
                   fontSize: "1.2em",
                 }}
               >
-                {totalPoints}P
+                {totalPoints.toLocaleString()}P
               </span>{" "}
-              입니다.
+              입니다
             </h2>
+            <br></br>
+            <div id="chart" style={{ width: "100%", height: "200px" }}>
+              <ReactApexChart
+                options={chartOptions}
+                series={chartSeries}
+                type="bar"
+                height={200}
+              />
+            </div>
             <br></br>
             <h4 style={{ textAlign: "left", fontSize: 15 }}>
               <Link
@@ -92,7 +140,8 @@ function PointMain(props) {
                             fontSize: "1.2em",
                           }}
                         >
-                          {point.isAdd === 1 ? "+" : "-"} {point.amount}P
+                          {point.isAdd === 1 ? "+" : "-"}{" "}
+                          {point.amount.toLocaleString()}P
                         </span>
                         <i className="fa fa-plus"></i>
                       </div>
