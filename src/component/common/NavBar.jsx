@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthContext'; 
-import ControllerImg from "asset/image/controller.png";
 import LoginImg from "asset/image/login.png";
 import LogoutImg from "asset/image/logout.png";
 import axios from 'axios'; 
@@ -9,6 +8,7 @@ import "asset/css/nav.css";
 
 function NavBar({ togglePanel }) {
     const { user, setUser } = useContext(AuthContext); // Context에서 user와 setUser를 가져옵니다.
+
     const handleLogout = async () => {
       try {
           // 스프링 서버에 로그아웃 요청을 보냅니다.
@@ -37,7 +37,6 @@ function NavBar({ togglePanel }) {
                 <div className="site-title">
                     <Link to="/" className="logo">
                         <div className="soloplay-logo-container">
-                            <img src={ControllerImg} alt="Controller" className="soloplay-controller-icon" />
                             <h1 className="soloplay-text">SOLoPLAY</h1>
                         </div>
                     </Link>
@@ -45,9 +44,6 @@ function NavBar({ togglePanel }) {
                 <div className="panel-control-right">
                     {user ? (
                         <div className="user-controls">
-                            <Link to="/point" className="user-icon">
-                                <i className="fa fa-user-circle-o" style={{ marginRight: '10px' }}></i>
-                            </Link>
                             <img src={LogoutImg} alt="Logout" className="logout-icon" onClick={handleLogout} />
                         </div>
                     ) : (

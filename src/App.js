@@ -4,6 +4,7 @@ import NavBar from 'component/common/NavBar';
 import PanelControl from 'component/common/PanelControl';
 import { AuthContext } from 'component/auth/AuthContext';
 import './App.css';
+import Footer from 'component/common/Footer';
 
 function App() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -26,6 +27,7 @@ function App() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </AuthContext.Provider>
   );
 }
